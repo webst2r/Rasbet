@@ -1,18 +1,26 @@
 import java.util.List;
 
 public class ApostaSimples extends Aposta{
-    private Resultado resultado;
+    private int idJogo;
+    private Resultado resultadoEscolhido;
 
     public ApostaSimples(){
         super();
+        this.idJogo = 0;
+        this.resultadoEscolhido = null;
     }
 
     public ApostaSimples(ApostaSimples as){
-        this.resultado = as.getResultado();
+        this.idJogo = as.getIdJogo();
+        this.resultadoEscolhido = as.getResultadoEscolhido();
     }
 
-    public Resultado getResultado() {
-        return this.resultado;
+    public int getIdJogo() {
+        return this.idJogo;
+    }
+
+    public Resultado getResultadoEscolhido() {
+        return this.resultadoEscolhido.clone();
     }
 
     public ApostaSimples clone(){

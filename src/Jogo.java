@@ -2,20 +2,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jogo {
+    private int id;
     private String ladoA;
     private String ladoB;
-    private List<Resultado> resultados;
+    private List<Resultado> resultadosDisponiveis;
+    private Resultado resultadoFinal;
 
-    public Jogo(String ladoA, String ladoB, List<Resultado> resultados){
+
+    public Jogo(int id, String ladoA, String ladoB, List<Resultado> resultados, Resultado resultadoFinal){
+        this.id = id;
         this.ladoA = ladoA;
         this.ladoB = ladoB;
-        this.resultados = resultados;
+        this.resultadosDisponiveis = resultados;
+        this.resultadoFinal = resultadoFinal;
     }
 
     public Jogo(Jogo jogo){
+        this.id = jogo.getId();
         this.ladoA = jogo.getLadoA();
         this.ladoB = jogo.getLadoB();
-        this.resultados = jogo.getResultados();
+        this.resultadosDisponiveis = jogo.getResultadosDisponiveis();
+        this.resultadoFinal = jogo.getResultadoFinal();
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getLadoA() {
@@ -26,12 +37,16 @@ public class Jogo {
         return this.ladoB;
     }
 
-    public List<Resultado> getResultados() {
+    public List<Resultado> getResultadosDisponiveis() {
         List<Resultado> results = new ArrayList<>();
-        for(Resultado r : this.resultados){
+        for(Resultado r : this.resultadosDisponiveis){
             results.add(r.clone());
         }
         return results;
+    }
+
+    public Resultado getResultadoFinal() {
+        return this.resultadoFinal.clone();
     }
 
     public Jogo clone() {

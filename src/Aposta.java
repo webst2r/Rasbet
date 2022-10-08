@@ -8,7 +8,13 @@ public abstract class Aposta {
 
     public Aposta(){
         this.estado = OFF;
+        this.valor = 0.0;
     }
+
+    public Aposta(double valor){
+        this.valor = valor;
+    }
+
     public Aposta(Aposta a){
             this.estado = a.getEstado();
             this.valor = a.getValor();
