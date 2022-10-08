@@ -1,29 +1,27 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ApostaMultipla extends Aposta{
-    private Map<Integer, Resultado> escolhas; // ex: JogoA -> V1
+    private Map<Integer, Resultado> resultadosEscolhidos; // ex: JogoA -> V1
 
     public ApostaMultipla(){
         super();
-        this.escolhas = new HashMap<>();
+        this.resultadosEscolhidos = new HashMap<>();
     }
 
     public ApostaMultipla(ApostaMultipla am){
         super(am.getValor());
-        this.escolhas = am.getEscolhas();
+        this.resultadosEscolhidos = am.getResultadosEscolhidos();
     }
 
-    public Map<Integer,Resultado> getEscolhas() {
-        Map<Integer, Resultado> es = new HashMap<>();
+    public Map<Integer,Resultado> getResultadosEscolhidos() {
+        Map<Integer, Resultado> results = new HashMap<>();
 
-        for (Map.Entry<Integer, Resultado> entry : es.entrySet()) {
-            es.put(entry.getKey(),
+        for (Map.Entry<Integer, Resultado> entry : this.resultadosEscolhidos.entrySet()) {
+            results.put(entry.getKey(),
                     entry.getValue());
         }
-        return es;
+        return results;
     }
 
     @Override

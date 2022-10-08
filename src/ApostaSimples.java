@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class ApostaSimples extends Aposta{
     private int idJogo;
     private Resultado resultadoEscolhido;
@@ -23,7 +21,7 @@ public class ApostaSimples extends Aposta{
         return this.resultadoEscolhido.clone();
     }
 
-    public ApostaSimples clone(){
+    public ApostaSimples clone() {
         return new ApostaSimples(this);
     }
 }

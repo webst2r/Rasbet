@@ -1,11 +1,11 @@
-public class Resultado {
+public class Resultado { // V1
     private double odd;
 
-    public Resultado(){
+    public Resultado() {
         this.odd = 1.0;
     }
 
-    public Resultado(Resultado result){
+    public Resultado(Resultado result) {
         this.odd = result.getOdd();
     }
 
@@ -13,7 +13,11 @@ public class Resultado {
         return this.odd;
     }
 
-    public Resultado clone(){
+    public void setOdd(double odd) {
+        this.odd = odd;
+    }
+
+    public Resultado clone() {
         return new Resultado(this);
     }
 }
