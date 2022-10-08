@@ -2,21 +2,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jogo {
-    private Desporto desporto;
+    private String ladoA;
+    private String ladoB;
     private List<Resultado> resultados;
 
-    public Jogo(Desporto desporto, List<Resultado> resultados){
-        this.desporto = desporto;
+    public Jogo(String ladoA, String ladoB, List<Resultado> resultados){
+        this.ladoA = ladoA;
+        this.ladoB = ladoB;
         this.resultados = resultados;
     }
 
     public Jogo(Jogo jogo){
-        this.desporto = jogo.getDesporto();
+        this.ladoA = jogo.getLadoA();
+        this.ladoB = jogo.getLadoB();
         this.resultados = jogo.getResultados();
     }
 
-    public Desporto getDesporto() {
-        return this.desporto;
+    public String getLadoA() {
+        return this.ladoA;
+    }
+
+    public String getLadoB() {
+        return this.ladoB;
     }
 
     public List<Resultado> getResultados() {
