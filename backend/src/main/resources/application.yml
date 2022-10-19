@@ -11,3 +11,4 @@ spring:
   sql:
     init:
       mode: always
+jwt_secret: sdfhvciusdhfmnsakid54w23"$#rgedskasadkasbdf283721438#$fdfjsdf0q394
