@@ -6,21 +6,31 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { HomeComponent } from './pages/home/home.component';
+import {HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./guard/auth.guard";
+import {JwtModule} from "@auth0/angular-jwt";
+import {StorageKey} from "./services/storage.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem(StorageKey.TOKEN),
+        allowedDomains: ['localhost:4200/login', 'localhost:4200/register'],
+        disallowedRoutes: [],
+      },
+    }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

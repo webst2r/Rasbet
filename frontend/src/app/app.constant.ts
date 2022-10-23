@@ -4,8 +4,12 @@ export class AppConstant {
   public static readonly API_URL = environment.apiUrl;
 
   public static readonly API_PATHS = {
-    LOGIN: 'user/login',
-    REGISTER: 'user/register'
+    USER:{
+      LOGIN: 'user/login',
+      REGISTER: 'user/register',
+      DEFAULT: 'user'
+    }
+
   }
 
   public static readonly REGEX = {
