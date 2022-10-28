@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AppConstant} from "../../app.constant";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {minimalAge} from "../../helpers/validator";
+import {Role} from "../../interfaces/user";
+import {tap} from "rxjs";
+import {ExceptionType} from "../../enumeration/exception";
 
 @Component({
   selector: 'app-register',
@@ -7,9 +16,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+
+  error: string = '';
+  form: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.email)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.password)]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    birthDate: new FormControl('', [Validators.required, minimalAge]),
+  });
+
+  constructor(private readonly authenticationService: AuthenticationService,
+              private router: Router,
+              private translate: TranslateService) {
+  }
 
   ngOnInit(): void {
   }
+
+  register() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.authenticationService.register(this.form.controls['email'].value,
+      this.form.controls['password'].value,
+      this.form.controls['firstName'].value,
+      this.form.controls['lastName'].value,
+      this.form.controls['birthDate'].value,
+      Role.ROLE_USER).pipe(
+        tap(res => console.log(res))
+    ).subscribe(
+      () => this.router.navigateByUrl('/login'),
+      (error) => {
+        if (error.error && error.error.type === ExceptionType.EMAIL_ALREADY_EXISTS) {
+          this.error = this.translate.instant("registerPage.emailAlreadyExists");
+        }
+      }
+    );
+  }
+
 
 }

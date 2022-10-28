@@ -16,19 +16,21 @@ mat-card-content {
 }
 
 .error {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  width: 100%;
   color: red;
-  background-color: white;
 }
 
 .button {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+
 }
 
 button{
   background: blue;
   color: white;
+}
+button:disabled{
+  color: white !important;
+  background: blue;
+
 }

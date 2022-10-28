@@ -5,6 +5,7 @@ import {catchError, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {ExceptionType} from "../../enumeration/exception";
 import {TranslateService} from "@ngx-translate/core";
+import {AppConstant} from "../../app.constant";
 
 @Component({
   selector: 'app-login',
@@ -13,17 +14,17 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class LoginComponent implements OnInit {
   error: string = '';
-
+  form: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.email)]),
+    password: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.password)]),
+  });
   constructor(private readonly authenticationService:AuthenticationService,
               private router: Router,
               private translate: TranslateService) { }
 
   ngOnInit(): void {
   }
-  form: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
+
 
   login() {
     if (!this.form.valid) {
@@ -41,7 +42,6 @@ export class LoginComponent implements OnInit {
         if(error.error && error.error.type === ExceptionType.WRONG_CREDENTIALS){
           this.error = this.translate.instant("loginPage.wrongCredentials");
         }
-       // console.log(error, error.error.type)
     }
     );
   }

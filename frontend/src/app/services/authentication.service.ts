@@ -21,9 +21,9 @@ export class AuthenticationService {
     }) as Observable<UserToken>;
   }
 
-  register(email: string, password: string, firstName: string, lastName: string, role: Role): Observable<any>{
+  register(email: string, password: string, firstName: string, lastName: string,birthDate: string, role: Role): Observable<any>{
     return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.USER.REGISTER, {
-      email, password, firstName, lastName, role
+      email, password, firstName, lastName, birthDate, role
     }) as Observable<any>;
   }
 
