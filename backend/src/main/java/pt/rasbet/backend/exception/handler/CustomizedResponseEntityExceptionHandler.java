@@ -2,6 +2,7 @@ package pt.rasbet.backend.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,8 @@ import pt.rasbet.backend.exception.ExceptionResponse;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
 
 import java.util.Date;
+
+import static pt.rasbet.backend.enumeration.ExceptionType.WRONG_CREDENTIALS;
 
 @ControllerAdvice
 @RestController
@@ -39,5 +42,13 @@ public class CustomizedResponseEntityExceptionHandler {
         }
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleBadRequestGenericException(AuthenticationException ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        exceptionResponse.setType(WRONG_CREDENTIALS);
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
     }
 }

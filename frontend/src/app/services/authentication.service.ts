@@ -16,7 +16,7 @@ export class AuthenticationService {
                private jwtHelperService:  JwtHelperService) { }
 
   login(email: string, password: string): Observable<UserToken>{
-    return this.http.put(AppConstant.API_URL+ AppConstant.API_PATHS.USER.LOGIN, {
+    return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.USER.LOGIN, {
       email, password
     }) as Observable<UserToken>;
   }

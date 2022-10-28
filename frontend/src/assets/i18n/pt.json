@@ -1,0 +1,8 @@
+{
+  "loginPage": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "wrongCredentials": "Email ou password incorretos"
+  }
+}
