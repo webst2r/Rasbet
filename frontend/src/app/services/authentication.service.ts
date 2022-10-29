@@ -5,15 +5,16 @@ import {AppConstant} from "../app.constant";
 import {StorageKey, StorageService} from "./storage.service";
 import {Role, UserToken} from "../interfaces/user";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(private http: HttpClient,
               private readonly storageService: StorageService,
-               private jwtHelperService:  JwtHelperService) { }
+               private jwtHelperService:  JwtHelperService,
+              private router: Router) { }
 
   login(email: string, password: string): Observable<UserToken>{
     return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.USER.LOGIN, {
@@ -29,6 +30,7 @@ export class AuthenticationService {
 
   logout(){
     this.storageService.clearData();
+    this.router.navigateByUrl('/dashboard');
   }
 
   saveToken(token: string){

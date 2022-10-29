@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MainRoutingModule} from "./main-routing.module";
 import {MainComponent} from "./main.component";
 import {HomeModule} from "../home/home.module";
+import {ToolbarModule} from "../../components/toolbar/toolbar.module";
 
 
 
@@ -11,7 +12,8 @@ import {HomeModule} from "../home/home.module";
   imports: [
     CommonModule,
     MainRoutingModule,
-    HomeModule
+    HomeModule,
+    ToolbarModule
   ]
 })
 export class MainModule { }

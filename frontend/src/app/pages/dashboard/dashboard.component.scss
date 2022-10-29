@@ -1,0 +1,13 @@
+main {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center;
+
+  mat-card {
+    width: fit-content;
+    padding: 2rem 5rem;
+    text-align: center;
+  }
+}

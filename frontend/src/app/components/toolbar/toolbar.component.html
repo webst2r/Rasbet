@@ -1,0 +1,10 @@
+<mat-toolbar class="toolbar">
+  <h1 class="title">Rasbet</h1>
+  <div class="auth-btns">
+    <ng-container *ngIf="!auth.isAuthenticated()">
+      <button mat-raised-button routerLink="/login">Login</button>
+      <button mat-raised-button routerLink="/register">Registar</button>
+    </ng-container>
+    <button *ngIf="auth.isAuthenticated()" mat-raised-button (click)="auth.logout()">Logout</button>
+  </div>
+</mat-toolbar>

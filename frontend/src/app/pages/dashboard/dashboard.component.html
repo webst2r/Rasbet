@@ -1,0 +1,7 @@
+<app-toolbar></app-toolbar>
+<main>
+  <mat-card *ngFor="let jogo of jogos">
+    <mat-card-title>{{jogo.home_team}} vs {{jogo.away_team}}</mat-card-title>
+    <mat-card-subtitle>{{jogo.date.toDateString()}}</mat-card-subtitle>
+  </mat-card>
+</main>
