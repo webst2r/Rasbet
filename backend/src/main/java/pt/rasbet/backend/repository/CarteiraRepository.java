@@ -8,19 +8,15 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.querydsl.binding.SingleValueBinding;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import pt.rasbet.backend.entity.QUser;
-import pt.rasbet.backend.entity.User;
+import pt.rasbet.backend.entity.Carteira;
+import pt.rasbet.backend.entity.QCarteira;
 
-import java.util.Optional;
-@RepositoryRestResource(collectionResourceRel = "user", path = "user")
-public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User>, QuerydslBinderCustomizer<QUser> {
+@RepositoryRestResource(collectionResourceRel = "carteira", path = "carteira")
+public interface CarteiraRepository extends JpaRepository<Carteira, Long>, QuerydslPredicateExecutor<Carteira>, QuerydslBinderCustomizer<QCarteira> {
+
     @Override
-    default void customize(QuerydslBindings bindings, QUser qUser) {
+    default void customize(QuerydslBindings bindings, QCarteira qCarteira) {
         // Make case-insensitive 'like' filter for all string properties
         bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
     }
-
-    Optional<User> findByEmail(String email);
-
-    Boolean existsByEmail(String email);
 }

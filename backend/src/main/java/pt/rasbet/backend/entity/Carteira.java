@@ -6,25 +6,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "carteira")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class Carteira {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Size(max = 20)
     @Column(nullable = false)
-    private String name;
+    private Float saldo;
 
     @JsonBackReference
-    @OneToMany(mappedBy="role")
-    private Set<User> user =  new HashSet<>();
+    @OneToOne(mappedBy = "carteira")
+    private User user;
+
+    @JsonBackReference
+    @OneToMany(mappedBy="carteira")
+    private Set<Transacoes> transacoes =  new HashSet<>();
+
 }

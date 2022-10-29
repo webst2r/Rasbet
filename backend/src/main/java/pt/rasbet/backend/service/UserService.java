@@ -40,7 +40,7 @@ public class UserService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
+        //TODO: Add user saldo when sending
         var user = userRepository.findByEmail(userCredentialsDTO.getEmail()).get();
 
         return new UserWithTokenDTO(user, jwt);
@@ -57,6 +57,7 @@ public class UserService {
         }
         user.setRole(roleService.findByName(userDTO.getRole()).get());
         userRepository.save(user);
+        //TODO - create wallet for user
         return "User registered successfully!";
     }
 
