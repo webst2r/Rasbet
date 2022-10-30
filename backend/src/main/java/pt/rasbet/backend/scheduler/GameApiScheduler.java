@@ -23,8 +23,7 @@ public class GameApiScheduler {
 
     private final OpcaoApostaRepository opcaoApostaRepository;
 
-    // @Scheduled(cron = "*/60  * * * * *", zone = "Europe/Lisbon")
-    @Scheduled(cron = "0 */1 * * * *", zone = "Europe/Lisbon")
+    @Scheduled(cron = "0 */15 * * * *", zone = "Europe/Lisbon")
     @Transactional
     public void updateJogos() {
         List<Jogo> jogos = gameApiService.getGames();
