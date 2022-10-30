@@ -35,6 +35,8 @@ public class Jogo {
     @Column(nullable = false)
     private String awayTeam;
 
+    private Boolean complete;
+
     private String vencedor;
 
     private String resultado;

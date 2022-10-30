@@ -54,6 +54,7 @@ public class GameApiService {
             jogo.setDate(gameApiDTO.getCommenceTime());
             jogo.setHomeTeam(gameApiDTO.getHomeTeam());
             jogo.setAwayTeam(gameApiDTO.getAwayTeam());
+            jogo.setComplete(gameApiDTO.getCompleted());
             if (gameApiDTO.getCompleted()) {
                 jogo.setResultado(gameApiDTO.getScores());
                 Integer homeTeam = getHomeTeamResult(gameApiDTO.getScores());
