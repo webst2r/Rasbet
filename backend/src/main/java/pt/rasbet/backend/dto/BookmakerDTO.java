@@ -13,15 +13,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GameApiDTO {
-    private String id;
-    private LocalDateTime commenceTime;
-    private Boolean completed;
-    private String homeTeam;
-    private String awayTeam;
-    private String scores;
-    private List<BookmakerDTO> bookmakers = new ArrayList<>();
-
-
+public class BookmakerDTO {
+    private String key;
+    private LocalDateTime lastUpdated;
+    private List<MarketDTO> markets = new ArrayList<>();
 }
-

@@ -30,15 +30,14 @@ public class Jogo {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private String home_team;
+    private String homeTeam;
 
     @Column(nullable = false)
-    private String away_team;
+    private String awayTeam;
 
     @Column(nullable = false)
     private String vencedor;
 
-    @Column(nullable = false)
     private String resultado;
 
     private String id_api;
@@ -47,7 +46,6 @@ public class Jogo {
     @JoinColumn(name= "id_tipo", nullable = false)
     private Tipo tipo;
 
-    @JsonBackReference
     @OneToMany(mappedBy="jogo")
     private Set<OpcaoAposta> opcaoApostas =  new HashSet<>();
 

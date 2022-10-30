@@ -11,6 +11,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pt.rasbet.backend.entity.Tipo;
 import pt.rasbet.backend.entity.QTipo;
 
+import java.util.Optional;
+
 @RepositoryRestResource(collectionResourceRel = "tipo", path = "tipo")
 public interface TipoRepository extends JpaRepository<Tipo, Long>, QuerydslPredicateExecutor<Tipo>, QuerydslBinderCustomizer<QTipo> {
 
@@ -19,4 +21,6 @@ default void customize(QuerydslBindings bindings, QTipo qTipo) {
         // Make case-insensitive 'like' filter for all string properties
         bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
         }
+
+        Optional<Tipo> findByNome(String nome);
 }

@@ -24,6 +24,7 @@ public class OpcaoAposta {
 
     private String type;
 
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name= "id_jogo", nullable = false)
     private Jogo jogo;
@@ -31,4 +32,9 @@ public class OpcaoAposta {
     @JsonBackReference
     @OneToMany(mappedBy="opcaoAposta")
     private Set<Aposta> apostas =  new HashSet<>();
+
+    public OpcaoAposta(Float odd, String type){
+        this.odd = odd;
+        this.type = type;
+    }
 }
