@@ -10,5 +10,6 @@ export interface UserToken{
   lastName: string;
   email: string;
   role: Role;
+  saldo: number;
   token: string;
 }
