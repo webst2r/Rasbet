@@ -15,3 +15,6 @@ spring:
 ---
 jwtSecret: sdfhvciusdhfmnsakid54w23"$#rgedskasadkasbdf283721438#$fdfjsdf0q394
 jwtExpirationMs: 432000000
+
+---
+gamesURL: http://ucras.di.uminho.pt/v1/games/
