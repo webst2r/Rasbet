@@ -33,8 +33,9 @@ public class OpcaoAposta {
     @OneToMany(mappedBy="opcaoAposta")
     private Set<Aposta> apostas =  new HashSet<>();
 
-    public OpcaoAposta(Float odd, String type){
+    public OpcaoAposta(Float odd, String type, Jogo jogo){
         this.odd = odd;
         this.type = type;
+        this.jogo =  jogo;
     }
 }

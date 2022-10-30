@@ -13,7 +13,6 @@ import pt.rasbet.backend.entity.OpcaoAposta;
 import pt.rasbet.backend.entity.Tipo;
 import pt.rasbet.backend.repository.TipoRepository;
 
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -69,18 +68,15 @@ public class GameApiService {
 
             }
             Set<OpcaoAposta> opcaoApostas = new HashSet<>();
-            gameApiDTO.getBookmakers().stream().filter(bookmakerDTO -> bookmakerDTO.getKey().equals("betclic"))
-                    .forEach(bookmaker -> {
-                        bookmaker.getMarkets().get(0).getOutcomes().forEach(outcomeDTO -> {
-                            if (outcomeDTO.getName().equals(jogo.getHomeTeam())) {
-                                opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), HOME_TEAM.name()));
-                            } else if (outcomeDTO.getName().equals(jogo.getAwayTeam())) {
-                                opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), AWAY_TEAM.name()));
-                            } else {
-                                opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), DRAW.name()));
-                            }
-                        });
-                    });
+            gameApiDTO.getBookmakers().get(0).getMarkets().get(0).getOutcomes().forEach(outcomeDTO -> {
+                if (outcomeDTO.getName().equals(jogo.getHomeTeam())) {
+                    opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), HOME_TEAM.name(), jogo));
+                } else if (outcomeDTO.getName().equals(jogo.getAwayTeam())) {
+                    opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), AWAY_TEAM.name(), jogo));
+                } else {
+                    opcaoApostas.add(new OpcaoAposta(outcomeDTO.getPrice(), DRAW.name(), jogo));
+                }
+            });
             jogo.setOpcaoApostas(opcaoApostas);
             jogo.setTipo(tipo);
             jogos.add(jogo);
@@ -94,7 +90,6 @@ public class GameApiService {
 
         int value = 0;
         if (matcher.find()) {
-            System.out.println("home team - " + matcher.group(0));
             value = Integer.parseInt(matcher.group(0));
         }
         return value;
@@ -105,7 +100,6 @@ public class GameApiService {
         Matcher matcher = pattern.matcher(result);
         int value = 0;
         if(matcher.find()) {
-            System.out.println("away team - " + matcher.group(0));
             value = Integer.parseInt(matcher.group(0));
         }
         return value;

@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.repository.JogoRepository;
+import pt.rasbet.backend.repository.OpcaoApostaRepository;
 import pt.rasbet.backend.service.GameApiService;
 
 import javax.transaction.Transactional;
@@ -20,17 +21,19 @@ public class GameApiScheduler {
     private final GameApiService gameApiService;
     private final JogoRepository jogoRepository;
 
-    @Scheduled(cron = "*/60  * * * * *", zone = "Europe/Lisbon")
-  //  @Scheduled(cron = "0 15 * * * *", zone = "Europe/Lisbon")
+    private final OpcaoApostaRepository opcaoApostaRepository;
+
+    // @Scheduled(cron = "*/60  * * * * *", zone = "Europe/Lisbon")
+    @Scheduled(cron = "0 */1 * * * *", zone = "Europe/Lisbon")
     @Transactional
-    public void updateJogos(){
-        List<Jogo>jogos = gameApiService.getGames();
+    public void updateJogos() {
+        List<Jogo> jogos = gameApiService.getGames();
 
         jogos.forEach(jogo -> {
-            Optional<Jogo>optionalJogo = jogoRepository.findByIdApi(jogo.getIdApi());
-            if(optionalJogo.isPresent()){
+            Optional<Jogo> optionalJogo = jogoRepository.findByIdApi(jogo.getIdApi());
+            if (optionalJogo.isPresent()) {
                 updateJogo(optionalJogo.get(), jogo);
-            }else {
+            } else {
                 jogoRepository.save(jogo);
             }
         });
@@ -39,6 +42,11 @@ public class GameApiScheduler {
 
     private void updateJogo(Jogo jogo, Jogo jogo1) {
         jogo1.setId(jogo.getId());
+        jogo1.getOpcaoApostas().forEach(opcaoAposta -> {
+            var opt = opcaoApostaRepository.findOpcaoApostaByJogo_IdAndType(jogo.getId(), opcaoAposta.getType());
+            opt.ifPresent(aposta -> opcaoAposta.setId(aposta.getId()));
+        });
+
         jogoRepository.save(jogo1);
     }
 

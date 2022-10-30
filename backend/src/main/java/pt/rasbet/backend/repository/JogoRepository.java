@@ -10,10 +10,11 @@ import org.springframework.data.querydsl.binding.SingleValueBinding;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.entity.QJogo;
+import pt.rasbet.backend.projection.JogoView;
 
 import java.util.Optional;
 
-@RepositoryRestResource(collectionResourceRel = "jogo", path = "jogo")
+@RepositoryRestResource(collectionResourceRel = "jogo", path = "jogo",  excerptProjection = JogoView.class)
 public interface JogoRepository extends JpaRepository<Jogo, Long>, QuerydslPredicateExecutor<Jogo>, QuerydslBinderCustomizer<QJogo> {
 
     @Override
