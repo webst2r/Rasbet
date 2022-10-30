@@ -4,10 +4,13 @@ export class AppConstant {
   public static readonly API_URL = environment.apiUrl;
 
   public static readonly API_PATHS = {
-    USER:{
+    USER: {
       LOGIN: 'user/login',
       REGISTER: 'user/register',
       DEFAULT: 'user'
+    },
+    JOGO: {
+      DEFAULT: 'jogo'
     }
 
   }

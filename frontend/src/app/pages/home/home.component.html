@@ -1,1 +1,37 @@
-<p>home works!</p>
+<main>
+  <mat-card *ngFor="let jogo of jogos">
+    <mat-card-title>{{jogo.homeTeam}} vs {{jogo.awayTeam}}</mat-card-title>
+    <mat-card-subtitle>{{jogo.date}}</mat-card-subtitle>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="home">
+        <div class="odd-item">
+          <strong>Sporting</strong>
+          <br>
+          <span>1.19</span>
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle value="draw">
+        <div class="odd-item">
+          <strong>Empate</strong>
+          <br>
+          <span>3.02</span>
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle value="away">
+        <div class="odd-item">
+          <strong>Porto</strong>
+          <br>
+          <span>2.9</span>
+        </div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card>
+  <mat-paginator class="paginator"
+                 [length]="totalGames"
+                 [pageIndex]="currentPage"
+                 [pageSize]="gamesPerPage"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 (page)="pageChanged($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+</main>
