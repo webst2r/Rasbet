@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.UserCredentialsDTO;
 import pt.rasbet.backend.dto.UserDTO;
 import pt.rasbet.backend.dto.UserWithTokenDTO;
+import pt.rasbet.backend.entity.Carteira;
 import pt.rasbet.backend.enumeration.ERole;
 import pt.rasbet.backend.enumeration.ExceptionType;
 import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.repository.UserRepository;
 import pt.rasbet.backend.security.jwt.JwtUtils;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -34,19 +36,19 @@ public class UserService {
 
     private List<String> roles = List.of(ERole.ROLE_USER.name(), ERole.ROLE_ADMIN.name(), ERole.ROLE_SPECIALIST.name());
 
+    @Transactional
     public UserWithTokenDTO login(UserCredentialsDTO userCredentialsDTO){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userCredentialsDTO.getEmail(), userCredentialsDTO.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        //TODO: Add user saldo when sending
         var user = userRepository.findByEmail(userCredentialsDTO.getEmail()).get();
 
         return new UserWithTokenDTO(user, jwt);
     }
 
-
+    @Transactional
     public String register(UserDTO userDTO){
         validateNewEmail(userDTO.getEmail());
         var user = userDTO.toEntity();
@@ -56,8 +58,8 @@ public class UserService {
             throw new BadRequestException("Role does not exists", ExceptionType.ROLE_NOT_EXISTS);
         }
         user.setRole(roleService.findByName(userDTO.getRole()).get());
+        user.setCarteira(new Carteira(0f, user));
         userRepository.save(user);
-        //TODO - create wallet for user
         return "User registered successfully!";
     }
 
