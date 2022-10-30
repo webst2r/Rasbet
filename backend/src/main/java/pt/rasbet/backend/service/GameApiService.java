@@ -50,7 +50,7 @@ public class GameApiService {
         Tipo tipo = tipoRepository.findByNome(FOOTBALL.name()).get();
         gameApiDTOS.forEach(gameApiDTO -> {
             Jogo jogo = new Jogo();
-            jogo.setId_api(gameApiDTO.getId());
+            jogo.setIdApi(gameApiDTO.getId());
             jogo.setDate(gameApiDTO.getCommenceTime());
             jogo.setHomeTeam(gameApiDTO.getHomeTeam());
             jogo.setAwayTeam(gameApiDTO.getAwayTeam());

@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "jogo",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = "id_api")
+        @UniqueConstraint(columnNames = "idApi")
 })
 @Getter
 @Setter
@@ -35,18 +35,17 @@ public class Jogo {
     @Column(nullable = false)
     private String awayTeam;
 
-    @Column(nullable = false)
     private String vencedor;
 
     private String resultado;
 
-    private String id_api;
+    private String idApi;
 
     @ManyToOne()
     @JoinColumn(name= "id_tipo", nullable = false)
     private Tipo tipo;
 
-    @OneToMany(mappedBy="jogo")
+    @OneToMany(mappedBy="jogo", cascade = CascadeType.ALL)
     private Set<OpcaoAposta> opcaoApostas =  new HashSet<>();
 
 }

@@ -11,6 +11,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.entity.QJogo;
 
+import java.util.Optional;
+
 @RepositoryRestResource(collectionResourceRel = "jogo", path = "jogo")
 public interface JogoRepository extends JpaRepository<Jogo, Long>, QuerydslPredicateExecutor<Jogo>, QuerydslBinderCustomizer<QJogo> {
 
@@ -19,4 +21,6 @@ public interface JogoRepository extends JpaRepository<Jogo, Long>, QuerydslPredi
         // Make case-insensitive 'like' filter for all string properties
         bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
     }
+
+    Optional<Jogo> findByIdApi(String idApi);
 }
