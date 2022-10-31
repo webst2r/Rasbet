@@ -31,4 +31,9 @@ public class Carteira {
     @OneToMany(mappedBy="carteira")
     private Set<Transacoes> transacoes =  new HashSet<>();
 
+    public Carteira(Float saldo, User user){
+        this.saldo = saldo;
+        this.user = user;
+    }
+
 }
