@@ -19,8 +19,6 @@ export class HomeComponent implements OnInit {
   constructor(private readonly jogoService: JogoService) {
   }
 
-  //TODO: selecionar e adicionar a lista
-
   ngOnInit(): void {
     this.getJogos(0, 10);
   }
@@ -60,5 +58,19 @@ export class HomeComponent implements OnInit {
     if (type === OutcomeType.AWAY_TEAM) return jogo.awayTeam;
 
     return 'Empate';
+  }
+
+  onChangeToggleGroup(jogo: Jogo, selectedOption: OutcomeType) {
+    this.jogoService.selecionarAposta({
+      jogo,
+      opcao: selectedOption
+    })
+  }
+
+  isOpcaoApostaChecked(jogo: Jogo, type: OutcomeType) {
+    const aposta = this.jogoService.getApostasSelecionadas()
+      .findIndex(aposta => aposta.jogo.id === jogo.id && aposta.opcao === type);
+
+    return aposta !== -1;
   }
 }

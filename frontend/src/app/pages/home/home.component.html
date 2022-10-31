@@ -2,8 +2,8 @@
   <mat-card *ngFor="let jogo of jogos">
     <mat-card-title>{{jogo.homeTeam}} vs {{jogo.awayTeam}}</mat-card-title>
     <mat-card-subtitle>{{jogo.date}}</mat-card-subtitle>
-    <mat-button-toggle-group name="odds" aria-label="Odds">
-      <mat-button-toggle *ngFor="let op of jogo.opcaoApostas" value="{{op.type}}" >
+    <mat-button-toggle-group name="odds" aria-label="Odds" (change)="onChangeToggleGroup(jogo, $event.value)">
+      <mat-button-toggle checked="{{isOpcaoApostaChecked(jogo, op.type)}}" *ngFor="let op of jogo.opcaoApostas" value="{{op.type}}" >
         <div class="odd-item">
           <strong>{{handleTypeToShow(op.type, jogo)}}</strong>
           <br>
