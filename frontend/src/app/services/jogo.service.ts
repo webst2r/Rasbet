@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Jogo} from "../interfaces/jogo";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {Observable} from "rxjs";
 import {AppConstant} from "../app.constant";
-import {OpcaoAposta, OutcomeType} from "../interfaces/opcao_aposta";
+import {OutcomeType} from "../interfaces/opcao_aposta";
 
 export interface ApostaSelecionada {
   jogo: Jogo,
@@ -30,12 +30,24 @@ export class JogoService {
   }
 
   selecionarAposta(aposta: ApostaSelecionada) {
-    let apostaExistenteIdx = this.apostasSelecionadas.findIndex(a => a.jogo.id == aposta.jogo.id);
+    let apostaExistenteIdx = this.apostasSelecionadas.findIndex(a => a.jogo.id === aposta.jogo.id);
 
     if (apostaExistenteIdx !== -1) {
       this.apostasSelecionadas[apostaExistenteIdx] = aposta
     } else {
       this.apostasSelecionadas.push(aposta)
     }
+  }
+
+  removerAposta(jogoId: number, opcao: OutcomeType) {
+    let apostaExistenteIdx = this.apostasSelecionadas.findIndex(a => a.jogo.id === jogoId && a.opcao === opcao);
+
+    if (apostaExistenteIdx !== -1) {
+      this.apostasSelecionadas.splice(apostaExistenteIdx, 1)
+    }
+  }
+
+  clearApostas() {
+    this.apostasSelecionadas = [];
   }
 }

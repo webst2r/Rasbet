@@ -1,0 +1,27 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  section {
+    position: relative;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: .5rem;
+
+    .remove-btn {
+      position: absolute;
+      right: 5px;
+      top: 0;
+      cursor: pointer;
+
+      &:hover {
+        color: #d70000;
+      }
+    }
+  }
+}

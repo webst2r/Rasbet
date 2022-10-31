@@ -6,6 +6,7 @@ import {StorageKey, StorageService} from "./storage.service";
 import {Role, UserToken} from "../interfaces/user";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
+import {JogoService} from "./jogo.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,35 +14,38 @@ import {Router} from "@angular/router";
 export class AuthenticationService {
   constructor(private http: HttpClient,
               private readonly storageService: StorageService,
-               private jwtHelperService:  JwtHelperService,
-              private router: Router) { }
+              private jwtHelperService: JwtHelperService,
+              private jogoService: JogoService,
+              private router: Router) {
+  }
 
-  login(email: string, password: string): Observable<UserToken>{
-    return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.USER.LOGIN, {
+  login(email: string, password: string): Observable<UserToken> {
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.USER.LOGIN, {
       email, password
     }) as Observable<UserToken>;
   }
 
-  register(email: string, password: string, firstName: string, lastName: string,birthDate: string, role: Role): Observable<any>{
-    return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.USER.REGISTER, {
+  register(email: string, password: string, firstName: string, lastName: string, birthDate: string, role: Role): Observable<any> {
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.USER.REGISTER, {
       email, password, firstName, lastName, birthDate, role
     }) as Observable<any>;
   }
 
-  logout(){
+  logout() {
     this.storageService.clearData();
+    this.jogoService.clearApostas();
     this.router.navigateByUrl('/dashboard');
   }
 
-  saveToken(token: string){
+  saveToken(token: string) {
     this.storageService.saveData(StorageKey.TOKEN, token);
   }
 
-  getToken(): string | null{
+  getToken(): string | null {
     return this.storageService.getData(StorageKey.TOKEN);
   }
 
-  saveUser(user: UserToken){
+  saveUser(user: UserToken) {
     this.storageService.saveData(StorageKey.USER, JSON.stringify(user));
   }
 
@@ -57,7 +61,7 @@ export class AuthenticationService {
     const token = this.storageService.getData(StorageKey.TOKEN);
     // Check whether the token is expired and return
     // true or false
-    if(token !== null) {
+    if (token !== null) {
       return !this.jwtHelperService.isTokenExpired(token);
     }
 

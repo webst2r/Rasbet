@@ -1,0 +1,10 @@
+<main>
+  <h2>Boletim de apostas</h2>
+
+  <section *ngFor="let aposta of apostas">
+    <span class="remove-btn" (click)="removerAposta(aposta.jogo.id, aposta.opcao)">&#10005;</span>
+    <h3>{{aposta.jogo.homeTeam}} - {{aposta.jogo.awayTeam}}</h3>
+    <p>Resultado: {{getResultado(aposta.jogo, aposta.opcao)}}</p>
+    <p>Odd: {{getSelectedOdd(aposta.jogo.opcaoApostas, aposta.opcao)}}</p>
+  </section>
+</main>

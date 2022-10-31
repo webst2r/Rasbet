@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {MainRoutingModule} from "./main-routing.module";
 import {MainComponent} from "./main.component";
 import {HomeModule} from "../home/home.module";
 import {ToolbarModule} from "../../components/toolbar/toolbar.module";
-
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {SidebarModule} from "../../components/sidebar/sidebar.module";
 
 
 @NgModule({
@@ -13,7 +14,10 @@ import {ToolbarModule} from "../../components/toolbar/toolbar.module";
     CommonModule,
     MainRoutingModule,
     HomeModule,
-    ToolbarModule
+    ToolbarModule,
+    MatSidenavModule,
+    SidebarModule
   ]
 })
-export class MainModule { }
+export class MainModule {
+}
