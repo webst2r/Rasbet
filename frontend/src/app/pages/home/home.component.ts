@@ -61,6 +61,11 @@ export class HomeComponent implements OnInit {
   }
 
   onChangeToggleGroup(jogo: Jogo, selectedOption: OutcomeType) {
+    if (this.isDateInvalid(jogo.date)) {
+      this.getJogos(0, 10);
+      return;
+    }
+
     this.jogoService.selecionarAposta({
       jogo,
       opcao: selectedOption
@@ -72,5 +77,23 @@ export class HomeComponent implements OnInit {
       .findIndex(aposta => aposta.jogo.id === jogo.id && aposta.opcao === type);
 
     return aposta !== -1;
+  }
+
+  isDateInvalid(dateString: string): boolean {
+    const date = new Date(dateString);
+    const todayDate = new Date();
+
+    return date.getTime() <= todayDate.getTime()
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().length === 1 ? "0" + date.getDate().toString() : date.getDate().toString();
+    const month = (date.getMonth() + 1).toString().length === 1 ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
+    const year = date.getFullYear().toString();
+    const hours = date.getHours().toString().length === 1 ? "0" + date.getHours().toString() : date.getHours().toString();
+    const minutes = date.getMinutes().toString().length === 1 ? "0" + date.getMinutes().toString() : date.getMinutes().toString();
+
+    return `${day}-${month}-${year} ${hours}:${minutes}`;
   }
 }
