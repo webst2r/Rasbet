@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "apostasMultiplas")
@@ -26,5 +28,9 @@ public class ApostasMultiplas {
     @ManyToOne()
     @JoinColumn(name= "id_user", nullable = false)
     private User user;
+
+
+    @OneToMany(mappedBy="apostasMultiplas", cascade = CascadeType.ALL)
+    private Set<Aposta> apostas =  new HashSet<>();
 
 }

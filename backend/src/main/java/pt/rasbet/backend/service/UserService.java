@@ -11,9 +11,11 @@ import pt.rasbet.backend.dto.UserCredentialsDTO;
 import pt.rasbet.backend.dto.UserDTO;
 import pt.rasbet.backend.dto.UserWithTokenDTO;
 import pt.rasbet.backend.entity.Carteira;
+import pt.rasbet.backend.entity.User;
 import pt.rasbet.backend.enumeration.ERole;
 import pt.rasbet.backend.enumeration.ExceptionType;
 import pt.rasbet.backend.exception.BadRequestException;
+import pt.rasbet.backend.exception.ResourceNotFoundException;
 import pt.rasbet.backend.repository.UserRepository;
 import pt.rasbet.backend.security.jwt.JwtUtils;
 
@@ -67,5 +69,14 @@ public class UserService {
         if (userRepository.existsByEmail(email)) {
             throw new BadRequestException("Email already exists", ExceptionType.EMAIL_ALREADY_EXISTS);
         }
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    }
+
+    @Transactional
+    public User save(User user){
+        return userRepository.save(user);
     }
 }

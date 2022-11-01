@@ -42,4 +42,11 @@ public class Transacoes {
     @JoinColumn(name= "id_carteira", nullable = false)
     private Carteira carteira;
 
+    public Transacoes (Carteira carteira, Float valor, String tipo, String tipoDeposit){
+        this.carteira = carteira;
+        this.tipoDeposit = tipoDeposit;
+        this.valor = valor;
+        this.tipo = tipo;
+    }
+
 }

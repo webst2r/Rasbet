@@ -1,5 +1,6 @@
 package pt.rasbet.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,7 +31,12 @@ public class Aposta {
     private OpcaoAposta opcaoAposta;
 
     @ManyToOne()
-    @JoinColumn(name= "id_user", nullable = false)
+    @JoinColumn(name= "id_user")
     private User user;
+
+    @JsonBackReference
+    @ManyToOne()
+    @JoinColumn(name= "id_multipla")
+    private ApostasMultiplas apostasMultiplas;
 
 }
