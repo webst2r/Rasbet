@@ -7,7 +7,8 @@ import {OutcomeType} from "../interfaces/opcao_aposta";
 
 export interface ApostaSelecionada {
   jogo: Jogo,
-  opcao: OutcomeType
+  opcao: OutcomeType,
+  ammout?: number;
 }
 
 @Injectable({

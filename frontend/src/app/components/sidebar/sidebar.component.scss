@@ -24,4 +24,15 @@ main {
       }
     }
   }
+  .mat-radio-group{
+    display:flex ;
+    width:50%;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+  }
+  button{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 82%;
+  }
 }

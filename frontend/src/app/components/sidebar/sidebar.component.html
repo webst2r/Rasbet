@@ -1,10 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="saveBet()">
 <main>
   <h2>{{"sidenav.bettingSlip" | translate}}</h2>
-
+  <mat-radio-group formControlName="type">
+    <mat-radio-button [value]="betType.SIMPLE" checked="true"
+                      color="primary">{{"betType.simple" | translate}}</mat-radio-button>
+    <mat-radio-button [value]="betType.MULTIPLE" color="primary" [disabled] ="apostas.length<2">{{"betType.multiple" | translate}}</mat-radio-button>
+  </mat-radio-group>
   <section *ngFor="let aposta of apostas">
     <span class="remove-btn" (click)="removerAposta(aposta.jogo.id, aposta.opcao)">&#10005;</span>
     <h3>{{aposta.jogo.homeTeam}} - {{aposta.jogo.awayTeam}}</h3>
     <p>{{"sidenav.result" | translate}}: {{getResultado(aposta.jogo, aposta.opcao)}}</p>
     <p>{{"sidenav.odd" | translate}}: {{getSelectedOdd(aposta.jogo.opcaoApostas, aposta.opcao)}}</p>
+    <table *ngIf="form.controls['type'].value === betType.SIMPLE">
+      <tr>
+        <td>
+          <mat-form-field>
+            <mat-label>{{ "sidenav.amount" | translate}}</mat-label>
+            <input matInput type="number"  min="0" required (change)="setValue($event, aposta)">
+          </mat-form-field>
+        </td>
+        <td style="text-align: center;">
+          <span>Ganhos: {{getSimpleBetGain(aposta)}}€</span>
+        </td>
+      </tr>
+    </table>
   </section>
+  <table *ngIf="form.controls['type'].value === betType.MULTIPLE && this.apostas.length != 0">
+    <tr>
+      <td>
+        <mat-form-field>
+          <mat-label>{{ "sidenav.amount" | translate}}</mat-label>
+          <input matInput type="number" formControlName = "value">
+        </mat-form-field>
+      </td>
+      <td style="text-align: center;">
+        <span>{{"sidenav.odd" | translate}}: {{getMultipleOdd()}}</span>
+      </td>
+    </tr>
+  </table>
+  <span *ngIf="this.apostas.length != 0">{{"sidenav.potentialGains" | translate}}: {{getTotalGains()}}€</span>
+  <button [disabled]="this.apostas.length == 0" mat-button mat-raised-button
+          type="submit">{{"sidenav.bet" | translate}}</button>
 </main>
+</form>

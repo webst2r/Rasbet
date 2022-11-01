@@ -29,12 +29,19 @@
     "deposit": "Depositar",
     "rise": "Levantar",
     "amount": "Montante",
-    "depositType": "Topo de Depósito"
+    "depositType": "Topo de Depósito",
+    "bet": "Apostar",
+    "gains": "Ganhos",
+    "potentialGains": "Ganhos Potenciais"
   },
   "depositType": {
     "atm": "Multibanco",
     "mbway": "MBWay",
     "deposit": "Depositar",
     "raise": "Levantar"
+  },
+  "betType": {
+    "simple": "Simples",
+    "multiple": "Múltiplas"
   }
 }

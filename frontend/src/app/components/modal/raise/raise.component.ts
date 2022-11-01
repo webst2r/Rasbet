@@ -27,11 +27,11 @@ export class RaiseComponent implements OnInit {
 
   updateSaldo(){
     const user = this.auth.getUser();
-    const saldo = user?.saldo as number -  this.form.controls['saldo'].value;
     if(this.form.controls['saldo'].value > (user?.saldo as number)){
       this.form.controls['saldo'].setErrors({'incorrect': false});
       return;
     }
+    const saldo = user?.saldo as number -  this.form.controls['saldo'].value;
     this.carteiraService.updateSaldo(user?.idCarteira as number, saldo as number).pipe(
       tap((res) => {
         if(user && user.saldo){
