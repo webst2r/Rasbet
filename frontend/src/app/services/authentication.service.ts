@@ -8,6 +8,11 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
 import {JogoService} from "./jogo.service";
 
+export enum WalletType{
+  PLUS = "PLUS",
+  MINUS = "MINUS"
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,6 +60,18 @@ export class AuthenticationService {
       return JSON.parse(user);
     }
     return null;
+  }
+
+  updateUserWallet(value: number, type: WalletType){
+    let user = this.getUser();
+    if(user && user.saldo !== undefined) {
+      if (type === WalletType.PLUS) {
+        user.saldo += value;
+      }else {
+        user.saldo -=value;
+      }
+      this.saveUser(user);
+    }
   }
 
   isAuthenticated(): boolean {

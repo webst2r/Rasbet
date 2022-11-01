@@ -36,7 +36,7 @@ export class DepositComponent implements OnInit {
     const saldo = user?.saldo +  this.form.controls['saldo'].value;
     this.carteiraService.updateSaldo(user?.idCarteira as number, saldo as number).pipe(
       tap((res) => {
-        if(user && user.saldo){
+        if(user && user.saldo !== undefined){
           user.saldo = res.saldo;
         }
         this.auth.saveUser(user as UserToken);

@@ -17,7 +17,12 @@ export class AppConstant {
     },
     TRANSACOES: {
       DEFAULT: 'transacoes'
-    }
+    },
+    APOSTAS:{
+      DEFAULT:'aposta',
+      SAVE: 'aposta/all',
+      MULTIPLE:'apostaMultipla'
+    },
 
   }
 

@@ -5,6 +5,8 @@ import {Jogo} from "../../interfaces/jogo";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BetTypes} from "../../enumeration/bet_types";
+import {ApostasService, SimpleBet} from "../../services/apostas.service";
+import {AuthenticationService, WalletType} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -21,8 +23,11 @@ export class SidebarComponent implements OnInit {
   })
   multipleOdd: number = 0.00;
 
+  //TODO: validate saldo disponivel para apostar
   constructor(private jogoService: JogoService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private apostasService: ApostasService,
+              private auth: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -45,11 +50,14 @@ export class SidebarComponent implements OnInit {
   }
 
   saveBet(){
-    if(this.form.controls['type'].value === this.betType.SIMPLE){
+    if (this.form.controls['type'].value === this.betType.SIMPLE) {
       const t = this.apostas.filter(aposta => aposta.ammout === undefined || aposta.ammout === 0).length > 0;
-      if(t){
+      if (t) {
         return;
       }
+      this.saveSimpleBet();
+    } else {
+      this.saveMultipleBet();
     }
 
   }
@@ -81,14 +89,52 @@ export class SidebarComponent implements OnInit {
     let total = 0;
     if(this.form.controls['type'].value === this.betType.SIMPLE){
       this.apostas.forEach(aposta => {
-        if(aposta.ammout)
-        total += Number(this.getSelectedOdd(aposta.jogo.opcaoApostas, aposta.opcao)) * aposta.ammout;
+        if (aposta.ammout)
+          total += Number(this.getSelectedOdd(aposta.jogo.opcaoApostas, aposta.opcao)) * aposta.ammout;
       })
-    }else {
-     total = Number(this.getMultipleOdd()) * this.form.controls['value'].value
+    } else {
+      total = Number(this.getMultipleOdd()) * this.form.controls['value'].value
     }
 
     return total.toFixed(2);
   }
 
+  getSelectedOddId(opcaoApostas: OpcaoAposta[], opcao: OutcomeType) {
+    return opcaoApostas.find(op => op.type === opcao)?.id;
+  }
+
+  private saveSimpleBet() {
+    let ap: SimpleBet[] = [];
+    let total = 0;
+    this.apostas.forEach(aposta => {
+      total += aposta.ammout as number;
+      ap.push({
+        valor: aposta.ammout as number,
+        oddId: this.getSelectedOddId(aposta.jogo.opcaoApostas, aposta.opcao) as number
+      })
+    })
+    this.apostasService.saveSimpleBets(ap, this.auth.getUser()?.id as number).subscribe(
+      () =>{
+        this.auth.updateUserWallet(total, WalletType.MINUS);
+        this.jogoService.clearApostas();
+        this.apostas = this.jogoService.getApostasSelecionadas();
+      },
+      (error) => console.log(error)
+    );
+  }
+
+  private saveMultipleBet() {
+    const odds: number[] = [];
+    this.apostas.forEach(aposta => {
+      odds.push( this.getSelectedOddId(aposta.jogo.opcaoApostas, aposta.opcao) as number)
+    })
+    this.apostasService.saveMultipleBet(this.auth.getUser()?.id as number,this.form.controls['value'].value,odds).subscribe(
+      () => {
+        this.auth.updateUserWallet(this.form.controls['value'].value, WalletType.MINUS);
+        this.jogoService.clearApostas();
+        this.apostas = this.jogoService.getApostasSelecionadas();
+      },
+      (error) => console.log(error)
+    );
+  }
 }
