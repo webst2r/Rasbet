@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface JogoView {
     Long getId();
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     LocalDateTime getDate();
 
     String getHomeTeam();
