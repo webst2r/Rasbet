@@ -11,6 +11,12 @@ export class AppConstant {
     },
     JOGO: {
       DEFAULT: 'jogo'
+    },
+    CARTEIRA:{
+      DEFAULT: 'carteira'
+    },
+    TRANSACOES: {
+      DEFAULT: 'transacoes'
     }
 
   }

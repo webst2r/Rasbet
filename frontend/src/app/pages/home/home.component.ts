@@ -4,6 +4,7 @@ import {JogoService} from "../../services/jogo.service";
 import {catchError, of, take, tap} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {OpcaoAposta, OutcomeType} from "../../interfaces/opcao_aposta";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   public gamesPerPage = 10;
   public currentPage = 0;
 
-  constructor(private readonly jogoService: JogoService) {
+  constructor(private readonly jogoService: JogoService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +59,7 @@ export class HomeComponent implements OnInit {
     if (type === OutcomeType.HOME_TEAM) return jogo.homeTeam;
     if (type === OutcomeType.AWAY_TEAM) return jogo.awayTeam;
 
-    return 'Empate';
+    return this.translate.instant('home.draw');
   }
 
   onChangeToggleGroup(jogo: Jogo, selectedOption: OutcomeType) {

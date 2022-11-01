@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './pages/login/login.component';
 import {RegisterComponent} from './pages/register/register.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {AuthGuard} from "./guard/auth.guard";
 import {JwtModule} from "@auth0/angular-jwt";
 import {StorageKey} from "./services/storage.service";
@@ -19,6 +19,11 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {DashboardComponent} from './pages/dashboard/dashboard.component';
 import {ToolbarModule} from "./components/toolbar/toolbar.module";
+import {DepositComponent} from './components/modal/deposit/deposit.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatDialogModule} from "@angular/material/dialog";
+import {AuthInterceptor} from "./helpers/auth.interceptor";
+import { RaiseComponent } from './components/modal/raise/raise.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -30,7 +35,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    DepositComponent,
+    RaiseComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,9 +63,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ToolbarModule
+    ToolbarModule,
+    MatSelectModule,
+    MatDialogModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

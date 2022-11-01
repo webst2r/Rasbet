@@ -16,5 +16,25 @@
     "firstNameRequired": "O nome próprio é obrigatório",
     "lastNameRequired": "O apelido é obrigatório",
     "emailAlreadyExists": "Já existe uma conta com esse email."
+  },
+  "home": {
+    "wallet": "Saldo",
+    "draw": "Empate",
+    "logout": "Logout"
+  },
+  "sidenav": {
+    "bettingSlip": "Boletim de Apostas",
+    "result": "Resultado",
+    "odd": "Odd",
+    "deposit": "Depositar",
+    "rise": "Levantar",
+    "amount": "Montante",
+    "depositType": "Topo de Depósito"
+  },
+  "depositType": {
+    "atm": "Multibanco",
+    "mbway": "MBWay",
+    "deposit": "Depositar",
+    "raise": "Levantar"
   }
 }

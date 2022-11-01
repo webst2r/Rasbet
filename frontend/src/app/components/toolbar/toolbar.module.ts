@@ -4,6 +4,8 @@ import {ToolbarComponent} from "./toolbar.component";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
+import {TranslateModule} from "@ngx-translate/core";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {RouterLink} from "@angular/router";
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    TranslateModule,
+    MatMenuModule
   ]
 })
 export class ToolbarModule {

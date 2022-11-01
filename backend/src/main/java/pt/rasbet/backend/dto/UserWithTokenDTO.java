@@ -17,6 +17,8 @@ public class UserWithTokenDTO {
     private String firstName;
     private String lastName;
     private String role;
+
+    private Long idCarteira;
     private Float saldo;
     private String token;
 
@@ -29,5 +31,6 @@ public class UserWithTokenDTO {
         this.role = user.getRole().getName();
         this.token = token;
         this.saldo = user.getCarteira().getSaldo();
+        this.idCarteira = user.getCarteira().getId();
     }
 }

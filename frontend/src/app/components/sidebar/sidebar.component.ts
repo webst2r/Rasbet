@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApostaSelecionada, JogoService} from "../../services/jogo.service";
 import {OpcaoAposta, OutcomeType} from "../../interfaces/opcao_aposta";
 import {Jogo} from "../../interfaces/jogo";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,8 @@ import {Jogo} from "../../interfaces/jogo";
 export class SidebarComponent implements OnInit {
   public apostas: ApostaSelecionada[] = [];
 
-  constructor(private jogoService: JogoService) {
+  constructor(private jogoService: JogoService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class SidebarComponent implements OnInit {
     if (opcao === OutcomeType.HOME_TEAM) return jogo.homeTeam;
     if (opcao === OutcomeType.AWAY_TEAM) return jogo.awayTeam;
 
-    return 'Empate'
+    return this.translate.instant('home.draw');
   }
 
   removerAposta(jogoId: number, opcao: OutcomeType) {

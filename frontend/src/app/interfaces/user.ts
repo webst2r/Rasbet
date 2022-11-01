@@ -11,5 +11,6 @@ export interface UserToken{
   email: string;
   role: Role;
   saldo: number;
+  idCarteira: number;
   token: string;
 }

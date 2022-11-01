@@ -6,6 +6,7 @@ import {HomeModule} from "../home/home.module";
 import {ToolbarModule} from "../../components/toolbar/toolbar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {SidebarModule} from "../../components/sidebar/sidebar.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {SidebarModule} from "../../components/sidebar/sidebar.module";
     HomeModule,
     ToolbarModule,
     MatSidenavModule,
-    SidebarModule
+    SidebarModule,
+    MatDialogModule
   ]
 })
 export class MainModule {
