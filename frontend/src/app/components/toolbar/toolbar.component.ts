@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
+import {MatDialog} from "@angular/material/dialog";
+import {DepositComponent} from "../modal/deposit/deposit.component";
+import {RaiseComponent} from "../modal/raise/raise.component";
 
 @Component({
   selector: 'app-toolbar',
@@ -8,9 +11,36 @@ import {AuthenticationService} from "../../services/authentication.service";
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(public auth: AuthenticationService) { }
+  constructor(public auth: AuthenticationService,
+              public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
+  }
+
+  getUserWallet(): number {
+    const value = this.auth.getUser()?.saldo;
+    return value != null ? value : 0;
+  }
+
+  openDepositDialog(): void {
+    const dialogRef = this.dialog.open(DepositComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openRaiseDialog(): void {
+    const dialogRef = this.dialog.open(RaiseComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

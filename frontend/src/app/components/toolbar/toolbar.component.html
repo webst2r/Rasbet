@@ -2,9 +2,17 @@
   <h1 class="title">Rasbet</h1>
   <div class="auth-btns">
     <ng-container *ngIf="!auth.isAuthenticated()">
-      <button mat-raised-button routerLink="/login">Login</button>
-      <button mat-raised-button routerLink="/register">Registar</button>
+      <button mat-raised-button routerLink="/login">{{"loginPage.login" | translate}}</button>
+      <button mat-raised-button routerLink="/register">{{"registerPage.register" | translate}}</button>
     </ng-container>
-    <button *ngIf="auth.isAuthenticated()" mat-raised-button (click)="auth.logout()">Logout</button>
+    <ng-container *ngIf="auth.isAuthenticated()">
+      <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
+      <button *ngIf="auth.isAuthenticated()" mat-raised-button (click)="auth.logout()">{{"home.logout" | translate}}</button>
+    </ng-container>
+
   </div>
 </mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="openDepositDialog()">{{"sidenav.deposit" | translate}}</button>
+  <button mat-menu-item (click)="openRaiseDialog()">{{"sidenav.rise" | translate}}</button>
+</mat-menu>

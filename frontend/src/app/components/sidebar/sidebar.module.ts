@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SidebarComponent} from "./sidebar.component";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
@@ -8,9 +9,10 @@ import {SidebarComponent} from "./sidebar.component";
   exports: [
     SidebarComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        TranslateModule
+    ]
 })
 export class SidebarModule {
 }

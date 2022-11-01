@@ -23,11 +23,11 @@ public class Carteira {
     @Column(nullable = false)
     private Float saldo;
 
-    @JsonBackReference
+    @JsonBackReference(value = "user")
     @OneToOne(mappedBy = "carteira")
     private User user;
 
-    @JsonBackReference
+    @JsonBackReference(value = "transacoes")
     @OneToMany(mappedBy="carteira")
     private Set<Transacoes> transacoes =  new HashSet<>();
 

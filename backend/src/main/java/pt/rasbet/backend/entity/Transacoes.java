@@ -1,10 +1,14 @@
 package pt.rasbet.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transacoes")
@@ -22,6 +26,17 @@ public class Transacoes {
 
     @Column(nullable = false)
     private String tipo;
+
+    @Column(nullable = false)
+    private String tipoDeposit;
+
+    @CreatedDate
+    @CreationTimestamp
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
+    @Column(
+            name = "created_at"
+    )
+    private LocalDateTime createdAt;
 
     @ManyToOne()
     @JoinColumn(name= "id_carteira", nullable = false)

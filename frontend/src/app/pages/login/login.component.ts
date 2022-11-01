@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   error: string = '';
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.email)]),
-    password: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.password)]),
+    password: new FormControl('', [Validators.required]),
   });
   constructor(private readonly authenticationService:AuthenticationService,
               private router: Router,

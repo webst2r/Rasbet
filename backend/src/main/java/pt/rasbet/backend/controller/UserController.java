@@ -4,18 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pt.rasbet.backend.dto.UserCredentialsDTO;
 import pt.rasbet.backend.dto.UserDTO;
 import pt.rasbet.backend.dto.UserWithTokenDTO;
-import pt.rasbet.backend.entity.Jogo;
-import pt.rasbet.backend.service.GameApiService;
 import pt.rasbet.backend.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RepositoryRestController()
 @RequiredArgsConstructor
@@ -23,7 +19,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final GameApiService gameApiService;
 
     @PostMapping("user/register")
     public ResponseEntity<String> register(@RequestBody @Valid UserDTO userDTO) {
@@ -35,10 +30,5 @@ public class UserController {
     public ResponseEntity<UserWithTokenDTO> login(@RequestBody @Valid UserCredentialsDTO userCredentialsDTO) {
         var userWithTokenDTO  = userService.login(userCredentialsDTO);
         return ResponseEntity.ok(userWithTokenDTO);
-    }
-
-    @GetMapping("user/games")
-    public ResponseEntity<List<Jogo>> games(){
-        return ResponseEntity.ok(gameApiService.getGames());
     }
 }

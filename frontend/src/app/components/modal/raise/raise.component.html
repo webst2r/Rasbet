@@ -1,0 +1,8 @@
+<form [formGroup]="form" (ngSubmit)="updateSaldo()">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>{{"sidenav.amount" | translate}}</mat-label>
+    <input matInput formControlName = "saldo"  type="number">
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled] = "!this.form.valid" mat-button>{{"depositType.raise" | translate}}</button>
+</form>
+
