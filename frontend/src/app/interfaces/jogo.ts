@@ -7,6 +7,7 @@ export interface Jogo {
   homeTeam: string;
   awayTeam: string;
   vencedor?: string;
+  complete: boolean;
   resultado: string;
   idApi: string;
   tipo: Tipo;

@@ -7,10 +7,19 @@ import {ToolbarModule} from "../../components/toolbar/toolbar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {SidebarModule} from "../../components/sidebar/sidebar.module";
 import {MatDialogModule} from "@angular/material/dialog";
+import {ApostasComponent} from "../apostas/apostas.component";
+import {ApostasMultiplasComponent} from "../apostas-multiplas/apostas-multiplas.component";
+import {MatTableModule} from "@angular/material/table";
+import {MatIconModule} from "@angular/material/icon";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatButtonModule} from "@angular/material/button";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
-  declarations: [MainComponent],
+  declarations: [MainComponent,
+    ApostasComponent,
+    ApostasMultiplasComponent,],
   imports: [
     CommonModule,
     MainRoutingModule,
@@ -18,7 +27,12 @@ import {MatDialogModule} from "@angular/material/dialog";
     ToolbarModule,
     MatSidenavModule,
     SidebarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    TranslateModule
   ]
 })
 export class MainModule {

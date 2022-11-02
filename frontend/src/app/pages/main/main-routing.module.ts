@@ -3,6 +3,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "../home/home.component";
 import {AuthGuard} from "../../guard/auth.guard";
 import {MainComponent} from "./main.component";
+import {ApostasComponent} from "../apostas/apostas.component";
+import {ApostasMultiplasComponent} from "../apostas-multiplas/apostas-multiplas.component";
 
 const routes: Routes = [
   {
@@ -14,6 +16,14 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'aposta',
+        component: ApostasComponent,
+      },
+      {
+        path: 'apostaMultipla',
+        component: ApostasMultiplasComponent,
       },
       { path: '**', redirectTo: '' },
     ]

@@ -1,5 +1,12 @@
 <mat-toolbar class="toolbar">
-  <h1 class="title">Rasbet</h1>
+
+  <div class="menu" *ngIf="auth.isAuthenticated()">
+    <h1 class="title">Rasbet</h1>
+    <button mat-button routerLink="/home">{{"home.games" | translate}}</button>
+    <button mat-button routerLink="/aposta">{{"bets.simpleBets" | translate}}</button>
+    <button mat-button routerLink="/apostaMultipla">{{"bets.multipleBets" | translate}}</button>
+    <button mat-button routerLink="/apostaMultipla">{{"home.transation" | translate}}</button>
+  </div>
   <div class="auth-btns">
     <ng-container *ngIf="!auth.isAuthenticated()">
       <button mat-raised-button routerLink="/login">{{"loginPage.login" | translate}}</button>
@@ -11,7 +18,9 @@
     </ng-container>
 
   </div>
+
 </mat-toolbar>
+
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="openDepositDialog()">{{"sidenav.deposit" | translate}}</button>
   <button mat-menu-item (click)="openRaiseDialog()">{{"sidenav.rise" | translate}}</button>

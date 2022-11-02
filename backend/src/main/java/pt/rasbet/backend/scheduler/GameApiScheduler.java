@@ -4,14 +4,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import pt.rasbet.backend.entity.Aposta;
+import pt.rasbet.backend.entity.ApostasMultiplas;
 import pt.rasbet.backend.entity.Jogo;
+import pt.rasbet.backend.enumeration.EApostaEstado;
 import pt.rasbet.backend.repository.JogoRepository;
 import pt.rasbet.backend.repository.OpcaoApostaRepository;
+import pt.rasbet.backend.service.ApostaMultiplaService;
+import pt.rasbet.backend.service.ApostaService;
 import pt.rasbet.backend.service.GameApiService;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Configuration
 @EnableScheduling
@@ -22,8 +29,11 @@ public class GameApiScheduler {
     private final JogoRepository jogoRepository;
 
     private final OpcaoApostaRepository opcaoApostaRepository;
+    private final ApostaService apostaService;
+    private final ApostaMultiplaService apostaMultiplaService;
 
-    @Scheduled(cron = "0 */15 * * * *", zone = "Europe/Lisbon")
+    @Scheduled(cron = "0 */5 * * * *", zone = "Europe/Lisbon")
+    @PostConstruct
     @Transactional
     public void updateJogos() {
         List<Jogo> jogos = gameApiService.getGames();
@@ -46,7 +56,18 @@ public class GameApiScheduler {
             opt.ifPresent(aposta -> opcaoAposta.setId(aposta.getId()));
         });
 
-        jogoRepository.save(jogo1);
+
+        jogo1 = jogoRepository.save(jogo1);
+        if (jogo1.getComplete()) {
+           updateBets(jogo1);
+        }
     }
+
+    private void updateBets(Jogo jogo) {
+        apostaService.updateApostas(jogo);
+        apostaService.updateApostasMultiplas(jogo);
+        apostaMultiplaService.updateApostasMultiplas(jogo);
+    }
+
 
 }

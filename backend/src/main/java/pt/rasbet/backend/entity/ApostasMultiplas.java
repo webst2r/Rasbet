@@ -1,10 +1,14 @@
 package pt.rasbet.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +28,14 @@ public class ApostasMultiplas {
     private String estado;
 
     private Float valorTotalGanho;
+
+    @CreatedDate
+    @CreationTimestamp
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm")
+    @Column(
+            name = "created_at"
+    )
+    private LocalDateTime createdAt;
 
     @ManyToOne()
     @JoinColumn(name= "id_user", nullable = false)

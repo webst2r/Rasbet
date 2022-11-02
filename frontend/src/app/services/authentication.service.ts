@@ -62,6 +62,10 @@ export class AuthenticationService {
     return null;
   }
 
+  getUserId(): number{
+    return this.getUser()?.id as number
+  }
+
   updateUserWallet(value: number, type: WalletType){
     let user = this.getUser();
     if(user && user.saldo !== undefined) {

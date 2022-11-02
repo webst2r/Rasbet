@@ -20,7 +20,9 @@
   "home": {
     "wallet": "Saldo",
     "draw": "Empate",
-    "logout": "Logout"
+    "logout": "Logout",
+    "games": "Jogos",
+    "transation": "Transações"
   },
   "sidenav": {
     "bettingSlip": "Boletim de Apostas",
@@ -43,5 +45,25 @@
   "betType": {
     "simple": "Simples",
     "multiple": "Múltiplas"
+  },
+  "bets": {
+    "bets": "Apostas",
+    "simpleBets": "Apostas Simples",
+    "multipleBets": "Apostas Multiplas",
+    "date": "Data de Aposta",
+    "betType": "Tipo Aposta",
+    "odd": "Odd",
+    "value": "Montante",
+    "state": "Estado",
+    "game": "Jogo",
+    "result": "Resultado",
+    "FOOTBALL": "Futebol",
+    "gain": "Montante Ganho"
+  },
+  "betState": {
+    "WON": "Ganhou",
+    "LOST": "Perdeu",
+    "PLACED": "Colocada",
+    "CANCEL": "Cancelada"
   }
 }

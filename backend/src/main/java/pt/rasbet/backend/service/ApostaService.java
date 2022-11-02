@@ -1,12 +1,10 @@
 package pt.rasbet.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.ListApostaDTO;
-import pt.rasbet.backend.entity.Aposta;
-import pt.rasbet.backend.entity.OpcaoAposta;
-import pt.rasbet.backend.entity.Transacoes;
-import pt.rasbet.backend.entity.User;
+import pt.rasbet.backend.entity.*;
 import pt.rasbet.backend.enumeration.EApostaEstado;
 import pt.rasbet.backend.enumeration.ETRansationType;
 import pt.rasbet.backend.repository.ApostaRepository;
@@ -55,5 +53,47 @@ public class ApostaService {
 
     public Transacoes createTransaction(User user, Float value){
         return new Transacoes(user.getCarteira(), value, "RAISE", ETRansationType.BET.name());
+    }
+
+    public List<Aposta> getApostasTerminated(Jogo jogo){
+        return this.apostaRepository.findApostaByOpcaoAposta_JogoAndEstado(jogo, EApostaEstado.PLACED.name());
+    }
+
+    public List<Aposta> getApostasMultipleTerminated(Jogo jogo){
+        return this.apostaRepository.findApostaByOpcaoAposta_JogoAndEstado(jogo, EApostaEstado.MULTIPLE.name());
+    }
+
+    @Transactional
+    public void updateApostas(Jogo jogo) {
+        List<Aposta> apostas = this.getApostasTerminated(jogo);
+        apostas.forEach(aposta -> {
+            if(aposta.getOpcaoAposta().getType().equals(jogo.getVencedor())){
+                float valor = aposta.getValor() * aposta.getValorOdd();
+                aposta.setValorGanho(valor);
+                aposta.setEstado(EApostaEstado.WON.name());
+                apostaRepository.save(aposta);
+                Carteira carteira = aposta.getUser().getCarteira();
+                carteira.setSaldo(carteira.getSaldo() + valor);
+                carteiraRepository.save(carteira);
+                transacoesRepository.save(new Transacoes(carteira, valor, "DEPOSIT", ETRansationType.BET.name()));
+            }else {
+                aposta.setEstado(EApostaEstado.LOST.name());
+                apostaRepository.save(aposta);
+            }
+        });
+    }
+
+    @Transactional
+    public void updateApostasMultiplas(Jogo jogo){
+        List<Aposta> apostas = this.getApostasMultipleTerminated(jogo);
+        apostas.forEach(aposta -> {
+            if(aposta.getOpcaoAposta().getType().equals(jogo.getVencedor())){
+                aposta.setEstado(EApostaEstado.WON.name());
+            }else {
+                aposta.setEstado(EApostaEstado.LOST.name());
+            }
+            apostaRepository.save(aposta);
+        });
+
     }
 }

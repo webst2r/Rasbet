@@ -9,9 +9,13 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.querydsl.binding.SingleValueBinding;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pt.rasbet.backend.entity.Aposta;
+import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.entity.QAposta;
+import pt.rasbet.backend.projection.ApostaView;
 
-@RepositoryRestResource(collectionResourceRel = "aposta", path = "aposta")
+import java.util.List;
+
+@RepositoryRestResource(collectionResourceRel = "aposta", path = "aposta",  excerptProjection = ApostaView.class)
 public interface ApostaRepository extends JpaRepository<Aposta, Long>, QuerydslPredicateExecutor<Aposta>, QuerydslBinderCustomizer<QAposta> {
 
     @Override
@@ -19,4 +23,6 @@ public interface ApostaRepository extends JpaRepository<Aposta, Long>, QuerydslP
         // Make case-insensitive 'like' filter for all string properties
         bindings.bind(String.class).first((SingleValueBinding<StringPath, String>) StringExpression::containsIgnoreCase);
     }
+
+    List<Aposta> findApostaByOpcaoAposta_JogoAndEstado(Jogo jogo, String eApostaEstado);
 }
