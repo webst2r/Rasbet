@@ -58,12 +58,24 @@
     "game": "Jogo",
     "result": "Resultado",
     "FOOTBALL": "Futebol",
-    "gain": "Montante Ganho"
+    "gain": "Montante Ganho",
+    "totalGames": "Número de Jogos"
   },
   "betState": {
     "WON": "Ganhou",
     "LOST": "Perdeu",
     "PLACED": "Colocada",
     "CANCEL": "Cancelada"
+  },
+  "transaction": {
+    "date": "Data",
+    "movementType": "Tipo de Movimento",
+    "description": "Descrição",
+    "value": "Montante",
+    "DEPOSIT": "Deposito",
+    "RAISE": "Levantamento",
+    "PURCHASE": "Pagamneto",
+    "BETWINS": "Aposta ganha",
+    "bet": "Aposta"
   }
 }

@@ -14,3 +14,11 @@ export interface UserToken{
   idCarteira: number;
   token: string;
 }
+
+export interface Transaction {
+  id: number;
+  valor: number;
+  createdAt: string;
+  tipo: string;
+  tipoDeposit: string;
+}

@@ -18,9 +18,9 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getUserWallet(): number {
-    const value = this.auth.getUser()?.saldo;
-    return value != null ? value : 0;
+  getUserWallet(): string {
+    const value = this.auth.getUser()?.saldo.toFixed(2);
+    return value != null ? value : '0.00';
   }
 
   openDepositDialog(): void {

@@ -4,7 +4,7 @@ import {ApostasService} from "../../services/apostas.service";
 import {Aposta} from "../../interfaces/aposta";
 import {AuthenticationService} from "../../services/authentication.service";
 import {PageEvent} from "@angular/material/paginator";
-import {take, tap} from "rxjs";
+import {map, take, tap} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {OutcomeType} from "../../interfaces/opcao_aposta";
 
@@ -55,12 +55,6 @@ export class ApostasComponent implements OnInit {
     this.getBets(event.pageIndex, event.pageSize);
   }
 
-  getElementName(element:Aposta): string{
-
-    console.log(element);
-    return element.jogo.homeTeam;
-  }
-
   getElement(element: Aposta, column: string) {
     if(column === 'date') return element.createdAt;
     if(column === 'betType') return this.getBetOption(element);
@@ -79,5 +73,9 @@ export class ApostasComponent implements OnInit {
       return element.jogo.awayTeam;
     }
     return this.translate.instant("home.draw")
+  }
+
+  formatValue(value: number): string{
+    return value.toFixed(2);
   }
 }

@@ -40,6 +40,6 @@
   </table>
   <span *ngIf="this.apostas.length != 0">{{"sidenav.potentialGains" | translate}}: {{getTotalGains()}}€</span>
   <button [disabled]="this.apostas.length == 0" mat-button mat-raised-button
-          type="submit">{{"sidenav.bet" | translate}}</button>
+          type="submit">{{"sidenav.bet" | translate}} {{getTotalAmount()}}€</button>
 </main>
 </form>

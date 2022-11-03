@@ -30,7 +30,7 @@
                   <span class="mr-1">{{"bets.result" | translate}}: {{element.jogo.resultado}}</span>
                 </ng-container>
                 <ng-container *ngIf="element.estado === 'WON'">
-                  <span>{{"bets.gain" | translate}}: {{element.valorGanho}}€</span>
+                  <span>{{"bets.gain" | translate}}: {{formatValue(element.valorGanho)}}€</span>
                 </ng-container>
               </div>
             </div>

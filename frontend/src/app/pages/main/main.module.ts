@@ -14,12 +14,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
+import { TransacoesComponent } from '../transacoes/transacoes.component';
 
 
 @NgModule({
   declarations: [MainComponent,
     ApostasComponent,
-    ApostasMultiplasComponent,],
+    ApostasMultiplasComponent,
+    TransacoesComponent],
   imports: [
     CommonModule,
     MainRoutingModule,

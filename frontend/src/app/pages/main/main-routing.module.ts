@@ -5,6 +5,7 @@ import {AuthGuard} from "../../guard/auth.guard";
 import {MainComponent} from "./main.component";
 import {ApostasComponent} from "../apostas/apostas.component";
 import {ApostasMultiplasComponent} from "../apostas-multiplas/apostas-multiplas.component";
+import {TransacoesComponent} from "../transacoes/transacoes.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'apostaMultipla',
         component: ApostasMultiplasComponent,
+      },
+      {
+        path: 'transacoes',
+        component: TransacoesComponent,
       },
       { path: '**', redirectTo: '' },
     ]

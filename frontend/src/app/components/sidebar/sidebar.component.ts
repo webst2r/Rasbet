@@ -55,9 +55,15 @@ export class SidebarComponent implements OnInit {
       if (t) {
         return;
       }
+      if(this.getTotalAmount() > (this.auth.getUser()?.saldo as number)){
+        return;
+      }
       this.saveSimpleBet();
     } else {
-      this.saveMultipleBet();
+      if(this.getTotalAmount() > (this.auth.getUser()?.saldo as number)){
+        return;
+      }
+      if( this.form.controls['value'].value > 0) this.saveMultipleBet();
     }
 
   }
@@ -128,7 +134,7 @@ export class SidebarComponent implements OnInit {
     this.apostas.forEach(aposta => {
       odds.push( this.getSelectedOddId(aposta.jogo.opcaoApostas, aposta.opcao) as number)
     })
-    this.apostasService.saveMultipleBet(this.auth.getUser()?.id as number,this.form.controls['value'].value,odds).subscribe(
+    this.apostasService.saveMultipleBet(this.auth.getUser()?.id as number, this.form.controls['value'].value, odds).subscribe(
       () => {
         this.auth.updateUserWallet(this.form.controls['value'].value, WalletType.MINUS);
         this.jogoService.clearApostas();
@@ -136,5 +142,17 @@ export class SidebarComponent implements OnInit {
       },
       (error) => console.log(error)
     );
+  }
+
+  getTotalAmount(): number {
+    let total = 0;
+    if (this.form.controls['type'].value === this.betType.SIMPLE) {
+      this.apostas.forEach(aposta => {
+        if(aposta.ammout) total += aposta.ammout;
+      });
+    } else {
+      total = this.form.controls['value'].value;
+    }
+    return total;
   }
 }

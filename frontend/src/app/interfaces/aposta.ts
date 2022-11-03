@@ -1,5 +1,4 @@
 import {OpcaoAposta} from "./opcao_aposta";
-import {Jogo} from "./jogo";
 import {Tipo} from "./tipo";
 
 export interface Aposta {

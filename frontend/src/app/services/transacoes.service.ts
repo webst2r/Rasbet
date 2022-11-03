@@ -16,4 +16,8 @@ export class TransacoesService {
       carteira, valor, tipo, tipoDeposit
     }) as Observable<any>;
   }
+
+  getUserTransactions(id: number, page: number = 0, size: number = 10): Observable<any>{
+    return this.http.get(AppConstant.API_URL + AppConstant.API_PATHS.TRANSACOES.DEFAULT + `?carteira.user.id=${id}&page=${page}&size=${size}&sort=createdAt,desc`)as Observable<any>
+  }
 }
