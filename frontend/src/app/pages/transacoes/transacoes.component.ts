@@ -46,7 +46,7 @@ export class TransacoesComponent implements OnInit {
     if(column === 'date') return element.createdAt;
     if(column === 'movementType') return this.getType(element);
     if(column === 'description') return element.tipoDeposit === 'BET'? this.translate.instant('transaction.bet') : element.tipoDeposit;
-    if(column === 'value') return element.valor.toFixed(2) + '€';
+    if(column === 'value') return (element.tipo === "DEPOSIT"? '+' : '-') + element.valor.toFixed(2) + '€';
     return '';
   }
 
