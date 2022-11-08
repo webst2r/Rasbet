@@ -31,7 +31,7 @@
                 <td><span>{{aposta.jogo.date}}</span></td>
                 <td><span>{{"bets.betType" | translate}}: {{getBetOption(aposta)}}</span></td>
                 <td><span>{{"bets.odd" | translate}}: {{aposta.valorOdd}}</span></td>
-                <ng-container *ngIf="element.estado === 'WON'" class="money">
+                <ng-container *ngIf="aposta.estado !== 'MULTIPLE'" class="money">
                   <td><span>{{"bets.result" | translate}}: {{aposta.jogo.resultado}}</span></td>
                   <td><span>{{"betState." + aposta.estado | translate}}</span></td>
                 </ng-container>
