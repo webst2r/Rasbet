@@ -3,6 +3,7 @@ package pt.rasbet.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.ApostaMultiplaDTO;
+import pt.rasbet.backend.dto.CountMultiplasApostasUser;
 import pt.rasbet.backend.entity.*;
 import pt.rasbet.backend.enumeration.EApostaEstado;
 import pt.rasbet.backend.enumeration.ETRansationType;
@@ -86,5 +87,13 @@ public class ApostaMultiplaService {
                 }
             });
         }
+    }
+
+    @Transactional
+    public CountMultiplasApostasUser getApostasMultiplasCountByUser(Long userId){
+     return new CountMultiplasApostasUser(
+              this.apostaMultiplaRepository.countApostasMultiplasByUser_IdAndAndEstado(userId,  EApostaEstado.WON.name()),
+        this.apostaMultiplaRepository.countApostasMultiplasByUser_IdAndAndEstado(userId,  EApostaEstado.LOST.name())
+      );
     }
 }

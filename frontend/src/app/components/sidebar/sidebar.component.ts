@@ -23,7 +23,6 @@ export class SidebarComponent implements OnInit {
   })
   multipleOdd: number = 0.00;
 
-  //TODO: validate saldo disponivel para apostar
   constructor(private jogoService: JogoService,
               private translate: TranslateService,
               private apostasService: ApostasService,

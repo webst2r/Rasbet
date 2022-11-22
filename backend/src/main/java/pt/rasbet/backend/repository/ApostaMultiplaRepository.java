@@ -31,4 +31,5 @@ public interface ApostaMultiplaRepository extends JpaRepository<ApostasMultiplas
             "join op.jogo as j where j = :jogo and a.estado = :eApostaEstado")
     List<ApostasMultiplas> findApostasMultiplasByJogos(Jogo jogo, String eApostaEstado);
 
+    Long countApostasMultiplasByUser_IdAndAndEstado(Long idUser, String estado);
 }
