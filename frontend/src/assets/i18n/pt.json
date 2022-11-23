@@ -22,7 +22,8 @@
     "draw": "Empate",
     "logout": "Logout",
     "games": "Jogos",
-    "transation": "Transações"
+    "transation": "Transações",
+    "profile": "Perfil"
   },
   "sidenav": {
     "bettingSlip": "Boletim de Apostas",
@@ -77,5 +78,8 @@
     "PURCHASE": "Pagamento",
     "BETWINS": "Aposta ganha",
     "bet": "Aposta"
+  },
+  "profile": {
+    "betsStatistics": "Estatísticas de Apostas"
   }
 }
