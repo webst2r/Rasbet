@@ -1,8 +1,9 @@
 package pt.rasbet.backend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.springframework.stereotype.Service;
+import pt.rasbet.backend.dto.CountApostasUserDTO;
+import pt.rasbet.backend.dto.CountMultiplasApostasUser;
 import pt.rasbet.backend.dto.ListApostaDTO;
 import pt.rasbet.backend.entity.*;
 import pt.rasbet.backend.enumeration.EApostaEstado;
@@ -95,5 +96,13 @@ public class ApostaService {
             apostaRepository.save(aposta);
         });
 
+    }
+
+    @Transactional
+    public CountApostasUserDTO getApostasCountByUser(Long userId){
+        return new CountApostasUserDTO(
+                this.apostaRepository.countApostaByUser_IdAndAndEstado(userId,  EApostaEstado.WON.name()),
+                this.apostaRepository.countApostaByUser_IdAndAndEstado(userId,  EApostaEstado.LOST.name())
+        );
     }
 }

@@ -15,13 +15,14 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 import { TransacoesComponent } from '../transacoes/transacoes.component';
-
+import {UserAreaComponent} from "../user-area/user-area.component";
 
 @NgModule({
   declarations: [MainComponent,
     ApostasComponent,
     ApostasMultiplasComponent,
-    TransacoesComponent],
+    TransacoesComponent,
+    UserAreaComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
