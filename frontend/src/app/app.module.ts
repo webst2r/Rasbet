@@ -24,12 +24,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
 import {AuthInterceptor} from "./helpers/auth.interceptor";
 import { RaiseComponent } from './components/modal/raise/raise.component';
-import { StatisticsComponent } from './components/modal/statistics/statistics.component';
-
-// Chart
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import {NgApexchartsModule} from "ng-apexcharts";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +38,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     DepositComponent,
     RaiseComponent,
-    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,10 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     ToolbarModule,
     MatSelectModule,
-    MatDialogModule,
-    CommonModule,
-    FormsModule,
-    NgApexchartsModule
+    MatDialogModule
   ],
   providers: [AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

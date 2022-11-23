@@ -37,12 +37,4 @@ export class ApostasService {
   getMultipleBets(id: number, page: number = 0, size: number = 10): Observable<any>{
     return this.http.get(AppConstant.API_URL + AppConstant.API_PATHS.APOSTAS.MULTIPLE + `?user.id=${id}&page=${page}&size=${size}`)as Observable<any>
   }
-
-  getCountBetsbyUser(id: number): Observable<any>{
-    return this.http.get(AppConstant.API_URL + AppConstant.API_PATHS.APOSTAS.APOSTAS_COUNT.replace('id', String(id))) as Observable<any>
-  }
-
-  getMultipleCountBetsbyUser(id: number): Observable<any>{
-    return this.http.get(AppConstant.API_URL + AppConstant.API_PATHS.APOSTAS.MULTIPLE_APOSTAS_COUNT.replace('id', String(id))) as Observable<any>
-  }
 }

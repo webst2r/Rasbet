@@ -25,6 +25,4 @@ public interface ApostaRepository extends JpaRepository<Aposta, Long>, QuerydslP
     }
 
     List<Aposta> findApostaByOpcaoAposta_JogoAndEstado(Jogo jogo, String eApostaEstado);
-
-    Long countApostaByUser_IdAndAndEstado(Long idUser, String estado);
 }

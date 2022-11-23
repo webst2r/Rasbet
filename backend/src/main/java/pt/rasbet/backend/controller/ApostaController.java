@@ -4,12 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pt.rasbet.backend.dto.CountApostasUserDTO;
-import pt.rasbet.backend.dto.CountMultiplasApostasUser;
 import pt.rasbet.backend.dto.ListApostaDTO;
 import pt.rasbet.backend.service.ApostaService;
 
@@ -28,8 +24,4 @@ public class ApostaController {
         return ResponseEntity.ok("register");
     }
 
-    @GetMapping("aposta/{id}/count")
-    public ResponseEntity<CountApostasUserDTO> getApostasCountByUser(@PathVariable("id") Long id){
-        return ResponseEntity.ok(apostaService.getApostasCountByUser(id));
-    }
 }

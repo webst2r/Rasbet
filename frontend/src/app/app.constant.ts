@@ -21,9 +21,7 @@ export class AppConstant {
     APOSTAS:{
       DEFAULT:'aposta',
       SAVE: 'aposta/all',
-      MULTIPLE:'apostaMultipla',
-      APOSTAS_COUNT: 'aposta/id/count',
-      MULTIPLE_APOSTAS_COUNT: 'apostaMultipla/id/count'
+      MULTIPLE:'apostaMultipla'
     },
 
   }

@@ -6,7 +6,6 @@ import {MainComponent} from "./main.component";
 import {ApostasComponent} from "../apostas/apostas.component";
 import {ApostasMultiplasComponent} from "../apostas-multiplas/apostas-multiplas.component";
 import {TransacoesComponent} from "../transacoes/transacoes.component";
-import {UserAreaComponent} from "../user-area/user-area.component";
 
 const routes: Routes = [
   {
@@ -30,10 +29,6 @@ const routes: Routes = [
       {
         path: 'transacoes',
         component: TransacoesComponent,
-      },
-      {
-        path: 'profile',
-        component: UserAreaComponent,
       },
       { path: '**', redirectTo: '' },
     ]
