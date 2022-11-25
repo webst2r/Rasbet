@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pt.rasbet.backend.dto.CountMultiplasApostasUser;
-import pt.rasbet.backend.dto.UserCredentialsDTO;
-import pt.rasbet.backend.dto.UserDTO;
-import pt.rasbet.backend.dto.UserWithTokenDTO;
+import pt.rasbet.backend.dto.*;
 import pt.rasbet.backend.service.UserService;
 
 import javax.persistence.spi.LoadState;
@@ -35,5 +32,11 @@ public class UserController {
     public ResponseEntity<UserWithTokenDTO> login(@RequestBody @Valid UserCredentialsDTO userCredentialsDTO) {
         var userWithTokenDTO  = userService.login(userCredentialsDTO);
         return ResponseEntity.ok(userWithTokenDTO);
+    }
+
+    @PostMapping("user/profile")
+    public ResponseEntity<String> updateProfile(@RequestBody @Valid UserUpdateDTO userUpdateDTO) {
+        var msg = userService.updateProfile(userUpdateDTO);
+        return ResponseEntity.ok(msg);
     }
 }

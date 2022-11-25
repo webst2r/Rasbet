@@ -7,7 +7,8 @@ export class AppConstant {
     USER: {
       LOGIN: 'user/login',
       REGISTER: 'user/register',
-      DEFAULT: 'user'
+      DEFAULT: 'user',
+      EDIT: 'user/profile'
     },
     JOGO: {
       DEFAULT: 'jogo'

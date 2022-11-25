@@ -80,6 +80,10 @@
     "bet": "Aposta"
   },
   "profile": {
-    "betsStatistics": "Estatísticas de Apostas"
+    "betsStatistics": "Estatísticas de Apostas",
+    "editInfo" : "Editar Perfil",
+    "saveInfo" : "Guardar Alterações",
+    "cancelEdit" : "Cancelar Alterações",
+    "failSave": "Não foi possível alterar os dados do perfil"
   }
 }

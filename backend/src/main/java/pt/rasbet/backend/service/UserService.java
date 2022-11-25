@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.UserCredentialsDTO;
 import pt.rasbet.backend.dto.UserDTO;
+import pt.rasbet.backend.dto.UserUpdateDTO;
 import pt.rasbet.backend.dto.UserWithTokenDTO;
 import pt.rasbet.backend.entity.Carteira;
 import pt.rasbet.backend.entity.User;
@@ -78,5 +79,18 @@ public class UserService {
     @Transactional
     public User save(User user){
         return userRepository.save(user);
+    }
+
+    @Transactional
+    public String updateProfile(UserUpdateDTO userUpdateDTO){
+
+        long id = userUpdateDTO.getUserId();
+        User user = findById(id);
+
+        user.setPassword(encoder.encode(userUpdateDTO.getPassword()));
+        user.setFirstName(userUpdateDTO.getFirstName());
+        user.setLastName(userUpdateDTO.getLastName());
+
+        return "User Updated Successfully!";
     }
 }

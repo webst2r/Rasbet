@@ -30,6 +30,7 @@ import { StatisticsComponent } from './components/modal/statistics/statistics.co
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {NgApexchartsModule} from "ng-apexcharts";
+import { EditInfoComponent } from './components/modal/edit-info/edit-info.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     DepositComponent,
     RaiseComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    EditInfoComponent
   ],
   imports: [
     BrowserModule,

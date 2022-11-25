@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {StatisticsComponent} from "../../components/modal/statistics/statistics.component";
+import {EditInfoComponent} from "../../components/modal/edit-info/edit-info.component";
 
 @Component({
   selector: 'app-user-area',
@@ -16,6 +17,16 @@ export class UserAreaComponent implements OnInit {
 
   openStatisticsDialog(): void {
     const dialogRef = this.dialog.open(StatisticsComponent, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openEditInfoDialog(): void {
+    const dialogRef = this.dialog.open(EditInfoComponent, {
       width: '500px',
     });
 
