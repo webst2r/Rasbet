@@ -21,7 +21,7 @@ export class UserService {
 
   updateUserInfo(userId: number, firstName: string, lastName: string, password: string) : Observable<any> {
     return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.USER.EDIT, {
-      firstName, lastName, password
+      userId, firstName, lastName, password
     }) as Observable<any>;
   }
 }
