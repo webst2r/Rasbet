@@ -42,5 +42,4 @@ export class ToolbarComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-
 }

@@ -16,12 +16,24 @@
     </ng-container>
     <ng-container *ngIf="auth.isAuthenticated()">
       <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
-      <button *ngIf="auth.isAuthenticated()" mat-raised-button
-              (click)="auth.logout()">{{"home.logout" | translate}}</button>
+      <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
+
   </div>
 
 </mat-toolbar>
+
+<mat-menu #userMenu="matMenu">
+  <button *ngIf="auth.isAuthenticated()" routerLink="/profile" mat-menu-item>
+    <mat-icon>face</mat-icon>
+    <label>{{"home.profile" | translate}}</label>
+  </button>
+
+  <button *ngIf="auth.isAuthenticated()" (click)="auth.logout()" mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <label>{{"home.logout" | translate}}</label>
+  </button>
+</mat-menu>
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="openDepositDialog()">{{"sidenav.deposit" | translate}}</button>

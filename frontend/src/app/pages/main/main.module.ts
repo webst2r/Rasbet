@@ -16,6 +16,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 import { TransacoesComponent } from '../transacoes/transacoes.component';
 import {UserAreaComponent} from "../user-area/user-area.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [MainComponent,
@@ -35,7 +37,9 @@ import {UserAreaComponent} from "../user-area/user-area.component";
     MatIconModule,
     MatPaginatorModule,
     MatButtonModule,
-    TranslateModule
+    TranslateModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule {
