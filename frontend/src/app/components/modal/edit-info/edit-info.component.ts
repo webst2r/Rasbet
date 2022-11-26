@@ -48,7 +48,7 @@ export class EditInfoComponent implements OnInit {
       this.form.controls['lastName'].value).pipe(
       tap(res => console.log(res))
     ).subscribe(
-      () => this.router.navigateByUrl('/profile'),
+      () => this.closeEdit(),
       (error) => {
         if (error.error && error.error.type === ExceptionType.ERROR_SAVING_INFO) {
           this.error = this.translate.instant("profile.failSave");
@@ -57,7 +57,6 @@ export class EditInfoComponent implements OnInit {
     );
 
     console.log(this.authenticationService.getUser());
-    this.closeEdit()
   }
 
   closeEdit(): void {
