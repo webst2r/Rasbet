@@ -18,8 +18,9 @@ import static pt.rasbet.backend.utils.Constants.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserUpdateDTO {
-    @NotBlank(message = "userId" + ExceptionConstants.REQUIRED)
-    private long userId;
+    // tavamos a tentar meter notblank num long
+    //@NotBlank(message = "userId" + ExceptionConstants.REQUIRED)
+    private Long userId;
     @NotBlank(message = "firstName " + ExceptionConstants.REQUIRED)
     private String firstName;
     @NotBlank(message = "lastName " + ExceptionConstants.REQUIRED)
