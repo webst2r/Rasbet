@@ -20,7 +20,7 @@
       <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
     <ng-container *ngIf=" auth.isAuthenticated() && auth.getUserRole() !== role.ROLE_USER">
-      <button (click)="auth.logout()" mat-menu-item>
+      <button (click)="auth.logout()" mat-raised-button class="adminLogoutButton">
         <mat-icon>exit_to_app</mat-icon>
         <label>{{"home.logout" | translate}}</label>
       </button>

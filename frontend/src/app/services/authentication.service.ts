@@ -66,6 +66,14 @@ export class AuthenticationService {
     return this.getUser()?.id as number
   }
 
+  getUserFirstName(): string{
+    return this.getUser()?.firstName as string;
+  }
+
+  getUserLastName(): string{
+    return this.getUser()?.lastName as string;
+  }
+
   getUserRole(): Role{
     return this.getUser()?.role as Role
   }

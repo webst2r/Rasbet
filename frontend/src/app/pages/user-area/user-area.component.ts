@@ -11,6 +11,8 @@ import {ExceptionType} from "../../enumeration/exception";
 import {TranslateService} from "@ngx-translate/core";
 import {DepositComponent} from "../../components/modal/deposit/deposit.component";
 import {RaiseComponent} from "../../components/modal/raise/raise.component";
+import {ChangeDetectorRef} from "@angular/core";
+import {UserToken} from "../../interfaces/user";
 
 
 @Component({
@@ -28,11 +30,13 @@ export class UserAreaComponent implements OnInit {
   });
 
   constructor(private readonly authenticationService: AuthenticationService,
-              private user : UserService,
+              private userService : UserService,
               private translate: TranslateService,
+              private ref:ChangeDetectorRef,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
   }
 
   openStatisticsDialog(): void {
@@ -51,13 +55,17 @@ export class UserAreaComponent implements OnInit {
     }
 
     const userId = this.authenticationService.getUserId();
-    console.log(this.authenticationService.getUser());
-    console.log("Pass: " + this.form.controls['password'].value + " FN: " + this.form.controls['firstName'].value + " LN: " + this.form.controls['lastName'].value);
+    const user = this.authenticationService.getUser();
 
-    this.user.updateUserInfo(userId, this.form.controls['firstName'].value,
+    this.userService.updateUserInfo(userId, this.form.controls['firstName'].value,
         this.form.controls['lastName'].value,
         this.form.controls['password'].value).pipe(
-        tap(res => console.log(res))
+        tap((res) => {
+          if(user && user.firstName !== undefined){
+            user.firstName = res.firstName;
+          }
+          this.authenticationService.saveUser(user as UserToken);
+        })
     ).subscribe(
         (error) => {
           if (error.error && error.error.type === ExceptionType.ERROR_SAVING_INFO) {
@@ -65,8 +73,18 @@ export class UserAreaComponent implements OnInit {
           }
         }
     );
+    window.location.reload();
+  }
 
-    console.log(this.authenticationService.getUser());
+  getUserFirstName(): string {
+    let firstName = this.authenticationService.getUserFirstName();
+    console.log(firstName);
+    return firstName;
+  }
+
+  getUserLastName(): string {
+    const firstName = this.authenticationService.getUserLastName();
+    return firstName;
   }
 
   getUserWallet(): string {
@@ -93,15 +111,5 @@ export class UserAreaComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-
-/*  openEditInfoDialog(): void {
-    const dialogRef = this.dialog.open(EditInfoComponent, {
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }*/
 
 }

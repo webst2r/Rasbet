@@ -58,3 +58,11 @@ span{
   padding-right: 2rem;
   cursor: pointer;
 }
+
+.adminLogoutButton{
+  cursor: pointer;
+
+  label, mat-icon{
+    color: black;
+  }
+}
