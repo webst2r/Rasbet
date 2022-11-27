@@ -1,6 +1,6 @@
 <app-toolbar></app-toolbar>
 <mat-drawer-container>
-  <mat-drawer mode="side" opened position="end" class="sidenav" fullscreen>
+  <mat-drawer *ngIf="auth.getUserRole() === role.ROLE_USER" mode="side" opened position="end" class="sidenav" fullscreen>
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <mat-drawer-content>

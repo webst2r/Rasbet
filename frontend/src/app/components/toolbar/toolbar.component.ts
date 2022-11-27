@@ -3,6 +3,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DepositComponent} from "../modal/deposit/deposit.component";
 import {RaiseComponent} from "../modal/raise/raise.component";
+import {Role} from "../../interfaces/user";
 
 @Component({
   selector: 'app-toolbar',
@@ -10,7 +11,7 @@ import {RaiseComponent} from "../modal/raise/raise.component";
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-
+  role = Role;
   constructor(public auth: AuthenticationService,
               public dialog: MatDialog) {
   }

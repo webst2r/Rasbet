@@ -18,13 +18,16 @@ import { TransacoesComponent } from '../transacoes/transacoes.component';
 import {UserAreaComponent} from "../user-area/user-area.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
+import {GamesAdminComponent} from "../games-admin/games-admin.component";
+
 
 @NgModule({
   declarations: [MainComponent,
     ApostasComponent,
     ApostasMultiplasComponent,
     TransacoesComponent,
-    UserAreaComponent],
+    UserAreaComponent,
+    GamesAdminComponent],
   imports: [
     CommonModule,
     MainRoutingModule,

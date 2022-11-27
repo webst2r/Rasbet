@@ -50,4 +50,9 @@ public class Jogo {
     @OneToMany(mappedBy="jogo", cascade = CascadeType.ALL)
     private Set<OpcaoAposta> opcaoApostas =  new HashSet<>();
 
+    public Jogo(String homeTeam, String awayTeam, LocalDateTime date){
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.date = date;
+    }
 }

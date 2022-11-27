@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {ExceptionType} from "../../enumeration/exception";
 import {TranslateService} from "@ngx-translate/core";
 import {AppConstant} from "../../app.constant";
+import {Role} from "../../interfaces/user";
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,11 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.pattern(AppConstant.REGEX.email)]),
     password: new FormControl('', [Validators.required]),
   });
-  constructor(private readonly authenticationService:AuthenticationService,
+
+  constructor(private readonly authenticationService: AuthenticationService,
               private router: Router,
-              private translate: TranslateService) { }
+              private translate: TranslateService) {
+  }
 
   ngOnInit(): void {
   }
@@ -37,12 +40,20 @@ export class LoginComponent implements OnInit {
         this.authenticationService.saveUser(user);
       }),
     ).subscribe(
-      () => this.router.navigateByUrl('/home'),
-    (error) => {
-        if(error.error && error.error.type === ExceptionType.WRONG_CREDENTIALS){
+      (user) => {
+        if (user.role === Role.ROLE_ADMIN) {
+          this.router.navigateByUrl('/games')
+        } else if(user.role === Role.ROLE_SPECIALIST){
+          this.router.navigateByUrl('/home')
+        }else {
+          this.router.navigateByUrl('/home')
+        }
+      },
+      (error) => {
+        if (error.error && error.error.type === ExceptionType.WRONG_CREDENTIALS) {
           this.error = this.translate.instant("loginPage.wrongCredentials");
         }
-    }
+      }
     );
   }
 

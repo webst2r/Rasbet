@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../../services/authentication.service";
+import {Role} from "../../interfaces/user";
 
 @Component({
   selector: 'app-main',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
-  constructor() { }
+  role = Role
+  constructor(public auth: AuthenticationService) { }
 
   ngOnInit(): void {
   }
