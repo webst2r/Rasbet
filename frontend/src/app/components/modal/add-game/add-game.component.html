@@ -1,0 +1,63 @@
+<div style="width: 100%">
+    <form [formGroup]="form" (ngSubmit)="save()">
+        <p>
+            <mat-form-field>
+                <input type="text" matInput [placeholder]="'games.homeTeam' | translate" formControlName="homeTeam">
+            </mat-form-field>
+
+        </p>
+
+        <span *ngIf="!form.controls['homeTeam'].valid &&
+      form.controls['homeTeam']?.touched" class="error">
+        {{ "games.homeTeam" | translate }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field>
+                <input type="text" matInput [placeholder]="'games.awayTeam' | translate" formControlName="awayTeam">
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['awayTeam'].valid &&
+      form.controls['awayTeam']?.touched" class="error">
+        {{  "games.awayTeam" | translate  }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'games.type' | translate}}</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of tipos" [value]="type.id">
+                        {{"bets."+ type.nome | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['type'].valid &&
+      form.controls['type']?.touched" class="error">
+        {{  "games.type" | translate  }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field>
+                <input type="date" matInput [placeholder]="'games.date' | translate" formControlName="date">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" [(ngModel)]="myDatePicker">
+
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+                <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['date'].valid &&
+      form.controls['date']?.touched" class="error">
+        {{  "games.date" | translate  }} {{ "games.required" | translate}}
+      </span>
+
+        <div class="button">
+            <button type="submit" [disabled]="!this.form.valid" mat-button>{{"games.addGame" | translate}}</button>
+        </div>
+
+    </form>
+</div>
+
+<ngx-mat-timepicker [(ngModel)]="myTimePicker">
+</ngx-mat-timepicker>

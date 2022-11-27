@@ -9,7 +9,7 @@ export interface Jogo {
   vencedor?: string;
   complete: boolean;
   resultado: string;
-  idApi: string;
+  idApi?: string;
   tipo: Tipo;
   opcaoApostas: OpcaoAposta[];
 }

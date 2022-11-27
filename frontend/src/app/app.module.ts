@@ -31,6 +31,12 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {NgApexchartsModule} from "ng-apexcharts";
 import { EditInfoComponent } from './components/modal/edit-info/edit-info.component';
+import { AddGameComponent } from './components/modal/add-game/add-game.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from "@angular-material-components/datetime-picker";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -46,7 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DepositComponent,
     RaiseComponent,
     StatisticsComponent,
-    EditInfoComponent
+    EditInfoComponent,
+    AddGameComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +84,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     CommonModule,
     FormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   providers: [AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

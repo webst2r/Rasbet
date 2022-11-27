@@ -26,6 +26,11 @@ export class JogoService {
     return this.http.get<any>(url);
   }
 
+
+  getTipos(): Observable<any>{
+   return  this.http.get<any>(AppConstant.API_URL + AppConstant.API_PATHS.TIPO.DEFAULT)
+  }
+
   getApostasSelecionadas(): ApostaSelecionada[] {
     return this.apostasSelecionadas;
   }

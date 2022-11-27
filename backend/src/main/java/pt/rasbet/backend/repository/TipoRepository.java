@@ -10,10 +10,11 @@ import org.springframework.data.querydsl.binding.SingleValueBinding;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pt.rasbet.backend.entity.Tipo;
 import pt.rasbet.backend.entity.QTipo;
+import pt.rasbet.backend.projection.JogoView;
 
 import java.util.Optional;
 
-@RepositoryRestResource(collectionResourceRel = "tipo", path = "tipo")
+@RepositoryRestResource(collectionResourceRel = "tipo", path = "tipo",  excerptProjection = JogoView.TipoView.class)
 public interface TipoRepository extends JpaRepository<Tipo, Long>, QuerydslPredicateExecutor<Tipo>, QuerydslBinderCustomizer<QTipo> {
 
 @Override

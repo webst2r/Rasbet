@@ -13,6 +13,9 @@ export class AppConstant {
     JOGO: {
       DEFAULT: 'jogo'
     },
+    TIPO:{
+      DEFAULT:'tipo'
+    },
     CARTEIRA:{
       DEFAULT: 'carteira'
     },

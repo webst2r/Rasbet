@@ -59,6 +59,7 @@
     "game": "Jogo",
     "result": "Resultado",
     "FOOTBALL": "Futebol",
+    "BASKETBALL": "Basquete",
     "gain": "Montante Ganho",
     "totalGames": "Número de Jogos"
   },
@@ -85,5 +86,16 @@
     "saveInfo" : "Guardar Alterações",
     "cancelEdit" : "Cancelar Alterações",
     "failSave": "Não foi possível alterar os dados do perfil"
+  },
+  "games": {
+    "homeTeam": "Equipa da Casa",
+    "awayTeam": "Equipa de fora",
+    "type": "Tipo",
+    "date": "Data",
+    "edit": "Editar",
+    "details": "Detalhes",
+    "addGame": "Adicionar Jogo",
+    "required": " é obrigatório"
   }
+
 }
