@@ -43,9 +43,9 @@ export class EditInfoComponent implements OnInit {
     console.log(this.authenticationService.getUser());
     //console.log("Pass: " + this.form.controls['password'].value + " FN: " + this.form.controls['firstName'].value + " LN: " + this.form.controls['lastName'].value);
 
-    this.user.updateUserInfo(userId, this.form.controls['password'].value,
-      this.form.controls['firstName'].value,
-      this.form.controls['lastName'].value).pipe(
+    this.user.updateUserInfo(userId, this.form.controls['firstName'].value,
+      this.form.controls['lastName'].value,
+        this.form.controls['password'].value).pipe(
       tap(res => console.log(res))
     ).subscribe(
       () => this.closeEdit(),
