@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {ApostasService} from "../../../services/apostas.service";
 import {AuthenticationService} from "../../../services/authentication.service";
-import {tap} from "rxjs";
+import {Observable, switchMap, tap} from "rxjs";
 
 import {ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle} from "ng-apexcharts";
 
@@ -10,7 +10,12 @@ import {ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitl
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit{
+
+  loading = true;
+
+  singleNull = false;
+  multipleNull = false;
 
   chartSingleSeries: ApexNonAxisChartSeries = [];
 
@@ -39,24 +44,32 @@ export class StatisticsComponent implements OnInit {
               private auth: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.getSingleStatisticsValues();
-    this.getMultipleStatisticsValues();
+    this.loading = true;
+    this.getSingleStatisticsValues().pipe(
+        switchMap(() => this.getMultipleStatisticsValues())
+    ).subscribe(() => this.loading = false)
   }
 
-  getSingleStatisticsValues (): void {
-    this.apostasService.getCountBetsbyUser(this.auth.getUserId()).pipe(
+  getSingleStatisticsValues (): Observable<any> {
+    return this.apostasService.getCountBetsbyUser(this.auth.getUserId()).pipe(
       tap(res => {
+        if (res.won === 0 && res.lost === 0) {
+          this.singleNull = true
+        }
         this.chartSingleSeries.push(res.won);
         this.chartSingleSeries.push(res.lost);
-      })).subscribe(res => console.log("Single: " + "WON: " + res.won, "LOST: " + res.lost + " Series: " + this.chartSingleSeries));
+      }));
   }
 
-  getMultipleStatisticsValues(): void {
-    this.apostasService.getMultipleCountBetsbyUser(this.auth.getUserId()).pipe(
+  getMultipleStatisticsValues(): Observable<any> {
+    return this.apostasService.getMultipleCountBetsbyUser(this.auth.getUserId()).pipe(
       tap(res => {
+        if (res.won === 0 && res.lost === 0) {
+          this.multipleNull = true
+        }
         this.chartMultipleSeries.push(res.won);
         this.chartMultipleSeries.push(res.lost);
-      })).subscribe(res => console.log("Multiplas: " + "WON: "+ res.won, "LOST: " + res.lost + " Series: " + this.chartMultipleSeries));
+      }));
   }
 
 }

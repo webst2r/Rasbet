@@ -33,7 +33,7 @@ public class GameApiScheduler {
     private final ApostaMultiplaService apostaMultiplaService;
 
     @Scheduled(cron = "0 */5 * * * *", zone = "Europe/Lisbon")
-    //@PostConstruct
+    @PostConstruct
     @Transactional
     public void updateJogos() {
         List<Jogo> jogos = gameApiService.getGames();

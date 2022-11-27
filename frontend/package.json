@@ -26,6 +26,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "apexcharts": "^3.36.3",
     "moment": "^2.29.4",
+    "ngx-loading": "^14.0.0",
     "rxjs": "~7.5.0",
     "save": "^2.9.0",
     "tslib": "^2.3.0",

@@ -1,10 +1,20 @@
-<div class="chartContainer">
-  <div class="chartSingleBets">
-    <apx-chart [series]="chartSingleSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartSingleTitle">
-    </apx-chart>
-  </div>
-  <div class="chartMultipleBets">
-    <apx-chart [series]="chartMultipleSeries" [chart]="chartDetails" [labels]="chartLabels" [title]="chartMultipleTitle">
-    </apx-chart>
-  </div>
+<div>
+    <ng-container *ngIf="!loading">
+        <div class="chartContainer" *ngIf="!singleNull || !multipleNull">
+            <div class="chartSingleBets" *ngIf="!singleNull">
+                <apx-chart [series]="chartSingleSeries" [chart]="chartDetails" [labels]="chartLabels"
+                           [title]="chartSingleTitle">
+                </apx-chart>
+            </div>
+            <div class="chartMultipleBets" *ngIf="!multipleNull">
+                <apx-chart [series]="chartMultipleSeries" [chart]="chartDetails" [labels]="chartLabels"
+                           [title]="chartMultipleTitle">
+                </apx-chart>
+            </div>
+        </div>
+        <div *ngIf="singleNull || multipleNull">
+            Sem Apostas
+        </div>
+    </ng-container>
+    <ngx-loading [show]="loading"></ngx-loading>
 </div>

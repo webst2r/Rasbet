@@ -37,6 +37,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule
 } from "@angular-material-components/datetime-picker";
+import {NgxLoadingModule} from "ngx-loading";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -87,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgApexchartsModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    NgxMatNativeDateModule
+    NgxMatNativeDateModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [AuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
