@@ -1,6 +1,108 @@
 main {
   margin: 1.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  background: mintcream;
+  border: 2px dotted var(--bg-green);
+  height: 42rem;
+  max-height: 42rem;
+  width: 65rem;
+  max-width: 65rem;
+
+  h1, h3{
+    color: var(--bg-green);
+    text-align: center;
+  }
+
+  h3{
+    font-weight: bold;
+  }
+
+}
+
+.walletButtons{
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
+  button {
+    padding: 0 3rem;
+  }
+}
+
+.withdraw, .deposit{
+  border: 1px solid #fe6e2e;
+  color: #fe6e2e;
+  border-radius: 0.5rem;
+  background: none;
+  box-shadow: none;
+}
+
+.deposit{
+  background: #fe6e2e;
+  color: lightgray;
+}
+
+.betsHistory{
+  width: 50%;
+  margin: 1.5rem auto 0rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p{
+    margin-right: 0.5rem;
+    color: var(--bg-green);
+  }
+
+  button{
+    border: 1px solid var(--bg-green);
+    border-radius: 0.5rem;
+    color:var(--bg-green);
+    background: none;
+    box-shadow: none;
+    display: inline-block;
+  }
 }
 
 
+.formEditInfo {
+  border-radius: 1.5rem;
+  padding: 3rem;
+
+  label{
+    color: var(--bg-green);
+  }
+
+  form{
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+
+    input{
+      color: black;
+      margin-top: 0.5rem;
+    }
+
+  }
+
+  button{
+    margin-top: 2rem;
+
+    &:enabled{
+      border: 1px solid var(--bg-green);
+      border-radius: 2rem;
+    }
+  }
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  span{
+    color: red;
+  }
+}

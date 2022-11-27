@@ -2,8 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectionStrategy, C
 import {ApostasService} from "../../../services/apostas.service";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {Observable, switchMap, tap} from "rxjs";
-
-import {ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitle} from "ng-apexcharts";
+import {ApexChart, ApexDataLabels, ApexNonAxisChartSeries, ApexOptions, ApexTitleSubtitle} from "ng-apexcharts";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-statistics',
@@ -13,35 +13,38 @@ import {ApexAxisChartSeries, ApexChart, ApexNonAxisChartSeries, ApexTitleSubtitl
 export class StatisticsComponent implements OnInit{
 
   loading = true;
-
   singleNull = false;
   multipleNull = false;
+
 
   chartSingleSeries: ApexNonAxisChartSeries = [];
 
   chartSingleTitle: ApexTitleSubtitle = {
-    text: "Single Bets Statistics",
+    text: this.translate.instant("chart.singleTitle"),
     align: "center"
   };
 
   chartMultipleSeries: ApexNonAxisChartSeries = [];
 
   chartMultipleTitle: ApexTitleSubtitle = {
-    text: "Multiple Bets Statistics",
+    text: this.translate.instant("chart.multipleTitle"),
     align: "center"
   }
 
   chartDetails: ApexChart = {
     type: "pie",
     toolbar:{
-      show: true
-    }
+      show: false,
+    },
   };
 
-  chartLabels = ["Won", "Lost"];
+  chartLabels = [this.translate.instant("betState.WON"), this.translate.instant("betState.LOST")];
+
+  colors = ['#1ba21b', '#b71414'];
 
   constructor(private apostasService: ApostasService,
-              private auth: AuthenticationService) { }
+              private auth: AuthenticationService,
+              private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.loading = true;

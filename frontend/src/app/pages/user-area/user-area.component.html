@@ -1,4 +1,67 @@
 <main>
-  <button mat-raised-button (click)="openEditInfoDialog()">{{"profile.editInfo" | translate}}</button>
-  <button mat-raised-button (click)="openStatisticsDialog()">{{"profile.betsStatistics" | translate}}</button>
+    <h1>{{"profile.userArea" | translate}}</h1>
+    <h3 >{{"home.wallet" | translate}}: {{getUserWallet()}}€</h3>
+    <hr>
+
+    <div class="walletButtons">
+        <button mat-raised-button (click)="openRaiseDialog()" class="withdraw">{{"sidenav.rise" | translate}}</button>
+        <button mat-raised-button (click)="openDepositDialog()" class="deposit">{{"sidenav.deposit" | translate}}</button>
+    </div>
+
+    <div class="betsHistory">
+        <button mat-raised-button (click)="openStatisticsDialog()">
+            {{"profile.betsHistory" | translate}}
+        </button>
+    </div>
+
+    <div class="formEditInfo">
+        <h1>{{"profile.editInfo" | translate}}</h1>
+        <form [formGroup]="form" (ngSubmit)="editInfo()">
+            <div class="field">
+                <mat-form-field>
+                    <label for="firstName">{{'registerPage.firstName' | translate}}</label>
+                    <input id="firstName" type="text" matInput formControlName="firstName">
+                </mat-form-field>
+
+                <span *ngIf="!form.controls['firstName'].valid &&
+      form.controls['firstName']?.touched" class="error">
+        {{  "registerPage.firstNameRequired" | translate  }}
+      </span>
+            </div>
+
+
+            <div class="field">
+                <mat-form-field>
+                    <label for="lastName">{{'registerPage.lastName' | translate}}</label>
+                    <input id="lastName" input="text" matInput formControlName="lastName">
+                </mat-form-field>
+                <span *ngIf="!form.controls['lastName'].valid &&
+      form.controls['lastName']?.touched" class="error">
+        {{  "registerPage.lastNameRequired" | translate  }}
+      </span>
+            </div>
+
+
+            <div class="field">
+                <mat-form-field>
+                    <label for="password">{{'loginPage.password' | translate}}</label>
+                    <input id="password" type="password" matInput formControlName="password">
+                </mat-form-field>
+                <span *ngIf="!form.controls['password'].valid &&
+      form.controls['password']?.touched" class="error">
+        {{  "loginPage.invalidPassword" | translate  }}
+      </span>
+            </div>
+
+
+            <p *ngIf="error" class="error">
+                {{ error }}
+            </p>
+
+            <div class="button">
+                <button type="submit" [disabled] = "!this.form.valid"  mat-button>{{"profile.saveInfo" | translate}}</button>
+            </div>
+
+        </form>
+    </div>
 </main>

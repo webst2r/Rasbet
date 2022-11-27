@@ -19,6 +19,9 @@ import {UserAreaComponent} from "../user-area/user-area.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {GamesAdminComponent} from "../games-admin/games-admin.component";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -28,22 +31,25 @@ import {GamesAdminComponent} from "../games-admin/games-admin.component";
     TransacoesComponent,
     UserAreaComponent,
     GamesAdminComponent],
-  imports: [
-    CommonModule,
-    MainRoutingModule,
-    HomeModule,
-    ToolbarModule,
-    MatSidenavModule,
-    SidebarModule,
-    MatDialogModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    TranslateModule,
-    MatFormFieldModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        MainRoutingModule,
+        HomeModule,
+        ToolbarModule,
+        MatSidenavModule,
+        SidebarModule,
+        MatDialogModule,
+        MatTableModule,
+        MatIconModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        TranslateModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatInputModule,
+        MatMenuModule
+    ]
 })
 export class MainModule {
 }

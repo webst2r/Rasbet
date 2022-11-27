@@ -3,12 +3,12 @@
         <div class="chartContainer" *ngIf="!singleNull || !multipleNull">
             <div class="chartSingleBets" *ngIf="!singleNull">
                 <apx-chart [series]="chartSingleSeries" [chart]="chartDetails" [labels]="chartLabels"
-                           [title]="chartSingleTitle">
+                           [title]="chartSingleTitle" [colors]="colors">
                 </apx-chart>
             </div>
             <div class="chartMultipleBets" *ngIf="!multipleNull">
                 <apx-chart [series]="chartMultipleSeries" [chart]="chartDetails" [labels]="chartLabels"
-                           [title]="chartMultipleTitle">
+                           [title]="chartMultipleTitle" [colors]="colors">
                 </apx-chart>
             </div>
         </div>
