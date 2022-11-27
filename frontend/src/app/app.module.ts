@@ -33,16 +33,35 @@ import {NgApexchartsModule} from "ng-apexcharts";
 import { EditInfoComponent } from './components/modal/edit-info/edit-info.component';
 import { AddGameComponent } from './components/modal/add-game/add-game.component';
 import {
+  NGX_MAT_DATE_FORMATS, NgxMatDateAdapter,
+  NgxMatDateFormats,
   NgxMatDatetimePickerModule,
   NgxMatNativeDateModule,
   NgxMatTimepickerModule
 } from "@angular-material-components/datetime-picker";
 import {NgxLoadingModule} from "ngx-loading";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {CustomNgxDatetimeAdapter} from "./helpers/CustomNgxDatetimeAdapter";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS} from "@angular-material-components/moment-adapter";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
+
+// If using Moment
+const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
+  parse: {
+    dateInput: 'l, LTS'
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY HH:mm',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -89,10 +108,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatNativeDateModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    MatDatepickerModule
   ],
   providers: [AuthGuard,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {
+      provide: NgxMatDateAdapter,
+      useClass: CustomNgxDatetimeAdapter,
+      deps: [MAT_DATE_LOCALE, NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
   ],
   bootstrap: [AppComponent]
 })
