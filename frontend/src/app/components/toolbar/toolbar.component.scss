@@ -3,10 +3,26 @@
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
+  background-color: var(--bg-green);
+  border-bottom: 0.1rem solid var(--rasbet-yellow);
+  border-radius: 0px 0px 12px 12px;
 }
 
 .title {
   font-size: 2.5rem;
+  font-family: 'Rubik', sans-serif;
+  background-image: linear-gradient(
+                  to right,
+                  #462523 0,
+                  #cb9b51 22%,
+                  #f6e27a 45%,
+                  #f6f2c0 50%,
+                  #f6e27a 55%,
+                  #cb9b51 78%,
+                  #462523 100%
+  );
+  color:transparent;
+  -webkit-background-clip:text;
 }
 
 .auth-btns {
@@ -20,9 +36,26 @@
   flex-direction: row;
   text-align: center;
   h1{
+    background-image: linear-gradient(
+                    to right,
+                    #462523 0,
+                    #cb9b51 22%,
+                    #f6e27a 45%,
+                    #f6f2c0 50%,
+                    #f6e27a 55%,
+                    #cb9b51 78%,
+                    #462523 100%
+    );
+    color:transparent;
+    -webkit-background-clip:text;
     margin-right: 1rem;
   }
 }
+
+.menu button,.auth-btns{
+  color: var(--white-text);
+}
+
 span{
   padding-right: 2rem;
   cursor: pointer;

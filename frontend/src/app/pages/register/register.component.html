@@ -1,64 +1,75 @@
-<mat-card>
-  <mat-card-title>{{"registerPage.register" | translate}}</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="register()">
-      <p>
-        <mat-form-field>
-          <input type="text" matInput [placeholder]="'loginPage.email' | translate"  formControlName="email">
-        </mat-form-field>
+<div class="registerWrapper">
 
-      </p>
+  <div class="left">
+    <div class="overlay">
+      <h1>RasBet</h1>
+      <h3>Aposta na desportiva</h3>
+    </div>
+  </div>
+  <div class="right">
+    <mat-card>
+      <mat-card-title>{{"registerPage.register" | translate}}</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="register()">
+          <p>
+            <mat-form-field>
+              <input type="text" matInput [placeholder]="'loginPage.email' | translate"  formControlName="email">
+            </mat-form-field>
 
-      <span *ngIf="!form.controls['email'].valid &&
+          </p>
+
+          <span *ngIf="!form.controls['email'].valid &&
       form.controls['email']?.touched" class="error">
         {{ "loginPage.invalidEmail" | translate }}
       </span>
-      <p>
-        <mat-form-field>
-          <input type="password" matInput [placeholder]="'loginPage.password' | translate" formControlName="password">
-        </mat-form-field>
-      </p>
-      <span *ngIf="!form.controls['password'].valid &&
+          <p>
+            <mat-form-field>
+              <input type="password" matInput [placeholder]="'loginPage.password' | translate" formControlName="password">
+            </mat-form-field>
+          </p>
+          <span *ngIf="!form.controls['password'].valid &&
       form.controls['password']?.touched" class="error">
         {{  "loginPage.invalidPassword" | translate  }}
       </span>
-      <p>
-      <mat-form-field>
-        <input type="text" matInput [placeholder]="'registerPage.firstName' | translate"  formControlName="firstName">
-      </mat-form-field>
-      </p>
-      <span *ngIf="!form.controls['firstName'].valid &&
+          <p>
+            <mat-form-field>
+              <input type="text" matInput [placeholder]="'registerPage.firstName' | translate"  formControlName="firstName">
+            </mat-form-field>
+          </p>
+          <span *ngIf="!form.controls['firstName'].valid &&
       form.controls['firstName']?.touched" class="error">
         {{  "registerPage.firstNameRequired" | translate  }}
       </span>
-      <p>
-      <mat-form-field>
-        <input type="text" matInput [placeholder]="'registerPage.lastName' | translate"  formControlName="lastName">
-      </mat-form-field>
-      </p>
-      <span *ngIf="!form.controls['lastName'].valid &&
+          <p>
+            <mat-form-field>
+              <input type="text" matInput [placeholder]="'registerPage.lastName' | translate"  formControlName="lastName">
+            </mat-form-field>
+          </p>
+          <span *ngIf="!form.controls['lastName'].valid &&
       form.controls['lastName']?.touched" class="error">
         {{  "registerPage.lastNameRequired" | translate  }}
       </span>
-      <p>
-        <mat-form-field>
-          <input type="date" matInput [placeholder]="'registerPage.birthDate' | translate"  formControlName="birthDate">
-        </mat-form-field>
-      </p>
-      <span *ngIf="!form.controls['birthDate'].valid &&
+          <p>
+            <mat-form-field>
+              <input type="date" matInput [placeholder]="'registerPage.birthDate' | translate"  formControlName="birthDate">
+            </mat-form-field>
+          </p>
+          <span *ngIf="!form.controls['birthDate'].valid &&
       form.controls['birthDate']?.touched" class="error">
         {{  "registerPage.minimalAge" | translate  }}
       </span>
-      <p *ngIf="error" class="error">
-        {{ error }}
-      </p>
+          <p *ngIf="error" class="error">
+            {{ error }}
+          </p>
 
-      <div class="button">
+          <div class="button">
 
-        <button type="button" routerLink="/login" mat-button>{{"loginPage.login" | translate}}</button>
-        <button type="submit" [disabled] = "!this.form.valid"  mat-button>{{"registerPage.register" | translate}}</button>
-      </div>
+            <button type="button" routerLink="/login" mat-button>{{"loginPage.login" | translate}}</button>
+            <button type="submit" [disabled] = "!this.form.valid"  mat-button>{{"registerPage.register" | translate}}</button>
+          </div>
 
-    </form>
-  </mat-card-content>
-</mat-card>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

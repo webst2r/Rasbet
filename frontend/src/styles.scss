@@ -35,5 +35,10 @@ $frontend-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --rasbet-yellow: #efff00;
+  --white-text: #ffffff;
+  --bg-green: #09640e;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

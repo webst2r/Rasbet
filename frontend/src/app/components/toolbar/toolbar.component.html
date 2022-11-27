@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar">
-  <h1 *ngIf="!auth.isAuthenticated()" class="title">Rasbet</h1>
+  <h1 *ngIf="!auth.isAuthenticated()" class="title">RasBet</h1>
   <div class="menu" *ngIf="auth.isAuthenticated()">
-    <h1 class="title">Rasbet</h1>
+    <h1 class="title">RasBet</h1>
     <ng-container *ngIf="auth.getUserRole() === role.ROLE_USER">
     <button mat-button routerLink="/home">{{"home.games" | translate}}</button>
     <button mat-button routerLink="/aposta">{{"bets.simpleBets" | translate}}</button>
