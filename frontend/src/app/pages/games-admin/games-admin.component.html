@@ -17,11 +17,17 @@
                     </button>
                 </ng-container>
                 <ng-container *ngIf="column === 'details'">
-                    <button mat-button>
+                    <button mat-button (click)="openDetails(element)">
                         <mat-icon class="icon-details" aria-hidden="false">description</mat-icon>
                     </button>
                 </ng-container>
-                <ng-container *ngIf="column !== 'edit' && column !== 'details'">
+
+                <ng-container *ngIf="column === 'result'">
+                    <button mat-button>
+                        <mat-icon class="icon-result" aria-hidden="false">add_box</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="column !== 'edit' && column !== 'details' && column !== 'result'">
                     {{getElement(element, column)}}
                 </ng-container>
             </td>

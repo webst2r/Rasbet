@@ -1,0 +1,18 @@
+<div class="header">
+    <h1>{{this.data.game.homeTeam}} vs {{data.game.awayTeam}}</h1>
+    <h3 class="margin">{{"bets." + data.game.tipo.nome | translate}}</h3>
+</div>
+<div>
+    <p>Data: {{formatDate(data.game.date)}}</p>
+    <ng-container *ngIf="data.game.opcaoApostas.length > 0">
+        <h2>Odds</h2>
+        <ng-container *ngFor="let bet of data.game.opcaoApostas">
+            <p>{{'games.'+bet.type | translate}}: {{bet.odd}}</p>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="data.game.complete">
+        <h2>{{'games.result' | translate}}: {{data.game.resultado}}</h2>
+    </ng-container>
+</div>
+

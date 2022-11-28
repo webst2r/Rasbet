@@ -7,6 +7,7 @@ import {JogoService} from "../../services/jogo.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {AddGameComponent} from "../../components/modal/add-game/add-game.component";
+import {GameDetailsComponent} from "../../components/modal/game-details/game-details.component";
 
 @Component({
     selector: 'app-games-admin',
@@ -14,7 +15,7 @@ import {AddGameComponent} from "../../components/modal/add-game/add-game.compone
     styleUrls: ['./games-admin.component.scss']
 })
 export class GamesAdminComponent implements OnInit {
-    columnsToDisplay = ['homeTeam', 'awayTeam', 'type', 'date', 'details', 'edit'];
+    columnsToDisplay = ['homeTeam', 'awayTeam', 'type', 'date', 'details', 'edit', 'result'];
     public totalGames = 0;
     public itemsPerPage = 10;
     public currentPage = 0;
@@ -30,10 +31,11 @@ export class GamesAdminComponent implements OnInit {
     }
 
     private getJogos(page: number, size: number) {
-        this.jogoService.getJogos(false, page, size)
+        this.jogoService.getAllJogos( page, size)
             .pipe(
                 take(1),
                 tap(res => {
+                    console.log(res);
                     this.jogos = res['_embedded'].jogo;
                     this.totalGames = res.page.totalElements;
                     this.itemsPerPage = res.page.size;
@@ -41,7 +43,7 @@ export class GamesAdminComponent implements OnInit {
                 }),
                 tap(_ => this.jogos.forEach(jogo => {
                     //ordenar apostas HOME, DRAW, AWAY
-                    if (jogo.opcaoApostas) {
+                    if (jogo.opcaoApostas.length >0) {
                         const copiaApostas = [...jogo.opcaoApostas];
                         jogo.opcaoApostas = [];
                         jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.HOME_TEAM) as OpcaoAposta);
@@ -90,5 +92,14 @@ export class GamesAdminComponent implements OnInit {
                 this.getJogos(0, 10);
             }
         });
+    }
+
+    openDetails(element: Jogo) {
+        const dialogRef = this.dialog.open(GameDetailsComponent, {
+            width: '400px',
+            data: {game: element}
+        });
+
+        dialogRef.afterClosed().subscribe();
     }
 }

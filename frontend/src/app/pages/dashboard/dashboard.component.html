@@ -2,6 +2,6 @@
 <main>
   <mat-card *ngFor="let jogo of jogos">
     <mat-card-title>{{jogo.homeTeam}} vs {{jogo.awayTeam}}</mat-card-title>
-    <mat-card-subtitle>{{jogo.date}}</mat-card-subtitle>
+    <mat-card-subtitle>{{formatDate(jogo.date)}}</mat-card-subtitle>
   </mat-card>
 </main>

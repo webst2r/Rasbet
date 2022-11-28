@@ -1,0 +1,9 @@
+.header{
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+  align-items: flex-end;
+  .margin {
+    margin-left: 0.5rem;
+  }
+}

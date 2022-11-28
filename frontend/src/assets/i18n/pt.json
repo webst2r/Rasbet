@@ -96,13 +96,17 @@
   },
   "games": {
     "homeTeam": "Equipa da Casa",
+    "HOME_TEAM": "Equipa da Casa",
     "awayTeam": "Equipa de fora",
+    "AWAY_TEAM": "Equipa de fora",
+    "DRAW": "Empate",
     "type": "Tipo",
     "date": "Data",
     "edit": "Editar",
     "details": "Detalhes",
     "addGame": "Adicionar Jogo",
-    "required": " é obrigatório"
+    "required": " é obrigatório",
+    "result": "Resultado"
   },
   "dialog": {
     "confirm": "Confirmar",
