@@ -12,7 +12,6 @@ export class GameDetailsComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: { game: Jogo }) { }
 
   ngOnInit(): void {
-    console.log(this.data.game)
   }
 
   formatDate(dateString: string): string {

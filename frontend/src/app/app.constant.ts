@@ -14,7 +14,8 @@ export class AppConstant {
       DEFAULT: 'jogo',
       CREATE: 'jogo/create',
       EDIT:'jogo/id/edit',
-      ADD_RESULT:'jogo/id/result'
+      ADD_RESULT:'jogo/id/result',
+      BET_GAMES: 'jogo/betGames'
     },
     TIPO:{
       DEFAULT:'tipo'

@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
       .pipe(
         take(1),
         tap(res => {
-          this.jogos = res['_embedded'].jogo;
+          this.jogos = res.jogo;
           this.totalGames = res.page.totalElements;
           this.gamesPerPage = res.page.size;
           this.currentPage = res.page.number

@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
     this.jogoService.getJogos(false)
       .pipe(
         take(1),
-        map(res => res['_embedded']),
         tap(jogos => this.jogos = jogos.jogo),
         catchError(e => {
           console.error(e);

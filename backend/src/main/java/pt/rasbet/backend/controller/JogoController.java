@@ -1,15 +1,20 @@
 package pt.rasbet.backend.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pt.rasbet.backend.dto.JogoDTO;
 import pt.rasbet.backend.dto.JogoResultDTO;
+import pt.rasbet.backend.dto.JogosPageDTO;
 import pt.rasbet.backend.entity.Jogo;
+import pt.rasbet.backend.projection.JogoView;
 import pt.rasbet.backend.service.JogoService;
 
 import javax.validation.Valid;
@@ -34,5 +39,10 @@ public class JogoController {
     @PostMapping("jogo/{id}/result")
     public ResponseEntity<String> addResult(@RequestBody @Valid JogoResultDTO jogoResultDTO, @PathVariable("id") Long id){
         return ResponseEntity.ok(jogoService.addResult(jogoResultDTO,id));
+    }
+
+    @GetMapping("jogo/betGames")
+    public ResponseEntity<JogosPageDTO> getGamesToBet(Pageable pageable){
+        return ResponseEntity.ok(this.jogoService.getGamesToBet(pageable));
     }
 }

@@ -21,7 +21,7 @@ export class JogoService {
   }
 
   getJogos(withResults: boolean, page: number = 0, size: number = 10): Observable<any> {
-    let url = AppConstant.API_URL + AppConstant.API_PATHS.JOGO.DEFAULT + `?complete=${withResults}&page=${page}&size=${size}`;
+    let url = AppConstant.API_URL + AppConstant.API_PATHS.JOGO.BET_GAMES + `?page=${page}&size=${size}&sort=date,asc`;
 
     return this.http.get<any>(url);
   }

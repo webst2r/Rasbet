@@ -1,12 +1,18 @@
 package pt.rasbet.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.JogoDTO;
 import pt.rasbet.backend.dto.JogoResultDTO;
+import pt.rasbet.backend.dto.JogosPageDTO;
+import pt.rasbet.backend.dto.PageDTO;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.entity.User;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
+import pt.rasbet.backend.projection.JogoView;
 import pt.rasbet.backend.repository.JogoRepository;
 import pt.rasbet.backend.repository.TipoRepository;
 
@@ -55,5 +61,15 @@ public class JogoService {
         game.setDate(jogoDTO.getDate());
         game.setTipo(tipo);
         return "saved;";
+    }
+
+    public JogosPageDTO getGamesToBet(Pageable pageable){
+        var gamesView = this.jogoRepository.getAll(pageable);
+
+        PageDTO pageDTO = new PageDTO(gamesView.getSize(),
+                gamesView.getTotalElements(),
+                gamesView.getTotalPages(),
+                gamesView.getNumber());
+        return new JogosPageDTO(pageDTO, gamesView.getContent());
     }
 }
