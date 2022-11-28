@@ -82,9 +82,8 @@
   },
   "profile": {
     "userArea": "Área do Utilizador",
-    "betsStatistics": "Estatísticas de Apostas",
     "editInfo" : "Editar Perfil",
-    "betsHistory": "Consultar o Histórico de Apostas",
+    "betsStatistics": "Consultar o Estatísticas de Apostas",
     "saveInfo" : "Guardar Alterações",
     "cancelEdit" : "Cancelar Alterações",
     "failSave": "Não foi possível alterar os dados do perfil"
