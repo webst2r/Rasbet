@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {StatisticsComponent} from "../../components/modal/statistics/statistics.component";
-import {EditInfoComponent} from "../../components/modal/edit-info/edit-info.component";
-import {tap} from "rxjs";
 import {AuthenticationService} from "../../services/authentication.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AppConstant} from "../../app.constant";
@@ -11,8 +9,6 @@ import {ExceptionType} from "../../enumeration/exception";
 import {TranslateService} from "@ngx-translate/core";
 import {DepositComponent} from "../../components/modal/deposit/deposit.component";
 import {RaiseComponent} from "../../components/modal/raise/raise.component";
-import {ChangeDetectorRef} from "@angular/core";
-import {UserToken} from "../../interfaces/user";
 
 
 @Component({
@@ -64,6 +60,7 @@ export class UserAreaComponent implements OnInit {
         () => {
           this.authenticationService.updateUserName(this.form.controls['firstName'].value,
               this.form.controls['lastName'].value);
+              this.form.reset();
         },
         (error) => {
           if (error.error && error.error.type === ExceptionType.ERROR_SAVING_INFO) {
@@ -71,7 +68,6 @@ export class UserAreaComponent implements OnInit {
           }
         }
     );
-    window.location.reload();
   }
 
   getUserFirstName(): string {

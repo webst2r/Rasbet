@@ -30,7 +30,6 @@ import { StatisticsComponent } from './components/modal/statistics/statistics.co
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {NgApexchartsModule} from "ng-apexcharts";
-import { EditInfoComponent } from './components/modal/edit-info/edit-info.component';
 import { AddGameComponent } from './components/modal/add-game/add-game.component';
 import {
   NGX_MAT_DATE_FORMATS, NgxMatDateAdapter,
@@ -74,7 +73,6 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     DepositComponent,
     RaiseComponent,
     StatisticsComponent,
-    EditInfoComponent,
     AddGameComponent,
     ConfirmComponent,
     GameDetailsComponent
