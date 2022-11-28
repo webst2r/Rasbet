@@ -41,11 +41,13 @@ export class GamesAdminComponent implements OnInit {
                 }),
                 tap(_ => this.jogos.forEach(jogo => {
                     //ordenar apostas HOME, DRAW, AWAY
-                    const copiaApostas = [...jogo.opcaoApostas];
-                    jogo.opcaoApostas = [];
-                    jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.HOME_TEAM) as OpcaoAposta);
-                    jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.DRAW) as OpcaoAposta);
-                    jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.AWAY_TEAM) as OpcaoAposta);
+                    if (jogo.opcaoApostas) {
+                        const copiaApostas = [...jogo.opcaoApostas];
+                        jogo.opcaoApostas = [];
+                        jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.HOME_TEAM) as OpcaoAposta);
+                        jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.DRAW) as OpcaoAposta);
+                        jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.AWAY_TEAM) as OpcaoAposta);
+                    }
                 })),
                 catchError(e => {
                     console.error(e);
@@ -60,10 +62,10 @@ export class GamesAdminComponent implements OnInit {
     }
 
     getElement(element: Jogo, column: string) {
-        if(column === 'homeTeam') return element.homeTeam;
-        if(column === 'awayTeam') return element.awayTeam;
-        if(column === 'type') return this.translate.instant("bets."+element.tipo.nome);
-        if(column === 'date') return this.formatDate(element.date);
+        if (column === 'homeTeam') return element.homeTeam;
+        if (column === 'awayTeam') return element.awayTeam;
+        if (column === 'type') return this.translate.instant("bets." + element.tipo.nome);
+        if (column === 'date') return this.formatDate(element.date);
         return '';
     }
 
@@ -84,7 +86,9 @@ export class GamesAdminComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            if(result){
+                this.getJogos(0, 10);
+            }
         });
     }
 }

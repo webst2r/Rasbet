@@ -103,6 +103,11 @@
     "details": "Detalhes",
     "addGame": "Adicionar Jogo",
     "required": " é obrigatório"
+  },
+  "dialog": {
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "confirmMessage": "Tem certeza que pretende realizar esta ação?"
   }
 
 }

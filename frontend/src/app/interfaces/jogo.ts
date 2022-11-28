@@ -8,7 +8,7 @@ export interface Jogo {
   awayTeam: string;
   vencedor?: string;
   complete: boolean;
-  resultado: string;
+  resultado?: string;
   idApi?: string;
   tipo: Tipo;
   opcaoApostas: OpcaoAposta[];

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pt.rasbet.backend.dto.JogoDTO;
 import pt.rasbet.backend.dto.JogoResultDTO;
+import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.service.JogoService;
 
 import javax.validation.Valid;
@@ -21,7 +22,7 @@ public class JogoController {
     private final JogoService jogoService;
 
     @PostMapping("jogo/create")
-    public ResponseEntity<String> createGame(@RequestBody @Valid JogoDTO jogoDTO){
+    public ResponseEntity<Jogo> createGame(@RequestBody @Valid JogoDTO jogoDTO){
         return ResponseEntity.ok(jogoService.createGame(jogoDTO));
     }
 

@@ -44,6 +44,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {CustomNgxDatetimeAdapter} from "./helpers/CustomNgxDatetimeAdapter";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS} from "@angular-material-components/moment-adapter";
+import { ConfirmComponent } from './components/modal/confirm/confirm.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -73,7 +74,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     RaiseComponent,
     StatisticsComponent,
     EditInfoComponent,
-    AddGameComponent
+    AddGameComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

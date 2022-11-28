@@ -31,6 +31,13 @@ export class JogoService {
    return  this.http.get<any>(AppConstant.API_URL + AppConstant.API_PATHS.TIPO.DEFAULT)
   }
 
+  createGame(homeTeam: string, awayTeam: string, date:string, idTipo: number): Observable<any>{
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.CREATE, {
+      homeTeam, awayTeam, date, idTipo
+    })
+
+  }
+
   getApostasSelecionadas(): ApostaSelecionada[] {
     return this.apostasSelecionadas;
   }

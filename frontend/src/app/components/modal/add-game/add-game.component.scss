@@ -1,6 +1,14 @@
 mat-form-field{
   width: 100%;
 }
+.button{
+  display: flex;
+  justify-content: end;
+  button{
+    background-color: var(--bg-green);
+    color: white;
+  }
+}
 
 
 

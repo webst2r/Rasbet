@@ -1,5 +1,5 @@
 <div style="width: 100%">
-    <form [formGroup]="form" (ngSubmit)="save()">
+    <form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
         <p>
             <mat-form-field>
                 <input type="text" matInput [placeholder]="'games.homeTeam' | translate" formControlName="homeTeam">
@@ -37,7 +37,7 @@
         <p>
 
             <mat-form-field>
-                <input matInput [ngxMatDatetimePicker]="picker" [placeholder]="'games.date' | translate" formControlName="date">
+                <input matInput [ngxMatDatetimePicker]="picker" [min]="minDate" [placeholder]="'games.date' | translate" formControlName="date">
                 <mat-datepicker-toggle matSuffix [for]="$any(picker)" showSeconds="false">
                 </mat-datepicker-toggle>
                 <ngx-mat-datetime-picker #picker [showSpinners]="true" >

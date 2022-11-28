@@ -11,7 +11,10 @@ export class AppConstant {
       EDIT: 'user/profile'
     },
     JOGO: {
-      DEFAULT: 'jogo'
+      DEFAULT: 'jogo',
+      CREATE: 'jogo/create',
+      EDIT:'jogo/id/edit',
+      ADD_RESULT:'jogo/id/result'
     },
     TIPO:{
       DEFAULT:'tipo'
@@ -36,4 +39,11 @@ export class AppConstant {
     email: /^[_a-z0-9-+]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/,
     password: /^(?=.*\d)(?=.*[A-Za-z])(?=.*[a-zA-Z]).{8,}$/
   }
+
+  public static readonly DIALOG_DEFAULT_CONFIG = {
+    disableClose: true,
+    autoFocus: false,
+    restoreFocus: false,
+    width: '40vw',
+  };
 }

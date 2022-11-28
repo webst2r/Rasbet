@@ -20,15 +20,14 @@ public class JogoService {
     private final TipoRepository tipoRepository;
 
     @Transactional
-    public String createGame(JogoDTO jogoDTO) {
+    public Jogo createGame(JogoDTO jogoDTO) {
         var tipo = this.tipoRepository.findById(jogoDTO.getIdTipo()).orElseThrow(() -> new ResourceNotFoundException("Tipo", "id", jogoDTO.getIdTipo()));
 
         var game = jogoDTO.toEntity();
         game.setTipo(tipo);
         game.setComplete(false);
 
-        jogoRepository.save(game);
-        return "created";
+        return jogoRepository.save(game);
     }
 
     @Transactional

@@ -1,0 +1,8 @@
+mat-dialog-actions{
+  display: flex;
+  justify-content: end;
+  .btn-confirm{
+    background-color: var(--bg-green);;
+    color: white;
+  }
+}
