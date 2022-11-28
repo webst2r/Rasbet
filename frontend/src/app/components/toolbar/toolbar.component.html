@@ -16,6 +16,7 @@
       <button mat-raised-button routerLink="/register">{{"registerPage.register" | translate}}</button>
     </ng-container>
     <ng-container *ngIf="auth.isAuthenticated() && auth.getUserRole() === role.ROLE_USER">
+      <button mat-button [matMenuTriggerFor]="languageMenu">{{"home.language" | translate}}</button>
       <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
       <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
@@ -28,6 +29,16 @@
   </div>
 
 </mat-toolbar>
+
+<mat-menu #languageMenu="matMenu">
+  <button class="language-item" mat-menu-item (click)="translate.use('pt')">
+    <span class="flag-icon flag-icon-pt flag-icon-squared"></span> {{"home.portuguese" | translate}}
+  </button>
+  <button mat-menu-item class="language-item" (click)="translate.use('eng')">
+    <span class="flag-icon flag-icon-gb flag-icon-squared"></span> {{"home.english" | translate}}
+  </button>
+</mat-menu>
+
 
 <mat-menu #userMenu="matMenu">
   <button routerLink="/profile" mat-menu-item>

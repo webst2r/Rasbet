@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DepositComponent} from "../modal/deposit/deposit.component";
 import {RaiseComponent} from "../modal/raise/raise.component";
 import {Role} from "../../interfaces/user";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,8 @@ import {Role} from "../../interfaces/user";
 export class ToolbarComponent implements OnInit {
   role = Role;
   constructor(public auth: AuthenticationService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              public translate: TranslateService) {
   }
 
   ngOnInit(): void {

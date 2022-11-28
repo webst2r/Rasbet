@@ -1,0 +1,119 @@
+{
+  "loginPage": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "wrongCredentials": "Incorrect Email or password.",
+    "invalidEmail": "Email is not valid.",
+    "invalidPassword": "Password needs minimum 8 characters."
+  },
+  "registerPage": {
+    "register": "Register",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "birthDate": "Birth date",
+    "minimalAge": "Minimum age of 18.",
+    "firstNameRequired": "First name is required.",
+    "lastNameRequired": "Last name is required.",
+    "emailAlreadyExists": "An account with this email already exists."
+  },
+  "home": {
+    "wallet": "Balance",
+    "draw": "Draw",
+    "logout": "Logout",
+    "games": "Matches",
+    "transation": "Transactions",
+    "profile": "Perfil",
+    "language": "Language",
+    "portuguese": "Portuguese",
+    "english": "English"
+  },
+  "sidenav": {
+    "bettingSlip": "Betting Slip",
+    "result": "Result",
+    "odd": "Odd",
+    "deposit": "Deposit",
+    "rise": "Withdraw",
+    "amount": "Amount",
+    "depositType": "Deposit type",
+    "bet": "Bet",
+    "gains": "Gains",
+    "potentialGains": "Potential gains"
+  },
+  "depositType": {
+    "atm": "ATM",
+    "mbway": "MBWay",
+    "deposit": "Deposit",
+    "raise": "Withdraw"
+  },
+  "betType": {
+    "simple": "Simple",
+    "multiple": "Multiple"
+  },
+  "bets": {
+    "bets": "Bets",
+    "simpleBets": "Simple bets",
+    "multipleBets": "Multiple bets",
+    "date": "Date of bet",
+    "betType": "Bet type",
+    "odd": "Odd",
+    "value": "Amount",
+    "state": "State",
+    "game": "Match",
+    "result": "Result",
+    "FOOTBALL": "Football",
+    "BASKETBALL": "Basketball",
+    "gain": "Amount gained",
+    "totalGames": "Number of matches"
+  },
+  "betState": {
+    "WON": "Won",
+    "LOST": "Lost",
+    "PLACED": "Placed",
+    "CANCEL": "Cancel"
+  },
+  "transaction": {
+    "date": "Date",
+    "movementType": "Transaction type",
+    "description": "Description",
+    "value": "Amount",
+    "DEPOSIT": "Deposit",
+    "RAISE": "Withdraw",
+    "PURCHASE": "Payment",
+    "BETWINS": "Won bet",
+    "bet": "Bet"
+  },
+  "profile": {
+    "userArea": "User area",
+    "editInfo" : "Edit Profile",
+    "betsStatistics": "Check betting statistics",
+    "saveInfo" : "Save changes",
+    "cancelEdit" : "Cancel changes",
+    "failSave": "Failed to apply changes to profile data."
+  },
+  "chart": {
+    "singleTitle": "Simple bet statistics",
+    "multipleTitle": "Multiple bet statistics"
+
+  },
+  "games": {
+    "homeTeam": "Home team",
+    "HOME_TEAM": "Home team",
+    "awayTeam": "Away team",
+    "AWAY_TEAM": "Away team",
+    "DRAW": "Draw",
+    "type": "Type",
+    "date": "Date",
+    "edit": "Edit",
+    "details": "Details",
+    "addGame": "Add Match",
+    "required": " is required",
+    "result": "Result"
+  },
+  "dialog": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirmMessage": "Are you sure you want to carry out this action?"
+  }
+
+}

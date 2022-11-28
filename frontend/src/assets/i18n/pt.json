@@ -23,7 +23,10 @@
     "logout": "Logout",
     "games": "Jogos",
     "transation": "Transações",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "language": "Idioma",
+    "portuguese": "Português",
+    "english": "Inglês"
   },
   "sidenav": {
     "bettingSlip": "Boletim de Apostas",
