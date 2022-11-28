@@ -59,14 +59,12 @@ export class UserAreaComponent implements OnInit {
 
     this.userService.updateUserInfo(userId, this.form.controls['firstName'].value,
         this.form.controls['lastName'].value,
-        this.form.controls['password'].value).pipe(
-        tap((res) => {
-          if(user && user.firstName !== undefined){
-            user.firstName = res.firstName;
-          }
-          this.authenticationService.saveUser(user as UserToken);
-        })
+        this.form.controls['password'].value
     ).subscribe(
+        () => {
+          this.authenticationService.updateUserName(this.form.controls['firstName'].value,
+              this.form.controls['lastName'].value);
+        },
         (error) => {
           if (error.error && error.error.type === ExceptionType.ERROR_SAVING_INFO) {
             this.error = this.translate.instant("profile.failSave");

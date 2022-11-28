@@ -101,4 +101,13 @@ export class AuthenticationService {
     return false;
   }
 
+  updateUserName(firstName : string, lastName: string) : void {
+    let user = this.getUser();
+    if(user !== null) {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      this.saveUser(user);
+    }
+  }
+
 }
