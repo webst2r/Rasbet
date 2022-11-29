@@ -18,7 +18,7 @@
     <ng-container *ngIf="auth.isAuthenticated() && auth.getUserRole() === role.ROLE_USER">
       <!-- {{"home.language" | translate}} -->
 
-      <button mat-button [matMenuTriggerFor]="languageMenu"><span class={{setLanguageFlag()}}></span></button>
+      <button mat-button [matMenuTriggerFor]="languageMenu"><span class={{setLanguageFlag()}}></span><mat-icon>keyboard_arrow_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
       <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
