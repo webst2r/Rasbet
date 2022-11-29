@@ -35,7 +35,7 @@ export class ToolbarComponent implements OnInit {
 
   openDepositDialog(): void {
     const dialogRef = this.dialog.open(DepositComponent, {
-      width: '250px',
+      width: '450px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -45,7 +45,7 @@ export class ToolbarComponent implements OnInit {
 
   openRaiseDialog(): void {
     const dialogRef = this.dialog.open(RaiseComponent, {
-      width: '250px',
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

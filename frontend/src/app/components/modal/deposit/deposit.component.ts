@@ -58,4 +58,16 @@ export class DepositComponent implements OnInit {
       switchMap((res)=> this.transacoesService.createTransation(res.id,this.form.controls['saldo'].value, TransationType.DEPOSIT, this.form.controls['tipo'].value ))
     ).subscribe( () => this.dialogRef.close());
   }
+
+  selectedMb = false;
+  selectedMbway = false;
+
+  selectMbway() {
+    this.selectedMbway = !this.selectedMbway;
+    if (this.selectedMb) this.selectedMb = !this.selectedMbway;
+  }
+    selectMb(){
+      this.selectedMb = !this.selectedMb;
+      if (this.selectedMbway) this.selectedMbway = !this.selectedMbway;
+    }
 }

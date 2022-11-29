@@ -57,4 +57,9 @@ export class RaiseComponent implements OnInit {
     ).subscribe( () => this.dialogRef.close());
   }
 
+  getUserWallet(): string {
+    const value = this.auth.getUser()?.saldo.toFixed(2);
+    return value != null ? value : '0.00';
+  }
+
 }

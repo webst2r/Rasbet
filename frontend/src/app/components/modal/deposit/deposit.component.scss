@@ -1,3 +1,48 @@
-button{
-  width: 100%;
+
+.container{
+  padding: 0px 3rem;
+  display: grid;
+  margin-bottom: 2rem;
+  place-items: center;
+  column-gap: 1.5rem;
+  grid-template-columns: auto auto auto;
 }
+
+
+
+button{
+  margin-top: 1rem;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.71);
+  color: black;
+}
+
+button:hover{
+  background-color: #0e7e0e;
+  color: #efefef;
+}
+
+ .image {
+    width: 8rem;
+    height: 6rem;
+    border: 0.2rem solid;
+    border-radius: 1rem;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    resize: both;
+  }
+
+ .green{
+   border-color: green;
+ }
+
+ .black{
+   border-color: black;
+ }
+
+.image:nth-child(2){
+  background-size: 80px;
+}
+
