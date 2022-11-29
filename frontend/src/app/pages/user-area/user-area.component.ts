@@ -9,6 +9,7 @@ import {ExceptionType} from "../../enumeration/exception";
 import {TranslateService} from "@ngx-translate/core";
 import {DepositComponent} from "../../components/modal/deposit/deposit.component";
 import {RaiseComponent} from "../../components/modal/raise/raise.component";
+import {ConfirmDialogService} from "../../services/confirm-dialog.service";
 
 
 @Component({
@@ -29,12 +30,25 @@ export class UserAreaComponent implements OnInit {
                 private userService: UserService,
                 private translate: TranslateService,
                 private ref: ChangeDetectorRef,
+                private confirmDialogService: ConfirmDialogService,
                 public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
 
     }
+
+    openConfirmDialog(){
+            this.confirmDialogService.showDialog().subscribe(
+                (res) => {
+                  if(res.save){
+                    this.editInfo();
+                  }else {
+                    return;
+                  }
+                }
+            )
+          }
 
     openStatisticsDialog(): void {
         const dialogRef = this.dialog.open(StatisticsComponent, {

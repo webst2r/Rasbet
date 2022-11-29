@@ -14,7 +14,7 @@
 
     <div class="formEditInfo">
         <h1>{{"profile.editInfo" | translate}}</h1>
-        <form [formGroup]="form" (ngSubmit)="editInfo()">
+        <form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
             <div class="field">
                 <mat-form-field>
                     <label for="firstName">{{'registerPage.firstName' | translate}}</label>

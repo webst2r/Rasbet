@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="saveBet()">
+<form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
 <main>
   <h2>{{"sidenav.bettingSlip" | translate}}</h2>
   <mat-radio-group formControlName="type">

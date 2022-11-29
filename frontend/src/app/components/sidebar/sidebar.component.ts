@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BetTypes} from "../../enumeration/bet_types";
 import {ApostasService, SimpleBet} from "../../services/apostas.service";
 import {AuthenticationService, WalletType} from "../../services/authentication.service";
+import {ConfirmDialogService} from "../../services/confirm-dialog.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -26,12 +27,25 @@ export class SidebarComponent implements OnInit {
   constructor(private jogoService: JogoService,
               private translate: TranslateService,
               private apostasService: ApostasService,
+              private confirmDialogService: ConfirmDialogService,
               private auth: AuthenticationService) {
   }
 
   ngOnInit(): void {
     this.apostas = this.jogoService.getApostasSelecionadas()
   }
+
+  openConfirmDialog(){
+        this.confirmDialogService.showDialog().subscribe(
+            (res) => {
+              if(res.save){
+                this.saveBet();
+              }else {
+                return;
+              }
+            }
+        )
+      }
 
   getSelectedOdd(opcaoApostas: OpcaoAposta[], opcao: OutcomeType) {
     return opcaoApostas.find(op => op.type === opcao)?.odd;
