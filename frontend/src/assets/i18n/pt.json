@@ -108,7 +108,9 @@
     "details": "Detalhes",
     "addGame": "Adicionar Jogo",
     "required": " é obrigatório",
-    "result": "Resultado"
+    "result": "Resultado",
+    "odds": "Odds",
+    "editGame": "Editar Jogo"
   },
   "dialog": {
     "confirm": "Confirmar",

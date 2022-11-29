@@ -23,7 +23,7 @@
         <p>
             <mat-form-field appearance="fill">
                 <mat-label>{{'games.type' | translate}}</mat-label>
-                <mat-select formControlName="type">
+                <mat-select formControlName="type" [(ngModel)]="data.edit && data.game.tipo.id">
                     <mat-option *ngFor="let type of tipos" [value]="type.id">
                         {{"bets."+ type.nome | translate}}
                     </mat-option>
@@ -50,7 +50,7 @@
       </span>
 
         <div class="button">
-            <button type="submit" [disabled]="!this.form.valid" mat-button>{{"games.addGame" | translate}}</button>
+            <button type="submit" [disabled]="!this.form.valid" mat-button>{{ (data.edit? "games.editGame" : "games.addGame") | translate}}</button>
         </div>
 
     </form>

@@ -3,9 +3,9 @@
     <h3 class="margin">{{"bets." + data.game.tipo.nome | translate}}</h3>
 </div>
 <div>
-    <p>Data: {{formatDate(data.game.date)}}</p>
+    <p>{{'games.date' | translate}}: {{formatDate(data.game.date)}}</p>
     <ng-container *ngIf="data.game.opcaoApostas.length > 0">
-        <h2>Odds</h2>
+        <h2>{{'games.odds' | translate}}</h2>
         <ng-container *ngFor="let bet of data.game.opcaoApostas">
             <p>{{'games.'+bet.type | translate}}: {{bet.odd}}</p>
         </ng-container>

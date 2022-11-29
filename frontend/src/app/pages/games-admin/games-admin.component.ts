@@ -85,6 +85,20 @@ export class GamesAdminComponent implements OnInit {
     openDialogCreate() {
         const dialogRef = this.dialog.open(AddGameComponent, {
             width: '300px',
+            data: {edit: false}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result){
+                this.getJogos(0, 10);
+            }
+        });
+    }
+
+    openDialogEdit(game: Jogo){
+        const dialogRef = this.dialog.open(AddGameComponent, {
+            width: '300px',
+            data: {edit: true, game: game}
         });
 
         dialogRef.afterClosed().subscribe(result => {

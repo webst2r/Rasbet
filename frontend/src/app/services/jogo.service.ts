@@ -27,7 +27,7 @@ export class JogoService {
   }
 
   getAllJogos(page: number = 0, size: number = 10): Observable<any> {
-    let url = AppConstant.API_URL + AppConstant.API_PATHS.JOGO.DEFAULT + `?page=${page}&size=${size}&sort=date,desc`;
+    let url = AppConstant.API_URL + AppConstant.API_PATHS.JOGO.DEFAULT + `?page=${page}&size=${size}&sort=date,asc`;
 
     return this.http.get<any>(url);
   }
@@ -38,6 +38,12 @@ export class JogoService {
 
   createGame(homeTeam: string, awayTeam: string, date:string, idTipo: number): Observable<any>{
     return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.CREATE, {
+      homeTeam, awayTeam, date, idTipo
+    })
+  }
+
+  editGame(id: number,homeTeam: string, awayTeam: string, date:string, idTipo: number): Observable<any>{
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.EDIT.replace('id', String(id)), {
       homeTeam, awayTeam, date, idTipo
     })
 

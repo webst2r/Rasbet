@@ -108,7 +108,9 @@
     "details": "Details",
     "addGame": "Add Match",
     "required": " is required",
-    "result": "Result"
+    "result": "Result",
+    "odds": "Odds",
+    "editGame": "Edit Match"
   },
   "dialog": {
     "confirm": "Confirm",
