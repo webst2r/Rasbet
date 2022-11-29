@@ -1,8 +1,6 @@
 <main>
     <h1>{{"profile.userArea" | translate}} : {{getUserFirstName()}} {{getUserLastName()}}</h1>
     <h3 >{{"home.wallet" | translate}}: {{getUserWallet()}}€</h3>
-    <hr>
-
     <div class="walletButtons">
         <button mat-raised-button (click)="openRaiseDialog()" class="withdraw">{{"sidenav.rise" | translate}}</button>
         <button mat-raised-button (click)="openDepositDialog()" class="deposit">{{"sidenav.deposit" | translate}}</button>

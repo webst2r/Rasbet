@@ -11,14 +11,15 @@
   </div>
 
   <div class="auth-btns">
+    <button mat-button [matMenuTriggerFor]="languageMenu"><span class={{setLanguageFlag()}}></span><mat-icon>keyboard_arrow_down</mat-icon></button>
     <ng-container *ngIf="!auth.isAuthenticated()">
-      <button mat-raised-button routerLink="/login">{{"loginPage.login" | translate}}</button>
+      <button mat-raised-button class="mg-r" routerLink="/login">{{"loginPage.login" | translate}}</button>
       <button mat-raised-button routerLink="/register">{{"registerPage.register" | translate}}</button>
     </ng-container>
+    <ng-container></ng-container>
     <ng-container *ngIf="auth.isAuthenticated() && auth.getUserRole() === role.ROLE_USER">
       <!-- {{"home.language" | translate}} -->
 
-      <button mat-button [matMenuTriggerFor]="languageMenu"><span class={{setLanguageFlag()}}></span><mat-icon>keyboard_arrow_down</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
       <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
