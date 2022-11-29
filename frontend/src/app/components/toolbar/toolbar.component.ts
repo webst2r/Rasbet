@@ -21,6 +21,13 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  setLanguageFlag() : string {
+    if (this.translate.currentLang === 'pt'){
+      return "flag-icon flag-icon-pt flag-icon-squared maior";
+    } else return "flag-icon flag-icon-gb flag-icon-squared maior";
+  }
+
   getUserWallet(): string {
     const value = this.auth.getUser()?.saldo.toFixed(2);
     return value != null ? value : '0.00';
