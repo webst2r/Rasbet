@@ -13,7 +13,7 @@ import pt.rasbet.backend.dto.*;
 import pt.rasbet.backend.service.UserService;
 
 import javax.persistence.spi.LoadState;
-import javax.validation.Valid;
+import javax.validation.Valid;  
 
 @RepositoryRestController()
 @RequiredArgsConstructor
