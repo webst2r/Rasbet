@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="updateSaldo()">
+<form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
 <mat-form-field appearance="fill">
   <mat-label>{{"sidenav.depositType" | translate}}</mat-label>
   <mat-select formControlName="tipo">

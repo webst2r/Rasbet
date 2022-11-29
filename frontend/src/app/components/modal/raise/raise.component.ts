@@ -7,6 +7,7 @@ import {TransacoesService} from "../../../services/transacoes.service";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ConfirmDialogService} from "../../../services/confirm-dialog.service";
 
 @Component({
   selector: 'app-raise',
@@ -20,10 +21,23 @@ export class RaiseComponent implements OnInit {
   constructor(private carteiraService: CarteiraService,
               private transacoesService: TransacoesService,
               private auth: AuthenticationService,
+              private confirmDialogService: ConfirmDialogService,
               private dialogRef: MatDialogRef<RaiseComponent>) { }
 
   ngOnInit(): void {
   }
+
+  openConfirmDialog(){
+        this.confirmDialogService.showDialog().subscribe(
+            (res) => {
+              if(res.save){
+                this.updateSaldo();
+              }else {
+                return;
+              }
+            }
+        )
+      }
 
   updateSaldo(){
     const user = this.auth.getUser();

@@ -6,6 +6,7 @@ import {CarteiraService} from "../../../services/carteira.service";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {switchMap, tap} from "rxjs";
 import {UserToken} from "../../../interfaces/user";
+import {ConfirmDialogService} from "../../../services/confirm-dialog.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {TransacoesService} from "../../../services/transacoes.service";
 
@@ -26,10 +27,23 @@ export class DepositComponent implements OnInit {
   constructor(private carteiraService: CarteiraService,
               private transacoesService: TransacoesService,
               private auth: AuthenticationService,
+              private confirmDialogService: ConfirmDialogService,
               private dialogRef: MatDialogRef<DepositComponent>) { }
 
   ngOnInit(): void {
   }
+
+  openConfirmDialog(){
+      this.confirmDialogService.showDialog().subscribe(
+          (res) => {
+            if(res.save){
+              this.updateSaldo();
+            }else {
+              return;
+            }
+          }
+      )
+    }
 
   updateSaldo(){
     const user = this.auth.getUser();
