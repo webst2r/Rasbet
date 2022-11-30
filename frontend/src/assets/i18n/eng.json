@@ -122,7 +122,8 @@
       "CANCEL": "Canceled",
       "FINISH": "Finish",
       "READY": "Ready to Bet"
-    }
+    },
+    "cancelGame": "Are you sure you want to cancel this match?"
   },
   "dialog": {
     "confirm": "Confirm",

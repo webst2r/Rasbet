@@ -29,7 +29,7 @@
                 </ng-container>
 
                 <ng-container *ngIf="column === 'cancel'">
-                    <button mat-button [disabled] = "element.state === 'CANCEL' || element.state === 'FINISH'">
+                    <button mat-button (click)="openDialogConfirm(element)" [disabled] = "element.state === 'CANCEL' || element.state === 'FINISH'">
                         <mat-icon class="icon-cancel" aria-hidden="false">cancel</mat-icon>
                     </button>
                 </ng-container>

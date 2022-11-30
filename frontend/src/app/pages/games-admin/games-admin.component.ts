@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddGameComponent} from "../../components/modal/add-game/add-game.component";
 import {GameDetailsComponent} from "../../components/modal/game-details/game-details.component";
 import {AddResultComponent} from "../../components/modal/add-result/add-result.component";
+import {ConfirmDialogService} from "../../services/confirm-dialog.service";
 
 @Component({
     selector: 'app-games-admin',
@@ -24,7 +25,8 @@ export class GamesAdminComponent implements OnInit {
 
     constructor(private readonly jogoService: JogoService,
                 private translate: TranslateService,
-                public dialog: MatDialog) {
+                public dialog: MatDialog,
+                private confirmDialogService: ConfirmDialogService) {
     }
 
     ngOnInit(): void {
@@ -130,5 +132,18 @@ export class GamesAdminComponent implements OnInit {
                 this.getJogos(0, 10);
             }
         });
+    }
+
+    openDialogConfirm(element: Jogo){
+        this.confirmDialogService.showDialog(this.translate.instant('games.cancelGame')).subscribe(
+            (res) => {
+                if(res.save){
+                    this.jogoService.cancelGame(element.id).subscribe(
+                        () =>  this.getJogos(0, 10))
+                }else {
+                    return;
+                }
+            }
+        )
     }
 }
