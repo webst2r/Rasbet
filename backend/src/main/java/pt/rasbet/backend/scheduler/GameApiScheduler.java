@@ -1,24 +1,21 @@
 package pt.rasbet.backend.scheduler;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import pt.rasbet.backend.entity.Aposta;
-import pt.rasbet.backend.entity.ApostasMultiplas;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.enumeration.EApostaEstado;
+import pt.rasbet.backend.event.common.UpdateApostasEvent;
 import pt.rasbet.backend.repository.JogoRepository;
 import pt.rasbet.backend.repository.OpcaoApostaRepository;
-import pt.rasbet.backend.service.ApostaMultiplaService;
-import pt.rasbet.backend.service.ApostaService;
 import pt.rasbet.backend.service.GameApiService;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Configuration
 @EnableScheduling
@@ -29,8 +26,7 @@ public class GameApiScheduler {
     private final JogoRepository jogoRepository;
 
     private final OpcaoApostaRepository opcaoApostaRepository;
-    private final ApostaService apostaService;
-    private final ApostaMultiplaService apostaMultiplaService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Scheduled(cron = "0 */5 * * * *", zone = "Europe/Lisbon")
     @PostConstruct
@@ -40,7 +36,7 @@ public class GameApiScheduler {
 
         jogos.forEach(jogo -> {
             Optional<Jogo> optionalJogo = jogoRepository.findByIdApi(jogo.getIdApi());
-            if (optionalJogo.isPresent()) {
+            if (optionalJogo.isPresent() && !optionalJogo.get().getState().equals(EApostaEstado.CANCEL.name())) {
                 updateJogo(optionalJogo.get(), jogo);
             } else {
                 jogoRepository.save(jogo);
@@ -59,14 +55,8 @@ public class GameApiScheduler {
 
         jogo1 = jogoRepository.save(jogo1);
         if (jogo1.getComplete()) {
-           updateBets(jogo1);
+            eventPublisher.publishEvent(UpdateApostasEvent.of(jogo1));
         }
-    }
-
-    private void updateBets(Jogo jogo) {
-        apostaService.updateApostas(jogo);
-        apostaService.updateApostasMultiplas(jogo);
-        apostaMultiplaService.updateApostasMultiplas(jogo);
     }
 
 

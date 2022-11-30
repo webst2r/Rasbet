@@ -43,6 +43,8 @@ public class Jogo {
 
     private String idApi;
 
+    private String state;
+
     @ManyToOne()
     @JoinColumn(name= "id_tipo", nullable = false)
     private Tipo tipo;
