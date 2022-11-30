@@ -38,4 +38,9 @@ public class OpcaoAposta {
         this.type = type;
         this.jogo =  jogo;
     }
+
+    public OpcaoAposta(Float odd, String type){
+        this.odd = odd;
+        this.type = type;
+    }
 }
