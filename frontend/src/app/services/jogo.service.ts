@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AppConstant} from "../app.constant";
 import {OutcomeType} from "../interfaces/opcao_aposta";
+import * as http from "http";
+import {A} from "@angular/cdk/keycodes";
 
 export interface ApostaSelecionada {
   jogo: Jogo,
@@ -46,8 +48,14 @@ export class JogoService {
     return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.EDIT.replace('id', String(id)), {
       homeTeam, awayTeam, date, idTipo
     })
-
   }
+
+  addResultToGame(id: number, resultado: string, vencedor: string): Observable<any>{
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.ADD_RESULT.replace('id', String(id)), {
+      resultado, vencedor
+    })
+  }
+
 
   getApostasSelecionadas(): ApostaSelecionada[] {
     return this.apostasSelecionadas;

@@ -12,7 +12,7 @@
             <th mat-header-cell *matHeaderCellDef> {{"games." + column | translate}} </th>
             <td mat-cell *matCellDef="let element">
                 <ng-container *ngIf="column === 'edit'">
-                    <button mat-button (click)="openDialogEdit(element)">
+                    <button mat-button [disabled] = "element.state === 'CANCEL' || element.state === 'FINISH'" (click)="openDialogEdit(element)">
                         <mat-icon class="icon-edit" aria-hidden="false">edit</mat-icon>
                     </button>
                 </ng-container>
@@ -23,11 +23,17 @@
                 </ng-container>
 
                 <ng-container *ngIf="column === 'result'">
-                    <button mat-button>
+                    <button mat-button (click)="openDialogAddResult(element)" [disabled] = "element.state === 'CANCEL' || element.state === 'FINISH'">
                         <mat-icon class="icon-result" aria-hidden="false">add_box</mat-icon>
                     </button>
                 </ng-container>
-                <ng-container *ngIf="column !== 'edit' && column !== 'details' && column !== 'result'">
+
+                <ng-container *ngIf="column === 'cancel'">
+                    <button mat-button [disabled] = "element.state === 'CANCEL' || element.state === 'FINISH'">
+                        <mat-icon class="icon-cancel" aria-hidden="false">cancel</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="column !== 'edit' && column !== 'details' && column !== 'result' && column !== 'cancel'">
                     {{getElement(element, column)}}
                 </ng-container>
             </td>

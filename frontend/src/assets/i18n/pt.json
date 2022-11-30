@@ -102,15 +102,25 @@
     "awayTeam": "Equipa de fora",
     "AWAY_TEAM": "Equipa de fora",
     "DRAW": "Empate",
+    "winner": "Vencedor",
     "type": "Tipo",
     "date": "Data",
     "edit": "Editar",
+    "state": "Estado",
+    "cancel": "Cancelar",
     "details": "Detalhes",
     "addGame": "Adicionar Jogo",
     "required": " é obrigatório",
     "result": "Resultado",
+    "saveResult": "Guardar Resultado",
     "odds": "Odds",
-    "editGame": "Editar Jogo"
+    "editGame": "Editar Jogo",
+    "gameStates":{
+      "NO_ODDS": "Sem Odds",
+      "CANCEL": "Cancelado",
+      "FINISH": "Terminado",
+      "READY": "Pronto para Apostas"
+    }
   },
   "dialog": {
     "confirm": "Confirmar",

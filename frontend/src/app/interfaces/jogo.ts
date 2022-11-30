@@ -12,4 +12,5 @@ export interface Jogo {
   idApi?: string;
   tipo: Tipo;
   opcaoApostas: OpcaoAposta[];
+  state: string;
 }
