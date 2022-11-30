@@ -55,7 +55,9 @@ export class JogoService {
       resultado, vencedor
     })
   }
-
+  cancelGame(id:number): Observable<any>{
+    return this.http.post(AppConstant.API_URL + AppConstant.API_PATHS.JOGO.CANCEL.replace('id', String(id)), {});
+  }
 
   getApostasSelecionadas(): ApostaSelecionada[] {
     return this.apostasSelecionadas;

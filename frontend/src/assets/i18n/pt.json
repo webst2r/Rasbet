@@ -120,7 +120,8 @@
       "CANCEL": "Cancelado",
       "FINISH": "Terminado",
       "READY": "Pronto para Apostas"
-    }
+    },
+    "cancelGame": "Tem certeza que pretende cancelar este jogo?"
   },
   "dialog": {
     "confirm": "Confirmar",
