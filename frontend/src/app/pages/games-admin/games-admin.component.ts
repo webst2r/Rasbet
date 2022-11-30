@@ -8,6 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {MatDialog} from "@angular/material/dialog";
 import {AddGameComponent} from "../../components/modal/add-game/add-game.component";
 import {GameDetailsComponent} from "../../components/modal/game-details/game-details.component";
+import {AddResultComponent} from "../../components/modal/add-result/add-result.component";
 
 @Component({
     selector: 'app-games-admin',
@@ -15,7 +16,7 @@ import {GameDetailsComponent} from "../../components/modal/game-details/game-det
     styleUrls: ['./games-admin.component.scss']
 })
 export class GamesAdminComponent implements OnInit {
-    columnsToDisplay = ['homeTeam', 'awayTeam', 'type', 'date', 'details', 'edit', 'result'];
+    columnsToDisplay = ['homeTeam', 'awayTeam', 'type', 'date', 'state', 'details', 'edit', 'result', 'cancel'];
     public totalGames = 0;
     public itemsPerPage = 10;
     public currentPage = 0;
@@ -68,6 +69,7 @@ export class GamesAdminComponent implements OnInit {
         if (column === 'awayTeam') return element.awayTeam;
         if (column === 'type') return this.translate.instant("bets." + element.tipo.nome);
         if (column === 'date') return this.formatDate(element.date);
+        if (column === 'state') return this.translate.instant("games.gameStates." + element.state);
         return '';
     }
 
@@ -115,5 +117,18 @@ export class GamesAdminComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe();
+    }
+
+    openDialogAddResult(element: Jogo) {
+        const dialogRef = this.dialog.open(AddResultComponent, {
+            width: '300px',
+            data: {game: element}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result){
+                this.getJogos(0, 10);
+            }
+        });
     }
 }

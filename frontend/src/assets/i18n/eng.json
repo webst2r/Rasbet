@@ -104,15 +104,25 @@
     "awayTeam": "Away team",
     "AWAY_TEAM": "Away team",
     "DRAW": "Draw",
+    "winner": "Winner",
     "type": "Type",
     "date": "Date",
     "edit": "Edit",
+    "state": "State",
+    "cancel": "Cancel",
     "details": "Details",
     "addGame": "Add Match",
     "required": " is required",
     "result": "Result",
+    "saveResult": "Save Result",
     "odds": "Odds",
-    "editGame": "Edit Match"
+    "editGame": "Edit Match",
+    "gameStates":{
+      "NO_ODDS": "No Odds",
+      "CANCEL": "Canceled",
+      "FINISH": "Finish",
+      "READY": "Ready to Bet"
+    }
   },
   "dialog": {
     "confirm": "Confirm",

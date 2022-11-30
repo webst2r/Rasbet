@@ -1,0 +1,48 @@
+<div style="width: 100%">
+    <form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
+        <p>
+            <mat-form-field>
+                <input type="number" matInput [placeholder]="'games.homeTeam' | translate" formControlName="homeTeam">
+            </mat-form-field>
+
+        </p>
+
+        <span *ngIf="!form.controls['homeTeam'].valid &&
+      form.controls['homeTeam']?.touched" class="error">
+        {{ "games.homeTeam" | translate }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field>
+                <input type="number" matInput [placeholder]="'games.awayTeam' | translate" formControlName="awayTeam">
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['awayTeam'].valid &&
+      form.controls['awayTeam']?.touched" class="error">
+        {{  "games.awayTeam" | translate  }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'games.winner' | translate}}</mat-label>
+                <mat-select formControlName="winner">
+                    <mat-option value="HOME_TEAM">
+                        {{"games.HOME_TEAM" | translate}}
+                    </mat-option>
+                    <mat-option value="AWAY_TEAM">
+                        {{"games.AWAY_TEAM" | translate}}
+                    </mat-option>
+                    <mat-option value="DRAW">
+                        {{"games.DRAW" | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['winner'].valid &&
+      form.controls['winner']?.touched" class="error">
+        {{  "games.winner" | translate  }} {{ "games.required" | translate}}
+      </span>
+
+        <div class="button">
+            <button type="submit" [disabled]="!this.form.valid" mat-button>{{ "games.saveResult"| translate}}</button>
+        </div>
+    </form>
+</div>

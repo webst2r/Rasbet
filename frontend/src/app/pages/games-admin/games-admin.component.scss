@@ -28,6 +28,10 @@ main {
   color: #F5D008;
 }
 
+.icon-cancel{
+  color: red;
+}
+
 .button-div {
   width: 100%;
   display: flex;
@@ -38,4 +42,8 @@ main {
     background: var(--bg-green);
     color: white;
   }
+}
+
+button:disabled{
+  opacity: 0.5;
 }
