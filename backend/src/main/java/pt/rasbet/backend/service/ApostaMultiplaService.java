@@ -60,40 +60,14 @@ public class ApostaMultiplaService {
     }
 
     @Transactional
-    public void updateApostasMultiplas(Jogo jogo){
-        List<ApostasMultiplas> apostasMultiplas = getApostasMultiplasByJogo(jogo);
-        if (!apostasMultiplas.isEmpty()) {
-            apostasMultiplas.forEach(pm -> {
-                long lost = pm.getApostas().stream().filter(aposta -> aposta.getEstado().equals(EApostaEstado.LOST.name())).count();
-                if(lost > 0){
-                    pm.setEstado(EApostaEstado.LOST.name());
-                    apostaMultiplaRepository.save(pm);
-                    return;
-                }
-
-                long won = pm.getApostas().stream().filter(aposta -> aposta.getEstado().equals(EApostaEstado.WON.name())).count();
-                if(won == pm.getApostas().size()){
-                    pm.setEstado(EApostaEstado.WON.name());
-                    AtomicReference<Float> odd = new AtomicReference<>(1f);
-                    pm.getApostas().forEach(aposta -> {
-                        odd.updateAndGet(o -> o*aposta.getValorOdd());
-                    });
-                    pm.setValorTotalGanho(pm.getValor()* odd.get());
-                    apostaMultiplaRepository.save(pm);
-                    Carteira carteira = pm.getUser().getCarteira();
-                    transacoesRepository.save(new Transacoes(carteira, pm.getValorTotalGanho(), "DEPOSIT", ETRansationType.BET.name()));
-                    carteira.setSaldo(carteira.getSaldo() + pm.getValorTotalGanho());
-                    carteiraRepository.save(carteira);
-                }
-            });
-        }
-    }
-
-    @Transactional
     public CountMultiplasApostasUser getApostasMultiplasCountByUser(Long userId){
      return new CountMultiplasApostasUser(
               this.apostaMultiplaRepository.countApostasMultiplasByUser_IdAndAndEstado(userId,  EApostaEstado.WON.name()),
         this.apostaMultiplaRepository.countApostasMultiplasByUser_IdAndAndEstado(userId,  EApostaEstado.LOST.name())
       );
+    }
+
+    public ApostasMultiplas save(ApostasMultiplas apostasMultiplas){
+        return apostaMultiplaRepository.save(apostasMultiplas);
     }
 }

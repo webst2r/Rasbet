@@ -17,6 +17,8 @@ public interface JogoView {
 
     String getResultado();
 
+    String getState();
+
     TipoView getTipo();
 
     List<OpcaoApostaView> getOpcaoApostas();

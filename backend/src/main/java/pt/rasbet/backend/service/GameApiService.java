@@ -11,6 +11,7 @@ import pt.rasbet.backend.dto.GameApiDTO;
 import pt.rasbet.backend.entity.Jogo;
 import pt.rasbet.backend.entity.OpcaoAposta;
 import pt.rasbet.backend.entity.Tipo;
+import pt.rasbet.backend.enumeration.EJogoEstado;
 import pt.rasbet.backend.repository.TipoRepository;
 
 import java.util.ArrayList;
@@ -36,12 +37,16 @@ public class GameApiService {
 
     public List<Jogo> getGames() {
 
-        RestTemplate restTemplate = new RestTemplate();
-        Object object = restTemplate.getForObject(url, Object.class);
-        List<GameApiDTO> gameApiDTOS = objectMapper.convertValue(object, new TypeReference<List<GameApiDTO>>() {
-        });
-        assert gameApiDTOS != null;
-        return convertToJogo(gameApiDTOS);
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            Object object = restTemplate.getForObject(url, Object.class);
+            List<GameApiDTO> gameApiDTOS = objectMapper.convertValue(object, new TypeReference<List<GameApiDTO>>() {
+            });
+            assert gameApiDTOS != null;
+            return convertToJogo(gameApiDTOS);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
     }
 
     public List<Jogo> convertToJogo(List<GameApiDTO> gameApiDTOS) {
@@ -62,10 +67,12 @@ public class GameApiService {
                     jogo.setVencedor(HOME_TEAM.name());
                 } else if (awayTeam > homeTeam) {
                     jogo.setVencedor(AWAY_TEAM.name());
-                }else {
+                } else {
                     jogo.setVencedor(DRAW.name());
                 }
-
+                jogo.setState(EJogoEstado.FINISH.name());
+            } else {
+                jogo.setState(EJogoEstado.READY.name());
             }
             Set<OpcaoAposta> opcaoApostas = new HashSet<>();
             gameApiDTO.getBookmakers().get(0).getMarkets().get(0).getOutcomes().forEach(outcomeDTO -> {
@@ -99,7 +106,7 @@ public class GameApiService {
         Pattern pattern = Pattern.compile("([^x]*$)");
         Matcher matcher = pattern.matcher(result);
         int value = 0;
-        if(matcher.find()) {
+        if (matcher.find()) {
             value = Integer.parseInt(matcher.group(0));
         }
         return value;

@@ -1,18 +1,19 @@
 package pt.rasbet.backend.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.JogoDTO;
 import pt.rasbet.backend.dto.JogoResultDTO;
 import pt.rasbet.backend.dto.JogosPageDTO;
 import pt.rasbet.backend.dto.PageDTO;
 import pt.rasbet.backend.entity.Jogo;
-import pt.rasbet.backend.entity.User;
+import pt.rasbet.backend.enumeration.EJogoEstado;
+import pt.rasbet.backend.event.common.CancelJogoEvent;
+import pt.rasbet.backend.event.common.UpdateApostasEvent;
+import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
-import pt.rasbet.backend.projection.JogoView;
 import pt.rasbet.backend.repository.JogoRepository;
 import pt.rasbet.backend.repository.TipoRepository;
 
@@ -25,6 +26,8 @@ public class JogoService {
     private final JogoRepository jogoRepository;
     private final TipoRepository tipoRepository;
 
+    private final ApplicationEventPublisher eventPublisher;
+
     @Transactional
     public Jogo createGame(JogoDTO jogoDTO) {
         var tipo = this.tipoRepository.findById(jogoDTO.getIdTipo()).orElseThrow(() -> new ResourceNotFoundException("Tipo", "id", jogoDTO.getIdTipo()));
@@ -32,8 +35,8 @@ public class JogoService {
         var game = jogoDTO.toEntity();
         game.setTipo(tipo);
         game.setComplete(false);
-
-        return jogoRepository.save(game);
+        game.setState(EJogoEstado.NO_ODDS.name());
+        return save(game);
     }
 
     @Transactional
@@ -43,7 +46,10 @@ public class JogoService {
         game.setVencedor(jogoResultDTO.getVencedor());
         game.setResultado(jogoResultDTO.getResultado());
         game.setComplete(true);
-        jogoRepository.save(game);
+        game.setState(EJogoEstado.FINISH.name());
+        game = save(game);
+        //TODO - test
+        eventPublisher.publishEvent(UpdateApostasEvent.of(game));
         return "saved";
     }
 
@@ -60,10 +66,11 @@ public class JogoService {
         game.setAwayTeam(jogoDTO.getAwayTeam());
         game.setDate(jogoDTO.getDate());
         game.setTipo(tipo);
+        save(game);
         return "saved;";
     }
 
-    public JogosPageDTO getGamesToBet(Pageable pageable){
+    public JogosPageDTO getGamesToBet(Pageable pageable) {
         var gamesView = this.jogoRepository.getAll(pageable);
 
         PageDTO pageDTO = new PageDTO(gamesView.getSize(),
@@ -71,5 +78,22 @@ public class JogoService {
                 gamesView.getTotalPages(),
                 gamesView.getNumber());
         return new JogosPageDTO(pageDTO, gamesView.getContent());
+    }
+
+    @Transactional
+    public String cancel(Long id) {
+        Jogo jogo = findById(id);
+//        TODO: test
+        if (jogo.getComplete()) {
+            throw new BadRequestException("Game already ended");
+        }
+        jogo.setState(EJogoEstado.CANCEL.name());
+        jogo = save(jogo);
+        eventPublisher.publishEvent(CancelJogoEvent.of(jogo));
+        return "cancel successfull";
+    }
+
+    public Jogo save(Jogo jogo){
+        return this.jogoRepository.save(jogo);
     }
 }

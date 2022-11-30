@@ -41,6 +41,11 @@ public class JogoController {
         return ResponseEntity.ok(jogoService.addResult(jogoResultDTO,id));
     }
 
+    @PostMapping("jogo/{id}/cancel")
+    public ResponseEntity<String> cancel(@PathVariable("id") Long id){
+        return ResponseEntity.ok(jogoService.cancel(id));
+    }
+
     @GetMapping("jogo/betGames")
     public ResponseEntity<JogosPageDTO> getGamesToBet(Pageable pageable){
         return ResponseEntity.ok(this.jogoService.getGamesToBet(pageable));

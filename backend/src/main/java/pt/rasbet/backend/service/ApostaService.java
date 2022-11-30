@@ -65,44 +65,17 @@ public class ApostaService {
     }
 
     @Transactional
-    public void updateApostas(Jogo jogo) {
-        List<Aposta> apostas = this.getApostasTerminated(jogo);
-        apostas.forEach(aposta -> {
-            if(aposta.getOpcaoAposta().getType().equals(jogo.getVencedor())){
-                float valor = aposta.getValor() * aposta.getValorOdd();
-                aposta.setValorGanho(valor);
-                aposta.setEstado(EApostaEstado.WON.name());
-                apostaRepository.save(aposta);
-                Carteira carteira = aposta.getUser().getCarteira();
-                carteira.setSaldo(carteira.getSaldo() + valor);
-                carteiraRepository.save(carteira);
-                transacoesRepository.save(new Transacoes(carteira, valor, "DEPOSIT", ETRansationType.BET.name()));
-            }else {
-                aposta.setEstado(EApostaEstado.LOST.name());
-                apostaRepository.save(aposta);
-            }
-        });
-    }
-
-    @Transactional
-    public void updateApostasMultiplas(Jogo jogo){
-        List<Aposta> apostas = this.getApostasMultipleTerminated(jogo);
-        apostas.forEach(aposta -> {
-            if(aposta.getOpcaoAposta().getType().equals(jogo.getVencedor())){
-                aposta.setEstado(EApostaEstado.WON.name());
-            }else {
-                aposta.setEstado(EApostaEstado.LOST.name());
-            }
-            apostaRepository.save(aposta);
-        });
-
-    }
-
-    @Transactional
     public CountApostasUserDTO getApostasCountByUser(Long userId){
         return new CountApostasUserDTO(
                 this.apostaRepository.countApostaByUser_IdAndAndEstado(userId,  EApostaEstado.WON.name()),
                 this.apostaRepository.countApostaByUser_IdAndAndEstado(userId,  EApostaEstado.LOST.name())
         );
+    }
+
+    public Aposta save(Aposta aposta){
+        return apostaRepository.save(aposta);
+    }
+    public List<Aposta> saveAll(List<Aposta> apostas){
+        return apostaRepository.saveAll(apostas);
     }
 }
