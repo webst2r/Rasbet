@@ -1,7 +1,6 @@
 package pt.rasbet.backend.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import pt.rasbet.backend.dto.JogoDTO;
 import pt.rasbet.backend.dto.JogoResultDTO;
 import pt.rasbet.backend.dto.JogosPageDTO;
 import pt.rasbet.backend.entity.Jogo;
-import pt.rasbet.backend.projection.JogoView;
 import pt.rasbet.backend.service.JogoService;
 
 import javax.validation.Valid;
