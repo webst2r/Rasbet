@@ -39,6 +39,8 @@ $frontend-theme: mat.define-light-theme((
   --rasbet-yellow: #efff00;
   --white-text: #ffffff;
   --bg-green: #053707;
+  --gray-weak: rgba(128, 128, 128, 0.71);
+  --gray-transparent: rgba(128, 128, 128, 0.07);
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

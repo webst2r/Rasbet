@@ -9,7 +9,7 @@ h1{
 h4{
   font-weight: 500;
   margin-bottom: 1rem;
-  background-color: rgba(128, 128, 128, 0.07);
+  background-color: var(--gray-transparent);
   padding: 0.6rem;
   border-radius: 1rem;
   width: fit-content;
@@ -18,7 +18,7 @@ h4{
 button{
   margin-top: 1rem;
   width: 100%;
-  background-color: rgba(128, 128, 128, 0.71);
+  background-color: var(--gray-weak);
   color: black;
 }
 

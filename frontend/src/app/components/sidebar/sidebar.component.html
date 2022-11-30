@@ -2,7 +2,7 @@
 <main>
   <h2>{{"sidenav.bettingSlip" | translate}}</h2>
   <mat-radio-group formControlName="type">
-    <mat-radio-button [value]="betType.SIMPLE" checked="true"
+    <mat-radio-button  [value]="betType.SIMPLE" checked="true"
                       color="primary">{{"betType.simple" | translate}}</mat-radio-button>
     <mat-radio-button [value]="betType.MULTIPLE" color="primary" [disabled] ="apostas.length<2">{{"betType.multiple" | translate}}</mat-radio-button>
   </mat-radio-group>
@@ -39,7 +39,7 @@
     </tr>
   </table>
   <span *ngIf="this.apostas.length != 0">{{"sidenav.potentialGains" | translate}}: {{getTotalGains()}}€</span>
-  <button [disabled]="this.apostas.length == 0" mat-button mat-raised-button
+  <button [disabled]="this.apostas.length == 0" [class]="{'bt-active':this.apostas.length > 0}" mat-button mat-raised-button
           type="submit">{{"sidenav.bet" | translate}} {{getTotalAmount()}}€</button>
 </main>
 </form>
