@@ -81,7 +81,9 @@
     "RAISE": "Levantamento",
     "PURCHASE": "Pagamento",
     "BETWINS": "Aposta ganha",
-    "bet": "Aposta"
+    "bet": "Aposta",
+    "amountToRaise": "Qual o valor que deseja leventar?",
+    "Available" : "Disponível"
   },
   "profile": {
     "userArea": "Área do Utilizador",

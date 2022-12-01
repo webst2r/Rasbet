@@ -81,7 +81,9 @@
     "RAISE": "Withdraw",
     "PURCHASE": "Payment",
     "BETWINS": "Won bet",
-    "bet": "Bet"
+    "bet": "Bet",
+    "amountToRaise": "What amount do you want to raise?",
+    "Available" : "Available"
   },
   "profile": {
     "userArea": "User area",

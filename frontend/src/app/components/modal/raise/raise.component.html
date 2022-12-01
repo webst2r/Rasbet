@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="updateSaldo()">
-  <h1 class="title">Quanto queres levantar?</h1>
-  <h4>Disponível: {{getUserWallet()}}€</h4>
+  <h1 class="title">{{"transaction.amountToRaise" | translate}}</h1>
+  <h4>{{"transaction.Available" | translate}} {{getUserWallet()}}€</h4>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>{{"sidenav.amount" | translate}}</mat-label>
     <input matInput formControlName = "saldo"  type="number">
