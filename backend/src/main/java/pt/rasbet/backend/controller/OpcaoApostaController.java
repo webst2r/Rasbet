@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pt.rasbet.backend.dto.OpcaoApostaDTO;
-import pt.rasbet.backend.entity.OpcaoAposta;
 import pt.rasbet.backend.service.OpcaoApostaService;
 
 import java.util.List;
