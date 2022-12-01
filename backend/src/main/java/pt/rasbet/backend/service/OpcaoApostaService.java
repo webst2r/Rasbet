@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.OpcaoApostaDTO;
 import pt.rasbet.backend.entity.OpcaoAposta;
+import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
 import pt.rasbet.backend.repository.OpcaoApostaRepository;
 
@@ -25,6 +26,13 @@ public class OpcaoApostaService {
     @Transactional
     public String createOdds(Long idJogo, List<OpcaoApostaDTO> opcaoApostaDTOS) {
         var jogo = jogoService.findById(idJogo);
+        if(jogo.getTipo().getEmpate() && opcaoApostaDTOS.size()!=3){
+            throw new BadRequestException("Must have three odds");
+        }
+        if(!jogo.getTipo().getEmpate() && opcaoApostaDTOS.size() !=2){
+            throw new BadRequestException("Must have two odds");
+        }
+
         if (jogo.getOpcaoApostas().size() > 0) {
             updateOdds(jogo.getOpcaoApostas(), opcaoApostaDTOS);
         } else {
