@@ -10,12 +10,22 @@ main {
     width: 30%;
     padding: 2rem 5rem;
     text-align: center;
+    border: 0.2rem solid rgba(0, 84, 0, 0.51);
+
+    border-radius: 2rem;
+  }
+  .mat-button-toggle-checked{
+    padding: 0.2rem;
+    background-color: #ffa119;
+    border: 0.1rem solid var(--gray-weak);
+    border-radius: 0.2rem;
   }
 }
 
 .odd-item {
-  line-height: 26px
+  line-height: 26px;
 }
+
 
 .paginator {
   width: 100%;

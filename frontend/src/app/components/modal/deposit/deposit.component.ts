@@ -16,12 +16,12 @@ import {TransacoesService} from "../../../services/transacoes.service";
   styleUrls: ['./deposit.component.scss']
 })
 export class DepositComponent implements OnInit {
-
-  depositType = DepositType;
+    selectedType : DepositType = DepositType.ATM ;
+    depositType = DepositType ;
 
   form: FormGroup = new FormGroup({
     saldo: new FormControl('', [Validators.required]),
-    tipo: new FormControl('', [Validators.required]),
+
   });
 
   constructor(private carteiraService: CarteiraService,
@@ -55,19 +55,13 @@ export class DepositComponent implements OnInit {
         }
         this.auth.saveUser(user as UserToken);
       }),
-      switchMap((res)=> this.transacoesService.createTransation(res.id,this.form.controls['saldo'].value, TransationType.DEPOSIT, this.form.controls['tipo'].value ))
+      switchMap((res)=> this.transacoesService.createTransation(res.id,this.form.controls['saldo'].value, TransationType.DEPOSIT, this.selectedType ))
     ).subscribe( () => this.dialogRef.close());
   }
 
-  selectedMb = false;
-  selectedMbway = false;
 
-  selectMbway() {
-    this.selectedMbway = !this.selectedMbway;
-    if (this.selectedMb) this.selectedMb = !this.selectedMbway;
-  }
-    selectMb(){
-      this.selectedMb = !this.selectedMb;
-      if (this.selectedMbway) this.selectedMbway = !this.selectedMbway;
+    selectPay(type : DepositType ){
+      this.selectedType = type;
     }
 }
+

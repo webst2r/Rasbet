@@ -25,7 +25,7 @@
           <div class="example-element-description">
 
             <table class="game" *ngFor="let aposta of element.apostas">
-              <ng-container>
+              <ng-container class="aposta">
                 <td><span>{{"bets." + aposta.jogo.tipo.nome | translate}}</span></td>
                 <td><span>{{aposta.jogo.homeTeam}} vs {{aposta.jogo.awayTeam}}</span></td>
                 <td><span>{{aposta.jogo.date}}</span></td>

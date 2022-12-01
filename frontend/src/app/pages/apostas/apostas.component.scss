@@ -26,6 +26,10 @@ main {
     background: #efefef;
   }
 
+  .example-expanded-row{
+    background-color: var(--gray-weak);
+  }
+
   .example-element-row td {
     border-bottom-width: 0;
   }
@@ -37,7 +41,10 @@ main {
 
 
   .example-element-description {
-    padding: 16px;
+    margin:auto;
+    padding: 32px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
   }
 
 }

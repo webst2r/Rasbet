@@ -4,7 +4,6 @@ main {
 
   table {
     width: 100%;
-    margin-bottom: 2rem;
   }
 
   th{
@@ -37,7 +36,7 @@ main {
 
 
   .example-element-description {
-    padding: 16px;
+    padding: 8px;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -47,6 +46,11 @@ main {
       text-align: end;
     }
     .game{
+      font-family: 'Rubik', sans-serif;
+      font-weight: 500;
+      padding: 8px;
+      border: 0.1rem solid var(--gray-weak);
+      background-color: var(--gray-transparent);
       td{
         text-align: left;
       }
