@@ -40,7 +40,9 @@ export class HomeComponent implements OnInit {
           const copiaApostas = [...jogo.opcaoApostas];
           jogo.opcaoApostas = [];
           jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.HOME_TEAM) as OpcaoAposta);
-          jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.DRAW) as OpcaoAposta);
+          if(jogo.tipo.empate){
+            jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.DRAW) as OpcaoAposta);
+          }
           jogo.opcaoApostas.push(copiaApostas.find(copy => copy.type === OutcomeType.AWAY_TEAM) as OpcaoAposta);
         })),
         catchError(e => {

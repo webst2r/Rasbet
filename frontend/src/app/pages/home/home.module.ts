@@ -5,16 +5,18 @@ import {MatCardModule} from "@angular/material/card";
 import {ToolbarModule} from "../../components/toolbar/toolbar.module";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    ToolbarModule,
-    MatButtonToggleModule,
-    MatPaginatorModule
-  ]
+    imports: [
+        CommonModule,
+        MatCardModule,
+        ToolbarModule,
+        MatButtonToggleModule,
+        MatPaginatorModule,
+        TranslateModule
+    ]
 })
 export class HomeModule { }

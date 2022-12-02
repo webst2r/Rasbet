@@ -123,7 +123,12 @@
       "FINISH": "Finish",
       "READY": "Ready to Bet"
     },
-    "cancelGame": "Are you sure you want to cancel this match?"
+    "cancelGame": "Are you sure you want to cancel this match?",
+    "editOdds": "Edit Odds",
+    "saveOdds": "Save Odds",
+    "oddsHomeTeam": "Odds for Home Team",
+    "oddsAwayTeam": "Odds for Away Team",
+    "oddsDraw": "Odds for Draw"
   },
   "dialog": {
     "confirm": "Confirm",

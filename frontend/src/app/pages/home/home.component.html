@@ -1,7 +1,9 @@
 <main>
   <mat-card *ngFor="let jogo of jogos">
     <mat-card-title>{{jogo.homeTeam}} vs {{jogo.awayTeam}}</mat-card-title>
-    <mat-card-subtitle>{{formatDate(jogo.date)}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      <p>{{"bets." + jogo.tipo.nome | translate}}</p>
+      {{formatDate(jogo.date)}}</mat-card-subtitle>
     <mat-button-toggle-group name="odds" aria-label="Odds" (change)="onChangeToggleGroup(jogo, $event.value)"
                              disabled="{{isDateInvalid(jogo.date)}}">
       <mat-button-toggle checked="{{isOpcaoApostaChecked(jogo, op.type)}}" *ngFor="let op of jogo.opcaoApostas"
