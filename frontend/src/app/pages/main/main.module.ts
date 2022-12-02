@@ -14,7 +14,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
-import { TransacoesComponent } from '../transacoes/transacoes.component';
+import {TransacoesComponent} from '../transacoes/transacoes.component';
 import {UserAreaComponent} from "../user-area/user-area.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -22,15 +22,17 @@ import {GamesAdminComponent} from "../games-admin/games-admin.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatMenuModule} from "@angular/material/menu";
+import {GamesSpecialistComponent} from "../games-specialist/games-specialist.component";
 
 
 @NgModule({
-  declarations: [MainComponent,
-    ApostasComponent,
-    ApostasMultiplasComponent,
-    TransacoesComponent,
-    UserAreaComponent,
-    GamesAdminComponent],
+    declarations: [MainComponent,
+        ApostasComponent,
+        ApostasMultiplasComponent,
+        TransacoesComponent,
+        UserAreaComponent,
+        GamesAdminComponent,
+        GamesSpecialistComponent],
     imports: [
         CommonModule,
         MainRoutingModule,

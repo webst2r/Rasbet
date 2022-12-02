@@ -33,6 +33,12 @@ export class JogoService {
 
     return this.http.get<any>(url);
   }
+  getOddJogos(page: number = 0, size: number = 10): Observable<any> {
+    let url = AppConstant.API_URL + AppConstant.API_PATHS.JOGO.ODD_GAMES + `?page=${page}&size=${size}&sort=date,asc`;
+
+    return this.http.get<any>(url);
+  }
+
 
   getTipos(): Observable<any>{
    return  this.http.get<any>(AppConstant.API_URL + AppConstant.API_PATHS.TIPO.DEFAULT)

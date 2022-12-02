@@ -46,6 +46,7 @@ import {NGX_MAT_MOMENT_DATE_ADAPTER_OPTIONS} from "@angular-material-components/
 import { ConfirmComponent } from './components/modal/confirm/confirm.component';
 import { GameDetailsComponent } from './components/modal/game-details/game-details.component';
 import { AddResultComponent } from './components/modal/add-result/add-result.component';
+import { AddOddsComponent } from './components/modal/add-odds/add-odds.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -77,7 +78,8 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     AddGameComponent,
     ConfirmComponent,
     GameDetailsComponent,
-    AddResultComponent
+    AddResultComponent,
+    AddOddsComponent
   ],
   imports: [
     BrowserModule,

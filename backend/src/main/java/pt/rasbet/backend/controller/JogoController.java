@@ -48,4 +48,9 @@ public class JogoController {
     public ResponseEntity<JogosPageDTO> getGamesToBet(Pageable pageable){
         return ResponseEntity.ok(this.jogoService.getGamesToBet(pageable));
     }
+
+    @GetMapping("jogo/oddGames")
+    public ResponseEntity<JogosPageDTO> getGamesForOdds(Pageable pageable){
+        return ResponseEntity.ok(this.jogoService.getGamesForOdds(pageable));
+    }
 }

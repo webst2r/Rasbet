@@ -31,4 +31,7 @@ public interface JogoRepository extends JpaRepository<Jogo, Long>, QuerydslPredi
 
     @Query("select j from Jogo j where j.opcaoApostas.size > 0  and j.complete is false ")
     Page<JogoView> getAll(Pageable pageable);
+
+    @Query("select j from Jogo j where j.state <> :type  and j.state <> :type2 ")
+    Page<JogoView> getAllGamesToOdd(String type, String type2, Pageable pageable);
 }

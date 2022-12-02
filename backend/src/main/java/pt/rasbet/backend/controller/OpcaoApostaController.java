@@ -7,10 +7,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import pt.rasbet.backend.dto.OpcaoApostaDTO;
+import pt.rasbet.backend.dto.ListOpcaoApostaDTO;
 import pt.rasbet.backend.service.OpcaoApostaService;
-
-import java.util.List;
 
 @RepositoryRestController()
 @RequiredArgsConstructor
@@ -20,7 +18,7 @@ public class OpcaoApostaController {
     private final OpcaoApostaService opcaoApostaService;
 
     @PostMapping("opcaoAposta/add/{id}")
-    public ResponseEntity<?> addOdds(@PathVariable("id") Long idJogo, @RequestBody List<OpcaoApostaDTO> opcaoApostaDTOS){
+    public ResponseEntity<?> addOdds(@PathVariable("id") Long idJogo, @RequestBody ListOpcaoApostaDTO opcaoApostaDTOS){
         return ResponseEntity.ok(opcaoApostaService.createOdds(idJogo, opcaoApostaDTOS));
     }
 }

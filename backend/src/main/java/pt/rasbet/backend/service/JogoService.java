@@ -96,4 +96,14 @@ public class JogoService {
     public Jogo save(Jogo jogo){
         return this.jogoRepository.save(jogo);
     }
+
+    public JogosPageDTO getGamesForOdds(Pageable pageable) {
+        var gamesView = this.jogoRepository.getAllGamesToOdd(EJogoEstado.CANCEL.name(), EJogoEstado.FINISH.name(),pageable);
+
+        PageDTO pageDTO = new PageDTO(gamesView.getSize(),
+                gamesView.getTotalElements(),
+                gamesView.getTotalPages(),
+                gamesView.getNumber());
+        return new JogosPageDTO(pageDTO, gamesView.getContent());
+    }
 }

@@ -8,6 +8,7 @@ import {ApostasMultiplasComponent} from "../apostas-multiplas/apostas-multiplas.
 import {TransacoesComponent} from "../transacoes/transacoes.component";
 import {UserAreaComponent} from "../user-area/user-area.component";
 import {GamesAdminComponent} from "../games-admin/games-admin.component";
+import {GamesSpecialistComponent} from "../games-specialist/games-specialist.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'games',
         component: GamesAdminComponent,
+      },
+      {
+        path: 'specialist',
+        component: GamesSpecialistComponent,
       },
       { path: '**', redirectTo: '' },
     ]

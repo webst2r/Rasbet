@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         if (user.role === Role.ROLE_ADMIN) {
           this.router.navigateByUrl('/games')
         } else if(user.role === Role.ROLE_SPECIALIST){
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/specialist')
         }else {
           this.router.navigateByUrl('/home')
         }

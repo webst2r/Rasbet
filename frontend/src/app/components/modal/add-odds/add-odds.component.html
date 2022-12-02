@@ -1,0 +1,43 @@
+<main>
+    <form [formGroup]="form" (ngSubmit)="openConfirmDialog()">
+        <p>
+            <mat-form-field>
+                <input type="number" matInput [placeholder]="'games.oddsHomeTeam' | translate"
+                       formControlName="homeTeam">
+            </mat-form-field>
+
+        </p>
+
+        <span *ngIf="!form.controls['homeTeam'].valid &&
+      form.controls['homeTeam']?.touched" class="error">
+        {{ "games.oddsHomeTeam" | translate }} {{ "games.required" | translate}}
+      </span>
+        <p>
+            <mat-form-field>
+                <input type="number" matInput [placeholder]="'games.oddsAwayTeam' | translate"
+                       formControlName="awayTeam">
+            </mat-form-field>
+        </p>
+        <span *ngIf="!form.controls['awayTeam'].valid &&
+      form.controls['awayTeam']?.touched" class="error">
+        {{  "games.oddsAwayTeam" | translate  }} {{ "games.required" | translate}}
+      </span>
+        <ng-container *ngIf="data.game.tipo.empate">
+            <p>
+                <mat-form-field>
+                    <input type="number" matInput [placeholder]="'games.oddsDraw' | translate" formControlName="draw">
+                </mat-form-field>
+            </p>
+            <span *ngIf="!form.controls['draw'].valid &&
+              form.controls['draw']?.touched" class="error">
+                {{  "games.oddsDraw" | translate  }} {{ "games.required" | translate}}
+            </span>
+        </ng-container>
+
+        <div class="button">
+            <button type="submit" [disabled]="!this.form.valid"
+                    mat-button>{{ (data.game.opcaoApostas.length > 0 ? "games.editOdds" : "games.saveOdds") | translate}}</button>
+        </div>
+
+    </form>
+</main>

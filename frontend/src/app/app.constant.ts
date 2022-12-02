@@ -16,7 +16,8 @@ export class AppConstant {
       EDIT:'jogo/id/edit',
       CANCEL:'jogo/id/cancel',
       ADD_RESULT:'jogo/id/result',
-      BET_GAMES: 'jogo/betGames'
+      BET_GAMES: 'jogo/betGames',
+      ODD_GAMES: 'jogo/oddGames'
     },
     TIPO:{
       DEFAULT:'tipo'
@@ -34,6 +35,9 @@ export class AppConstant {
       APOSTAS_COUNT: 'aposta/id/count',
       MULTIPLE_APOSTAS_COUNT: 'apostaMultipla/id/count'
     },
+    OPCAO_APOSTA:{
+      ADD: "opcaoAposta/add/id_jogo"
+    }
 
   }
 

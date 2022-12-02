@@ -2,8 +2,10 @@ package pt.rasbet.backend.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pt.rasbet.backend.dto.ListOpcaoApostaDTO;
 import pt.rasbet.backend.dto.OpcaoApostaDTO;
 import pt.rasbet.backend.entity.OpcaoAposta;
+import pt.rasbet.backend.enumeration.EJogoEstado;
 import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
 import pt.rasbet.backend.repository.OpcaoApostaRepository;
@@ -24,25 +26,28 @@ public class OpcaoApostaService {
     }
 
     @Transactional
-    public String createOdds(Long idJogo, List<OpcaoApostaDTO> opcaoApostaDTOS) {
+    public String createOdds(Long idJogo, ListOpcaoApostaDTO opcaoApostaDTOS) {
         var jogo = jogoService.findById(idJogo);
-        if(jogo.getTipo().getEmpate() && opcaoApostaDTOS.size()!=3){
+
+        if(jogo.getTipo().getEmpate() && opcaoApostaDTOS.getOdds().size()!=3){
             throw new BadRequestException("Must have three odds");
         }
-        if(!jogo.getTipo().getEmpate() && opcaoApostaDTOS.size() !=2){
+        if(!jogo.getTipo().getEmpate() && opcaoApostaDTOS.getOdds().size() !=2){
             throw new BadRequestException("Must have two odds");
         }
 
         if (jogo.getOpcaoApostas().size() > 0) {
-            updateOdds(jogo.getOpcaoApostas(), opcaoApostaDTOS);
+            updateOdds(jogo.getOpcaoApostas(), opcaoApostaDTOS.getOdds());
         } else {
             List<OpcaoAposta> opcaoApostas = new ArrayList<>();
-            opcaoApostaDTOS.forEach(opcaoApostaDTO -> {
+            opcaoApostaDTOS.getOdds().forEach(opcaoApostaDTO -> {
                 var op = opcaoApostaDTO.toEntity();
                 op.setJogo(jogo);
                 opcaoApostas.add(op);
             });
             opcaoApostaRepository.saveAll(opcaoApostas);
+            jogo.setState(EJogoEstado.READY.name());
+            jogoService.save(jogo);
         }
 
         return "Odds created";

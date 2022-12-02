@@ -123,7 +123,12 @@
       "FINISH": "Terminado",
       "READY": "Pronto para Apostas"
     },
-    "cancelGame": "Tem certeza que pretende cancelar este jogo?"
+    "cancelGame": "Tem certeza que pretende cancelar este jogo?",
+    "editOdds": "Editar Odds",
+    "saveOdds": "Guardar Odds",
+    "oddsHomeTeam": "Odds para a Equipa da Casa",
+    "oddsAwayTeam": "Odds para a Equipa da Fora",
+    "oddsDraw": "Odds para o Empate"
   },
   "dialog": {
     "confirm": "Confirmar",

@@ -1,0 +1,49 @@
+main {
+  margin: 1.5rem;
+  padding: 1rem;
+
+  table {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  td {
+    text-align: center;
+  }
+
+}
+
+.icon-details {
+  color: #1E90FF;
+}
+
+.icon-edit {
+  color: var(--bg-green);
+}
+.icon-result{
+  color: #F5D008;
+}
+
+.icon-cancel{
+  color: red;
+}
+
+.button-div {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+
+  .add-button {
+    margin-bottom: 1rem;
+    background: var(--bg-green);
+    color: white;
+  }
+}
+
+button:disabled{
+  opacity: 0.5;
+}
