@@ -4,9 +4,9 @@ spring:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/rasbet1
+    url: jdbc:mysql://localhost:3306/rasbet
     username: root
-    password: root
+    password: Root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql:
     init:
