@@ -81,7 +81,7 @@ public class JogoExecutor {
             }
             apostaService.save(aposta);
         });
-
+        System.out.println("entrou");
     }
 
     @Transactional
@@ -112,6 +112,7 @@ public class JogoExecutor {
                 }
             });
         }
+        System.out.println("entrou multiplas");
     }
 
 }

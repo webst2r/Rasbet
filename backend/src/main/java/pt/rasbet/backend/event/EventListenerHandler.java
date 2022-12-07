@@ -6,6 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import pt.rasbet.backend.event.common.CancelJogoEvent;
+import pt.rasbet.backend.event.common.UpdateApostasEvent;
 
 @Component
 @RequiredArgsConstructor
@@ -24,8 +25,8 @@ public class EventListenerHandler {
 
     @Async
     @EventListener
-    public void handleAsyncCompleteJogoEvent(CancelJogoEvent cancelJogoEvent) {
-        var jogo = cancelJogoEvent.getJogo();
+    public void handleAsyncCompleteJogoEvent(UpdateApostasEvent updateApostasEvent) {
+        var jogo = updateApostasEvent.getJogo();
         jogoExecutor.updateAllApostas(jogo);
         jogoExecutor.updateApostasMultiplas(jogo);
         jogoExecutor.updateAllApostasMultiplas(jogo);

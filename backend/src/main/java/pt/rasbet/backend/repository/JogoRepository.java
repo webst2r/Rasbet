@@ -29,7 +29,7 @@ public interface JogoRepository extends JpaRepository<Jogo, Long>, QuerydslPredi
 
     Optional<Jogo> findByIdApi(String idApi);
 
-    @Query("select j from Jogo j where j.opcaoApostas.size > 0  and j.complete is false ")
+    @Query("select j from Jogo j where size(j.opcaoApostas) > 0  and j.complete is false ")
     Page<JogoView> getAll(Pageable pageable);
 
     @Query("select j from Jogo j where j.state <> :type  and j.state <> :type2 ")
