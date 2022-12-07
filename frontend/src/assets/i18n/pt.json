@@ -1,4 +1,6 @@
 {
+  "rasbet": "Rasbet",
+  "betOnSports": "Aposta na desportiva",
   "loginPage": {
     "login": "Login",
     "email": "Email",
@@ -95,7 +97,8 @@
   },
   "chart": {
     "singleTitle": "Estatísticas de Apostas Simples",
-    "multipleTitle": "Estatísticas de Apostas Múltiplas"
+    "multipleTitle": "Estatísticas de Apostas Múltiplas",
+    "noBets": "Sem Apostas"
 
   },
   "games": {

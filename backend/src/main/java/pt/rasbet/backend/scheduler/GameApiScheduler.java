@@ -36,8 +36,10 @@ public class GameApiScheduler {
 
         jogos.forEach(jogo -> {
             Optional<Jogo> optionalJogo = jogoRepository.findByIdApi(jogo.getIdApi());
-            if (optionalJogo.isPresent() && !optionalJogo.get().getState().equals(EApostaEstado.CANCEL.name())) {
-                updateJogo(optionalJogo.get(), jogo);
+            if (optionalJogo.isPresent()) {
+                if(!optionalJogo.get().getState().equals(EApostaEstado.CANCEL.name())){
+                    updateJogo(optionalJogo.get(), jogo);
+                }
             } else {
                 jogoRepository.save(jogo);
             }

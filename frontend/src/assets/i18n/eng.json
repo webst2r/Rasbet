@@ -1,4 +1,6 @@
 {
+  "rasbet": "Rasbet",
+  "betOnSports": "Bet on Sports",
   "loginPage": {
     "login": "Login",
     "email": "Email",
@@ -95,7 +97,8 @@
   },
   "chart": {
     "singleTitle": "Simple bet statistics",
-    "multipleTitle": "Multiple bet statistics"
+    "multipleTitle": "Multiple bet statistics",
+    "noBets": "No bets"
 
   },
   "games": {
