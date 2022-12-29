@@ -6,6 +6,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import pt.rasbet.backend.event.common.CancelJogoEvent;
+import pt.rasbet.backend.event.common.SendNotificationEvent;
 import pt.rasbet.backend.event.common.UpdateApostasEvent;
 
 @Component
@@ -13,6 +14,7 @@ import pt.rasbet.backend.event.common.UpdateApostasEvent;
 @Log4j2
 public class EventListenerHandler {
     private final JogoExecutor jogoExecutor;
+    private final NotificationExecutor notificationExecutor;
 
     @Async
     @EventListener
@@ -31,5 +33,13 @@ public class EventListenerHandler {
         jogoExecutor.updateApostasMultiplas(jogo);
         jogoExecutor.updateAllApostasMultiplas(jogo);
         log.info("Complete all bets of game: {}", jogo.getId());
+    }
+
+    @Async
+    @EventListener
+    public void handleAsyncSendNotificationsEvent(SendNotificationEvent sendNotificationEvent) {
+        var notifications = sendNotificationEvent.getNotificacoes();
+        notificationExecutor.createNotifications(notifications);
+        log.info("All notifications sent: {}", notifications.size());
     }
 }

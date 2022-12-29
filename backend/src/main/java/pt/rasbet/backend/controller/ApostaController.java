@@ -32,4 +32,10 @@ public class ApostaController {
     public ResponseEntity<CountApostasUserDTO> getApostasCountByUser(@PathVariable("id") Long id){
         return ResponseEntity.ok(apostaService.getApostasCountByUser(id));
     }
+
+    @PostMapping("aposta/{id}/cancel")
+    public ResponseEntity<String> cancelAposta(@PathVariable("id") Long id){
+        apostaService.cancelAposta(id);
+        return ResponseEntity.ok("cancel");
+    }
 }

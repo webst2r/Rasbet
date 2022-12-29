@@ -19,6 +19,8 @@ public interface ApostaView {
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     LocalDateTime getCreatedAt();
 
+    Boolean getActiveNotification();
+
     pt.rasbet.backend.projection.JogoView.OpcaoApostaView getOpcaoAposta();
 
     @Value("#{target.opcaoAposta?.jogo ?: null}")

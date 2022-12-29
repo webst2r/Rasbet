@@ -3,11 +3,11 @@ package pt.rasbet.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pt.rasbet.backend.dto.CountApostasUserDTO;
-import pt.rasbet.backend.dto.CountMultiplasApostasUser;
 import pt.rasbet.backend.dto.ListApostaDTO;
 import pt.rasbet.backend.entity.*;
 import pt.rasbet.backend.enumeration.EApostaEstado;
 import pt.rasbet.backend.enumeration.ETRansationType;
+import pt.rasbet.backend.exception.ResourceNotFoundException;
 import pt.rasbet.backend.repository.ApostaRepository;
 import pt.rasbet.backend.repository.CarteiraRepository;
 import pt.rasbet.backend.repository.TransacoesRepository;
@@ -77,5 +77,22 @@ public class ApostaService {
     }
     public List<Aposta> saveAll(List<Aposta> apostas){
         return apostaRepository.saveAll(apostas);
+    }
+
+    public Aposta findById(Long id) {
+        return apostaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aposta", "id", id));
+    }
+
+    @Transactional
+    public void cancelAposta(Long id) {
+        var aposta = findById(id);
+        aposta.setEstado(EApostaEstado.CANCEL.name());
+        aposta.setActiveNotification(false);
+        save(aposta);
+        var carteira = aposta.getUser().getCarteira();
+        carteira.setSaldo(carteira.getSaldo() - aposta.getValor());
+        carteiraRepository.save(carteira);
+        var transaction =  new Transacoes(carteira, aposta.getValor(), "DEPOSIT", ETRansationType.BET.name());
+        transacoesRepository.save(transaction);
     }
 }

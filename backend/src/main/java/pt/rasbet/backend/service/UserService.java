@@ -12,16 +12,21 @@ import pt.rasbet.backend.dto.UserDTO;
 import pt.rasbet.backend.dto.UserUpdateDTO;
 import pt.rasbet.backend.dto.UserWithTokenDTO;
 import pt.rasbet.backend.entity.Carteira;
+import pt.rasbet.backend.entity.Jogo;
+import pt.rasbet.backend.entity.Notificacao;
 import pt.rasbet.backend.entity.User;
 import pt.rasbet.backend.enumeration.ERole;
 import pt.rasbet.backend.enumeration.ExceptionType;
 import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
+import pt.rasbet.backend.repository.NotificacaoRepository;
+import pt.rasbet.backend.repository.UserNotificationRepository;
 import pt.rasbet.backend.repository.UserRepository;
 import pt.rasbet.backend.security.jwt.JwtUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,16 +36,21 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final UserNotificationRepository userNotificationRepository;
+
     private final RoleService roleService;
 
     private final PasswordEncoder encoder;
 
+    private final JogoService jogoService;
+
     private final JwtUtils jwtUtils;
+
 
     private List<String> roles = List.of(ERole.ROLE_USER.name(), ERole.ROLE_ADMIN.name(), ERole.ROLE_SPECIALIST.name());
 
     @Transactional
-    public UserWithTokenDTO login(UserCredentialsDTO userCredentialsDTO){
+    public UserWithTokenDTO login(UserCredentialsDTO userCredentialsDTO) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userCredentialsDTO.getEmail(), userCredentialsDTO.getPassword()));
 
@@ -52,12 +62,12 @@ public class UserService {
     }
 
     @Transactional
-    public String register(UserDTO userDTO){
+    public String register(UserDTO userDTO) {
         validateNewEmail(userDTO.getEmail());
         var user = userDTO.toEntity();
         user.setPassword(encoder.encode(user.getPassword()));
 
-        if(!roles.contains(userDTO.getRole())){
+        if (!roles.contains(userDTO.getRole())) {
             throw new BadRequestException("Role does not exists", ExceptionType.ROLE_NOT_EXISTS);
         }
         user.setRole(roleService.findByName(userDTO.getRole()).get());
@@ -77,12 +87,12 @@ public class UserService {
     }
 
     @Transactional
-    public User save(User user){
+    public User save(User user) {
         return userRepository.save(user);
     }
 
     @Transactional
-    public String updateProfile(UserUpdateDTO userUpdateDTO){
+    public String updateProfile(UserUpdateDTO userUpdateDTO) {
 
         long id = userUpdateDTO.getUserId();
         User user = findById(id);
@@ -92,5 +102,41 @@ public class UserService {
         user.setLastName(userUpdateDTO.getLastName());
 
         return "User Updated Successfully!";
+    }
+
+    @Transactional
+    public void addGameToUserNotification(Long id, Long gameId) {
+        var game = jogoService.findById(gameId);
+        var user = findById(id);
+        var list = user.getJogos();
+        list.add(game);
+        user.setJogos(list);
+        save(user);
+    }
+
+    @Transactional
+    public void removeGameToUserNotification(Long id, Long gameId) {
+        var game = jogoService.findById(gameId);
+        var user = findById(id);
+        var list = user.getJogos();
+        list.remove(game);
+        user.setJogos(list);
+        save(user);
+    }
+
+    public List<Long> getAllUserGameToNotify(Long id) {
+        var user = findById(id);
+        return user.getJogos().stream().map(Jogo::getId).collect(Collectors.toList());
+    }
+
+    public Long countUnreadUserNotifications(Long id) {
+        findById(id);
+        return userNotificationRepository.countAllByUserIdAndReadIsFalse(id);
+    }
+
+    public String setUnreadUserNotificationsAsRead(Long id) {
+        findById(id);
+        userNotificationRepository.updatetoReadByUserId(id);
+        return "changed";
     }
 }

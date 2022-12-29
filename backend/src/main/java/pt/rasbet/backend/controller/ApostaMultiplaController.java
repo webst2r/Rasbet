@@ -30,4 +30,10 @@ public class ApostaMultiplaController {
     public ResponseEntity<CountMultiplasApostasUser> getApostasMultiplasCountByUser(@PathVariable("id") Long id){
         return ResponseEntity.ok(apostaMultiplaService.getApostasMultiplasCountByUser(id));
     }
+
+    @PostMapping("apostaMultipla/{id}/cancel")
+    public ResponseEntity<String> cancelApostaMultipla(@PathVariable("id") Long id){
+        apostaMultiplaService.cancelApostaMultipla(id);
+        return ResponseEntity.ok("cancel");
+    }
 }

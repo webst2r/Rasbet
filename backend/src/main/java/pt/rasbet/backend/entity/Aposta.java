@@ -10,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "aposta")
@@ -30,6 +32,8 @@ public class Aposta {
 
     private Float valorGanho;
 
+    private Boolean activeNotification =  true;
+
     @CreatedDate
     @CreationTimestamp
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
@@ -45,9 +49,12 @@ public class Aposta {
     @JoinColumn(name= "id_user")
     private User user;
 
-    @JsonBackReference
+    @JsonBackReference(value = "apostasMultiplas")
     @ManyToOne()
     @JoinColumn(name= "id_multipla")
     private ApostasMultiplas apostasMultiplas;
+
+    @OneToMany(mappedBy="aposta", cascade = CascadeType.ALL)
+    private Set<Notificacao> notifications =  new HashSet<>();
 
 }

@@ -24,12 +24,12 @@ public class OpcaoAposta {
 
     private String type;
 
-    @JsonBackReference
+    @JsonBackReference(value = "jogo")
     @ManyToOne()
     @JoinColumn(name= "id_jogo", nullable = false)
     private Jogo jogo;
 
-    @JsonBackReference
+    @JsonBackReference(value = "apostas")
     @OneToMany(mappedBy="opcaoAposta")
     private Set<Aposta> apostas =  new HashSet<>();
 

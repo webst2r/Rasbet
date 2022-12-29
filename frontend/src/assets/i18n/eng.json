@@ -66,7 +66,9 @@
     "FOOTBALL": "Football",
     "BASKETBALL": "Basketball",
     "gain": "Amount gained",
-    "totalGames": "Number of matches"
+    "totalGames": "Number of matches",
+    "notification": "Notify",
+    "cancel": "Cancel"
   },
   "betState": {
     "WON": "Won",
@@ -137,6 +139,19 @@
     "confirm": "Confirm",
     "cancel": "Cancel",
     "confirmMessage": "Are you sure you want to carry out this action?"
+  },
+  "notifications": {
+    "messages": {
+      "WON_BET": "You won the bet %{HOME_TEAM} vs %{AWAY_TEAM}",
+      "LOST_BET": "You lost the bet %{HOME_TEAM} vs %{AWAY_TEAM}",
+      "CANCEL_BET": "Bet %{HOME_TEAM} vs %{AWAY_TEAM} has been canceled by an administrator",
+      "WON_MULTIPLE_BET": "You have won the multiple bet placed on the date %{DATE}",
+      "LOST_MULTIPLE_BET": "You have lost the multiple bet placed on the date %{DATE}",
+      "CANCEL_MULTIPLE_BET": "The multiple bet placed on the date %{DATE} was canceled by an administrator",
+      "UPDATE_MULTIPLE_BET": "The multiple bet placed on the date %{DATE} has been updated",
+      "ODDS_CHANGED": "The odds for the match %{HOME_TEAM} vs %{AWAY_TEAM} have been changed",
+      "FINISHED_GAME": "The match %{HOME_TEAM} vs %{AWAY_TEAM} ended with result %{RESULT}",
+      "CANCEL_GAME": "The match %{HOME_TEAM} vs %{AWAY_TEAM} has been canceled by an administrator"
+    }
   }
-
 }

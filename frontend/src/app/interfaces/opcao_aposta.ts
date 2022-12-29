@@ -1,3 +1,5 @@
+import { Jogo } from "./jogo";
+
 export enum OutcomeType {
   HOME_TEAM = ('HOME_TEAM'),
   DRAW  = ('DRAW'),
@@ -8,4 +10,5 @@ export interface OpcaoAposta {
   id: number;
   odd: number;
   type: OutcomeType;
+  jogo: Jogo;
 }

@@ -9,8 +9,11 @@ import pt.rasbet.backend.dto.JogoResultDTO;
 import pt.rasbet.backend.dto.JogosPageDTO;
 import pt.rasbet.backend.dto.PageDTO;
 import pt.rasbet.backend.entity.Jogo;
+import pt.rasbet.backend.entity.Notificacao;
 import pt.rasbet.backend.enumeration.EJogoEstado;
+import pt.rasbet.backend.enumeration.ENotificationTypeEnum;
 import pt.rasbet.backend.event.common.CancelJogoEvent;
+import pt.rasbet.backend.event.common.SendNotificationEvent;
 import pt.rasbet.backend.event.common.UpdateApostasEvent;
 import pt.rasbet.backend.exception.BadRequestException;
 import pt.rasbet.backend.exception.ResourceNotFoundException;
@@ -18,6 +21,7 @@ import pt.rasbet.backend.repository.JogoRepository;
 import pt.rasbet.backend.repository.TipoRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,8 +52,11 @@ public class JogoService {
         game.setComplete(true);
         game.setState(EJogoEstado.FINISH.name());
         game = save(game);
-        //TODO - test
         eventPublisher.publishEvent(UpdateApostasEvent.of(game));
+        if (!game.getUsers().isEmpty()) {
+            eventPublisher.publishEvent(SendNotificationEvent.of(
+                    List.of(new Notificacao(ENotificationTypeEnum.FINISHED_GAME, game))));
+        }
         return "saved";
     }
 
@@ -83,13 +90,16 @@ public class JogoService {
     @Transactional
     public String cancel(Long id) {
         Jogo jogo = findById(id);
-//        TODO: test
         if (jogo.getComplete()) {
             throw new BadRequestException("Game already ended");
         }
         jogo.setState(EJogoEstado.CANCEL.name());
         jogo = save(jogo);
         eventPublisher.publishEvent(CancelJogoEvent.of(jogo));
+        if (!jogo.getUsers().isEmpty()) {
+            eventPublisher.publishEvent(SendNotificationEvent.of(
+                    List.of(new Notificacao(ENotificationTypeEnum.CANCEL_GAME, jogo))));
+        }
         return "cancel successfull";
     }
 

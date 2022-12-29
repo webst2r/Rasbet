@@ -45,4 +45,24 @@ export class ApostasService {
   getMultipleCountBetsbyUser(id: number): Observable<any>{
     return this.http.get(AppConstant.API_URL + AppConstant.API_PATHS.APOSTAS.MULTIPLE_APOSTAS_COUNT.replace('id', String(id))) as Observable<any>
   }
+
+  notifySimpleBet(id: number, activeNotification: boolean): Observable<any>{
+    return this.http.patch(AppConstant.API_URL+ AppConstant.API_PATHS.APOSTAS.APOSTA_ID.replace('id', String(id)), {
+      activeNotification
+    }) as Observable<any>;
+  }
+
+  notifyMultipleBet(id: number, activeNotification: boolean): Observable<any>{
+    return this.http.patch(AppConstant.API_URL+ AppConstant.API_PATHS.APOSTAS.MULTIPLE_ID.replace('id', String(id)), {
+      activeNotification
+    }) as Observable<any>;
+  }
+
+  cancelSimpleBet(id: number): Observable<any>{
+    return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.APOSTAS.CANCEL_APOSTA.replace('id', String(id)), {}) as Observable<any>;
+  }
+
+  cancelMultipleBet(id: number): Observable<any>{
+    return this.http.post(AppConstant.API_URL+ AppConstant.API_PATHS.APOSTAS.CANCEL_MULTIPLE.replace('id', String(id)), {}) as Observable<any>;
+  }
 }

@@ -7,6 +7,8 @@ import {RouterLink} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
+import {MatBadgeModule} from "@angular/material/badge";
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {MatIconModule} from "@angular/material/icon";
         RouterLink,
         TranslateModule,
         MatMenuModule,
-        MatIconModule
+        MatIconModule,
+        MatBadgeModule,
+        InfiniteScrollModule
     ]
 })
 export class ToolbarModule {

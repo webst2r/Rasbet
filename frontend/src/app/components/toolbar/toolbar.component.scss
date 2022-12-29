@@ -69,3 +69,37 @@
   font-size: 1.5rem;
   border: 1px solid black;
 }
+
+.infinite-scroll-container {
+  width: 100%;
+  height: 35vh;
+  overflow-y: auto;
+}
+
+.notification {
+  padding: 8px 13px;
+  margin-bottom: .3rem;
+  margin-top: 0;
+  font-size: .9rem;
+
+  .notification-date {
+    font-size: .8rem;
+    font-weight: 600;
+  }
+
+  .notification-content {
+    word-wrap: break-word;
+  }
+}
+
+.unread {
+  background-color: #edf0ec !important;  
+}
+
+.notification:hover {
+  background-color: #e7e7e7;
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0 !important;
+}

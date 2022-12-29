@@ -10,6 +10,7 @@ export interface Aposta {
   opcaoAposta: OpcaoAposta;
   jogo: JogoAposta;
   createdAt: string;
+  activeNotification: boolean;
 }
 
 export interface JogoAposta {
@@ -30,4 +31,5 @@ export interface ApostaMultipla{
   estado: string;
   apostas: Aposta[];
   createdAt: string;
+  activeNotification: boolean;
 }

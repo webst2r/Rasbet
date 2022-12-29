@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -51,6 +53,14 @@ public class Jogo {
 
     @OneToMany(mappedBy="jogo", cascade = CascadeType.ALL)
     private Set<OpcaoAposta> opcaoApostas =  new HashSet<>();
+
+    @OneToMany(mappedBy="jogo", cascade = CascadeType.ALL)
+    private Set<Notificacao> notifications =  new HashSet<>();
+
+    @JsonBackReference
+    @ManyToMany(mappedBy = "jogos")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<User> users = new HashSet<>();
 
     public Jogo(String homeTeam, String awayTeam, LocalDateTime date){
         this.homeTeam = homeTeam;

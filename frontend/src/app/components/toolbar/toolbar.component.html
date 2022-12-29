@@ -21,6 +21,7 @@
       <!-- {{"home.language" | translate}} -->
 
       <button mat-button [matMenuTriggerFor]="menu">{{"home.wallet" | translate}}: {{getUserWallet()}}€</button>
+      <button mat-button [matMenuTriggerFor]="notificationsMenu" (menuOpened)="notificationsMenuOpened()"> <mat-icon [matBadge]="unreadNotCount" matBadgeColor="warn">notifications</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="userMenu"><mat-icon>face</mat-icon></button>
     </ng-container>
     <ng-container *ngIf=" auth.isAuthenticated() && auth.getUserRole() !== role.ROLE_USER">
@@ -58,4 +59,26 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="openDepositDialog()">{{"sidenav.deposit" | translate}}</button>
   <button mat-menu-item (click)="openRaiseDialog()">{{"sidenav.rise" | translate}}</button>
+</mat-menu>
+
+<mat-menu #notificationsMenu="matMenu">
+  <div class="infinite-scroll-container"
+       (click)="$event.stopPropagation()"
+       infinite-scroll
+       [immediateCheck]="true"
+       [scrollWindow]="false"
+       (scrolled)="getNextNotificacoes()">
+      
+       <div *ngFor="let notificacao of notificacoes" 
+            class="notification"
+            [ngClass]="notificacao.read ? '' : 'unread'">
+        <p class="notification-date">{{notificacao.notification.date}}</p>
+        <p class="notification-content">
+          {{ addNotificationDynamicValues(
+            ("notifications.messages." + notificacao.notification.type | translate),
+            notificacao.notification
+            )}}
+        </p>
+      </div>
+  </div>
 </mat-menu>

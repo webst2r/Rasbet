@@ -7,6 +7,7 @@ import pt.rasbet.backend.dto.CountMultiplasApostasUser;
 import pt.rasbet.backend.entity.*;
 import pt.rasbet.backend.enumeration.EApostaEstado;
 import pt.rasbet.backend.enumeration.ETRansationType;
+import pt.rasbet.backend.exception.ResourceNotFoundException;
 import pt.rasbet.backend.repository.ApostaMultiplaRepository;
 import pt.rasbet.backend.repository.CarteiraRepository;
 import pt.rasbet.backend.repository.TransacoesRepository;
@@ -15,7 +16,6 @@ import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +69,23 @@ public class ApostaMultiplaService {
 
     public ApostasMultiplas save(ApostasMultiplas apostasMultiplas){
         return apostaMultiplaRepository.save(apostasMultiplas);
+    }
+
+    public ApostasMultiplas findById(Long id) {
+        return apostaMultiplaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ApostasMultipla", "id", id));
+    }
+
+    @Transactional
+    public void cancelApostaMultipla(Long id) {
+        var apostasMultipla =findById(id);
+        apostasMultipla.setEstado(EApostaEstado.CANCEL.name());
+        apostasMultipla.getApostas().forEach(aposta -> aposta.setEstado(EApostaEstado.CANCEL.name()));
+        apostasMultipla.setActiveNotification(false);
+        save(apostasMultipla);
+        var carteira = apostasMultipla.getUser().getCarteira();
+        carteira.setSaldo(carteira.getSaldo() - apostasMultipla.getValor());
+        carteiraRepository.save(carteira);
+        var transaction =  new Transacoes(carteira, apostasMultipla.getValor(), "DEPOSIT", ETRansationType.BET.name());
+        transacoesRepository.save(transaction);
     }
 }

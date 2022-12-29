@@ -1,5 +1,6 @@
 <main>
   <mat-card *ngFor="let jogo of jogos">
+    <mat-icon (click)="gameNotify(jogo.id)" class="notification-icon" *ngIf="!isDateInvalid(jogo.date)" [fontSet]="checkGameNotify(jogo.id)">notifications_active</mat-icon>
     <mat-card-title>{{jogo.homeTeam}} vs {{jogo.awayTeam}}</mat-card-title>
     <mat-card-subtitle>
       <p>{{"bets." + jogo.tipo.nome | translate}}</p>

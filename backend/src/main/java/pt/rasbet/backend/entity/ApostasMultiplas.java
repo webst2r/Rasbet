@@ -29,6 +29,8 @@ public class ApostasMultiplas {
 
     private Float valorTotalGanho;
 
+    private Boolean activeNotification =  true;
+
     @CreatedDate
     @CreationTimestamp
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
@@ -45,4 +47,6 @@ public class ApostasMultiplas {
     @OneToMany(mappedBy="apostasMultiplas", cascade = CascadeType.ALL)
     private Set<Aposta> apostas =  new HashSet<>();
 
+    @OneToMany(mappedBy="apostasMultiplas", cascade = CascadeType.ALL)
+    private Set<Notificacao> notifications =  new HashSet<>();
 }

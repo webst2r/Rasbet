@@ -6,6 +6,7 @@ import {ToolbarModule} from "../../components/toolbar/toolbar.module";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {TranslateModule} from "@ngx-translate/core";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {TranslateModule} from "@ngx-translate/core";
         ToolbarModule,
         MatButtonToggleModule,
         MatPaginatorModule,
-        TranslateModule
+        TranslateModule,
+        MatIconModule
     ]
 })
 export class HomeModule { }

@@ -7,6 +7,7 @@ import {Aposta, ApostaMultipla} from "../../interfaces/aposta";
 import {PageEvent} from "@angular/material/paginator";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {OutcomeType} from "../../interfaces/opcao_aposta";
+import {ConfirmDialogService} from "../../services/confirm-dialog.service";
 
 @Component({
   selector: 'app-apostas-multiplas',
@@ -21,7 +22,7 @@ import {OutcomeType} from "../../interfaces/opcao_aposta";
   ],
 })
 export class ApostasMultiplasComponent implements OnInit {
-  columnsToDisplay = ['date', 'totalGames', 'value', 'state'];
+  columnsToDisplay = ['date', 'totalGames', 'value', 'state', 'notification', 'cancel'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: ApostaMultipla | null = null;
 
@@ -32,7 +33,8 @@ export class ApostasMultiplasComponent implements OnInit {
 
   constructor(private apostasService: ApostasService,
               private auth: AuthenticationService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private confirmDialogService: ConfirmDialogService) {
   }
 
   ngOnInit(): void {
@@ -76,5 +78,55 @@ export class ApostasMultiplasComponent implements OnInit {
       return element.jogo.awayTeam;
     }
     return this.translate.instant("home.draw")
+  }
+
+  betNotify(bet: ApostaMultipla) {
+    this.apostasService.notifyMultipleBet(bet.id, !bet.activeNotification).pipe(
+        tap(res =>  bet.activeNotification = res.activeNotification)
+    ).subscribe();
+  }
+
+  checkBetNotify(bet: ApostaMultipla): string {
+    return bet.activeNotification && bet.estado === 'PLACED' ? '' : 'material-icons-outlined';
+  }
+
+  cancelBet(bet: ApostaMultipla) {
+    this.confirmDialogService.showDialog().subscribe(
+        (res) => {
+          if(res.save){
+            this.save(bet);
+          }else {
+            return;
+          }
+        }
+    )
+  }
+
+  save(bet: ApostaMultipla){
+    this.apostasService.cancelMultipleBet(bet.id).pipe(
+        tap(res => {
+          bet.estado= 'CANCEL'
+          bet.apostas.forEach(p => p.estado = 'CANCEL')
+        })
+    ).subscribe();
+  }
+
+  setBetDisable(bet: ApostaMultipla): boolean {
+    if(bet.estado !== 'PLACED') return true;
+    if( bet.apostas.filter(ap => ap.estado === 'MULTIPLE').length !== bet.apostas.length) return true;
+    let invalid = false;
+    bet.apostas.forEach(bet=> {
+      if(this.isDateInvalid(bet.jogo.date)){
+        invalid = true;
+      }
+    })
+    return invalid;
+  }
+
+  isDateInvalid(dateString: string): boolean {
+    const date = new Date(dateString);
+    const todayDate = new Date();
+
+    return date.getTime() <= todayDate.getTime()
   }
 }

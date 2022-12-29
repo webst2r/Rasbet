@@ -4,9 +4,10 @@ import {ApostasService} from "../../services/apostas.service";
 import {Aposta} from "../../interfaces/aposta";
 import {AuthenticationService} from "../../services/authentication.service";
 import {PageEvent} from "@angular/material/paginator";
-import {map, take, tap} from "rxjs";
+import {take, tap} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {OutcomeType} from "../../interfaces/opcao_aposta";
+import {ConfirmDialogService} from "../../services/confirm-dialog.service";
 
 @Component({
   selector: 'app-apostas',
@@ -23,7 +24,7 @@ import {OutcomeType} from "../../interfaces/opcao_aposta";
 
 
 export class ApostasComponent implements OnInit {
-  columnsToDisplay = ['game','date', 'betType', 'odd', 'value', 'state'];
+  columnsToDisplay = ['game','date', 'betType', 'odd', 'value', 'state', 'notification', 'cancel'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: Aposta | null = null;
 
@@ -33,7 +34,8 @@ export class ApostasComponent implements OnInit {
   apostas: Aposta[] = [];
   constructor(private apostasService: ApostasService,
               private auth: AuthenticationService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private confirmDialogService: ConfirmDialogService) { }
 
   ngOnInit(): void {
     this.getBets(0,10);
@@ -77,5 +79,39 @@ export class ApostasComponent implements OnInit {
 
   formatValue(value: number): string{
     return value.toFixed(2);
+  }
+
+  betNotify(bet: Aposta) {
+    this.apostasService.notifySimpleBet(bet.id, !bet.activeNotification).pipe(
+        tap(res =>  bet.activeNotification = res.activeNotification)
+    ).subscribe();
+  }
+
+  checkBetNotify(bet: Aposta): string {
+    return bet.activeNotification && bet.estado === 'PLACED' ? '' : 'material-icons-outlined';
+  }
+
+  cancelBet(bet: Aposta) {
+    this.confirmDialogService.showDialog().subscribe(
+        (res) => {
+          if(res.save){
+            this.save(bet);
+          }else {
+            return;
+          }
+        }
+    )
+  }
+  private save(bet: Aposta) {
+    this.apostasService.cancelSimpleBet(bet.id).pipe(
+        tap(res => bet.estado= 'CANCEL')
+    ).subscribe();
+  }
+  setBetDisable(bet: Aposta): boolean {
+    if(bet.estado !== 'PLACED') return true;
+    const date = new Date(bet.jogo.date);
+    const todayDate = new Date();
+
+    return date.getTime() <= todayDate.getTime()
   }
 }

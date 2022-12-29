@@ -17,6 +17,8 @@ public interface ApostaMultiplaView {
     @JsonFormat(pattern="dd-MM-yyyy HH:mm")
     LocalDateTime getCreatedAt();
 
+    Boolean getActiveNotification();
+
     List<ApostaView> getApostas();
 
 }

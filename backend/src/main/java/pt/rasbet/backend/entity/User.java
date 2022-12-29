@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -62,13 +64,21 @@ public class User {
     @JoinColumn(name = "id_carteira", referencedColumnName = "id")
     private Carteira carteira;
 
-    @JsonBackReference
+    @JsonBackReference(value = "apostas")
     @OneToMany(mappedBy="user")
     private Set<Aposta> apostas =  new HashSet<>();
 
-    @JsonBackReference
+    @JsonBackReference(value = "apostasMultiplas")
     @OneToMany(mappedBy="user")
     private Set<ApostasMultiplas> apostasMultiplas =  new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
+    @JoinTable(
+            name = "seguir_jogo",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "jogo_id")
+    )
+    private Set<Jogo> jogos = new HashSet<>();
 
     public User(String firstName, String lastName, String email, String password, LocalDate birthDate) {
         this.firstName = firstName;
